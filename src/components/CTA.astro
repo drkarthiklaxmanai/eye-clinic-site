@@ -1,1 +1,20 @@
+---
+const { title, address, phone } = Astro.props;
+---
+<section id="book" class="bg-blue-900 text-white py-16 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-4">{title}</h2>
+    <p class="mb-8 opacity-90 text-lg">Schedule your comprehensive eye evaluation today.</p>
+    
+    <div class="bg-white text-slate-900 p-8 rounded-xl shadow-xl max-w-md mx-auto">
+      <p class="font-bold text-xl mb-2">Call Us</p>
+      <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} class="text-3xl text-blue-600 font-black block mb-6 hover:underline">
+        {phone}
+      </a>
+      <hr class="border-slate-200 mb-6" />
+      <p class="text-sm text-slate-500 font-semibold mb-1">CLINIC LOCATION</p>
+      <p class="text-slate-800">{address}</p>
+    </div>
+  </div>
+</section>
 
