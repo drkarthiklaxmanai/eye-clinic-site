@@ -1,12 +1,11 @@
 backend:
   name: git-gateway
-  branch: main # Or 'dev', whichever branch you want to publish to
+  branch: main
 
 media_folder: "public/images/blog"
 public_folder: "/images/blog"
 
 collections:
-  # 1. The Blog Collection
   - name: "blog"
     label: "Blog Posts"
     folder: "src/content/blog"
@@ -20,7 +19,6 @@ collections:
       - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # 2. The FAQ Collection
   - name: "faqs"
     label: "FAQs"
     folder: "src/content/faqs"
