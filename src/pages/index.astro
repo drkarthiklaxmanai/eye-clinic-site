@@ -4,6 +4,8 @@ import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import CTA from '../components/CTA.astro';
 import { getCollection } from 'astro:content';
+import FAQ from '../components/FAQ.astro';
+
 
 // Fetch all blog posts, sort by newest first, and take the top 3
 const allPosts = await getCollection('blog');
@@ -117,7 +119,7 @@ const latestPosts = allPosts
       </div>
     </div>
   </section>
-
+  <FAQ />
   <section class="py-16 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-10">
       <h2 class="text-3xl font-bold text-blue-900 mb-4">Find Us in KK Nagar</h2>
