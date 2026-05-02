@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: main # Or 'dev', whichever branch you want to publish to
+
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+collections:
+  # 1. The Blog Collection
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Author", name: "author", widget: "string", default: "Dr. Rajeswari" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # 2. The FAQ Collection
+  - name: "faqs"
+    label: "FAQs"
+    folder: "src/content/faqs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Question", name: "question", widget: "string" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", required: false }
+      - { label: "Answer", name: "body", widget: "markdown" }
