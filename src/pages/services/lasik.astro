@@ -1,0 +1,26 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CTA from '../../components/CTA.astro';
+import { siteConfig } from '../../config/site.js';
+---
+
+<MainLayout title="LASIK & Vision Correction | Crispr Eye Care">
+  <div class="bg-blue-900 text-white py-20 px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">LASIK & Vision Correction</h1>
+    <p class="text-xl max-w-2xl mx-auto opacity-90">Achieve freedom from glasses with precise, evidence-based refractive surgery.</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-blue">
+    <h2>Are You a Candidate for LASIK?</h2>
+    <p>LASIK is a highly successful procedure for correcting myopia (nearsightedness), hyperopia (farsightedness), and astigmatism. However, not everyone is an ideal candidate. We conduct a rigorous, unbiased pre-LASIK evaluation, including corneal topography and pachymetry, to ensure your eyes are healthy enough for the procedure.</p>
+    
+    <h2>Why Choose Us for Vision Correction?</h2>
+    <ul>
+      <li><strong>Strict Safety Protocols:</strong> If your cornea is too thin or irregular, we will advise against LASIK. Your safety is our absolute priority.</li>
+      <li><strong>Advanced Technology:</strong> We utilize state-of-the-art excimer and femtosecond lasers for blade-free precision.</li>
+      <li><strong>Comprehensive Options:</strong> Depending on your eye profile, we offer guidance on LASIK, PRK, or SMILE procedures.</li>
+    </ul>
+  </div>
+
+  <CTA title="Book a Pre-LASIK Evaluation" address={siteConfig.contact.address} phone={siteConfig.contact.phone} />
+</MainLayout>

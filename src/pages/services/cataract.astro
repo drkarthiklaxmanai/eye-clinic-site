@@ -1,1 +1,32 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CTA from '../../components/CTA.astro';
+import { siteConfig } from '../../config/site.js';
+---
+
+<MainLayout title="Advanced Cataract Surgery in Chennai | Crispr Eye Care">
+  <div class="bg-blue-900 text-white py-20 px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Advanced Cataract Surgery</h1>
+    <p class="text-xl max-w-2xl mx-auto opacity-90">Micro-incision, painless phacoemulsification for rapid visual recovery.</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-blue">
+    <h2>What is a Cataract?</h2>
+    <p>A cataract is a natural clouding of the eye's internal lens, usually caused by aging. Symptoms include blurred vision, difficulty seeing at night, faded colors, and increased sensitivity to glare.</p>
+    
+    <h2>Our Approach to Surgery</h2>
+    <p>At Crispr Eye Care, we do not push unnecessary surgeries. If your cataract is mild and not interfering with your daily life, we may simply monitor it. When surgery is required, Dr. Rajeswari utilizes <strong>Micro-Incision Cataract Surgery (MICS)</strong> via Phacoemulsification.</p>
+    
+    <ul>
+      <li><strong>Painless:</strong> Performed under topical anesthesia (eye drops only).</li>
+      <li><strong>Stitch-less:</strong> The microscopic incision seals itself naturally.</li>
+      <li><strong>Fast Recovery:</strong> Most patients return to normal activities within days.</li>
+    </ul>
+
+    <h2>Premium IOL Implants</h2>
+    <p>During surgery, the cloudy lens is replaced with an Intraocular Lens (IOL). We offer unbiased counseling on Monofocal, Toric (astigmatism-correcting), and Multifocal lenses to suit your specific lifestyle needs.</p>
+  </div>
+
+  <CTA title="Schedule Your Cataract Evaluation" address={siteConfig.contact.address} phone={siteConfig.contact.phone} />
+</MainLayout>
 
