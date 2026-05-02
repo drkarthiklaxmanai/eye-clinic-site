@@ -1,1 +1,20 @@
+---
+import { siteConfig } from '../config/site.js';
+---
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="/" class="text-2xl font-bold text-blue-900 tracking-tight">
+      {siteConfig.name}
+    </a>
+    <nav class="hidden md:flex space-x-8">
+      <a href="/" class="text-slate-600 hover:text-blue-600 font-medium">Home</a>
+      <a href="/services/cataract" class="text-slate-600 hover:text-blue-600 font-medium">Cataract</a>
+      <a href="/services/lasik" class="text-slate-600 hover:text-blue-600 font-medium">LASIK</a>
+      <a href="/dr-rajeswari" class="text-slate-600 hover:text-blue-600 font-medium">Dr. Rajeswari</a>
+    </nav>
+    <a href="#book" class="bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition">
+      Book Now
+    </a>
+  </div>
+</header>
 
