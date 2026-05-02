@@ -21,7 +21,8 @@ const { Content } = await entry.render();
     <div class="mb-8">
       <h1 class="text-4xl font-extrabold text-blue-900 mb-4">{entry.data.title}</h1>
       <p class="text-slate-500 font-medium">
-        By {entry.data.author} • {entry.data.pubDate.toDateString()}
+        By {entry.data.author || 'Dr. Rajeswari'} 
+        {entry.data.pubDate && ` • ${new Date(entry.data.pubDate).toDateString()}`}
       </p>
     </div>
     
