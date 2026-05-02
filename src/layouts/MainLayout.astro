@@ -1,1 +1,38 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../config/site.js';
+import '../styles/global.css';
+
+const { title, description = siteConfig.description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title} | {siteConfig.name} - Dr. Rajeswari</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-slate-50 text-slate-900 font-sans antialiased">
+    <div class="bg-blue-900 text-white text-sm py-2 px-6 flex justify-between items-center hidden md:flex">
+      <span>{siteConfig.contact.workingHours}</span>
+      <div class="space-x-4">
+        <span>Emergency: {siteConfig.contact.phone}</span>
+        <a href={`mailto:${siteConfig.contact.email}`} class="hover:underline">{siteConfig.contact.email}</a>
+      </div>
+    </div>
+    
+    <Navbar />
+    
+    <main class="min-h-screen">
+      <slot />
+    </main>
+    
+    <Footer />
+  </body>
+</html>
 
