@@ -1,1 +1,48 @@
+---
+// This array holds your questions and answers. 
+// To add a new one later, just add another block to this list!
+const faqs = [
+  {
+    question: "Is cataract surgery painful?",
+    answer: "Cataract surgery is a painless procedure performed under local anesthesia. Most patients remain entirely comfortable during the surgery, which typically takes 10 to 15 minutes. Vision usually improves significantly within a few days with very minimal recovery time required."
+  },
+  {
+    question: "Who is eligible for LASIK?",
+    answer: "Patients with a stable vision prescription for at least a year and healthy corneas are generally suitable for LASIK. A thorough, unbiased clinical evaluation at our Chennai clinic will determine your exact eligibility and ensure the highest safety standards."
+  },
+  {
+    question: "When should I see an eye doctor?",
+    answer: "You should consult an ophthalmologist immediately if you notice sudden vision changes, persistent discomfort, or experience flashes and floaters. Routine annual checkups are also critical, especially if you have underlying conditions like diabetes that can quietly damage the retina."
+  },
+  {
+    question: "What is the recovery after cataract surgery?",
+    answer: "Most patients recover very quickly after modern phacoemulsification cataract surgery. You will likely notice improved, clearer vision within just a few days of the procedure, allowing you to return to the majority of your normal daily activities safely."
+  }
+];
+---
+
+<section class="py-20 px-6 bg-white border-t border-slate-200">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-blue-900 mb-4">Frequently Asked Questions</h2>
+      <p class="text-lg text-slate-600">Clear answers to help you make informed decisions about your eye care.</p>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details class="group bg-slate-50 rounded-lg border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-slate-900 group-hover:text-blue-600 transition">
+            {faq.question}
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <div class="p-6 pt-0 text-slate-600 leading-relaxed border-t border-slate-100 mt-2">
+            {faq.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
 
