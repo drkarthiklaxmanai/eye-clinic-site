@@ -16,6 +16,7 @@ const { title, description = siteConfig.description } = Astro.props;
     
     <title>{title} | {siteConfig.name} - Dr. Rajeswari</title>
     <meta name="description" content={description} />
+    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body class="bg-slate-50 text-slate-900 font-sans antialiased">
     <div class="bg-blue-900 text-white text-sm py-2 px-6 flex justify-between items-center hidden md:flex">
