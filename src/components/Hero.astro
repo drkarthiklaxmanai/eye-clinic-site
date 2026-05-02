@@ -1,1 +1,24 @@
+---
+const { title, subtitle, doctor, credentials, ctaText, whatsappText } = Astro.props;
+import { siteConfig } from '../config/site.js';
+---
+<section class="bg-blue-50 py-20 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 mb-6 leading-tight">{title}</h1>
+    <p class="text-lg md:text-xl text-slate-700 mb-8 max-w-3xl mx-auto">{subtitle}</p>
+    
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+      <a href="#book" class="bg-blue-600 text-white px-8 py-3 rounded-md font-bold hover:bg-blue-700 transition shadow-lg">
+        {ctaText}
+      </a>
+      <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-8 py-3 rounded-md font-bold hover:bg-green-600 transition shadow-lg flex items-center justify-center gap-2">
+        {whatsappText}
+      </a>
+    </div>
+
+    <div class="inline-block bg-white px-6 py-3 rounded-full shadow-sm border border-slate-100 text-sm font-medium text-slate-600">
+      Led by <span class="text-blue-900 font-bold">{doctor}</span> &mdash; {credentials}
+    </div>
+  </div>
+</section>
 
