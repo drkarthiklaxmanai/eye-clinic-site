@@ -1,1 +1,116 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import CTA from '../components/CTA.astro';
+import { siteConfig } from '../config/site.js';
+---
+
+<MainLayout title="Dr. Rajeswari Thangavel | AIIMS Ophthalmologist in Chennai">
+  <div class="bg-blue-900 text-white py-20 px-6">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+      <div class="md:w-1/3">
+        <div class="bg-white/10 aspect-[3/4] rounded-2xl shadow-xl flex items-center justify-center overflow-hidden border border-white/20">
+          <img src="/images/dr-rajeswari.jpg" alt="Dr. Rajeswari Thangavel" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x533/1e3a8a/ffffff?text=Dr.+Rajeswari'" />
+        </div>
+      </div>
+      <div class="md:w-2/3">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Dr. Rajeswari Thangavel</h1>
+        <p class="text-xl text-blue-300 font-bold mb-6 tracking-wide">MD (AIIMS), FAICO</p>
+        <p class="text-lg opacity-90 leading-relaxed mb-6">
+          Dr. Rajeswari is an AIIMS-trained ophthalmologist specializing in Cataract, Strabismus (Squint), Neuro-ophthalmology, and Medical Retina. With a commitment to ethical, evidence-based medicine, she provides advanced eye care treatments to the residents of KK Nagar and across Chennai.
+        </p>
+        <div class="flex gap-4">
+          <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-6 py-2 rounded-md font-bold hover:bg-green-600 transition shadow-lg flex items-center gap-2">
+            Chat on WhatsApp
+          </a>
+          <a href="https://instagram.com/dr_rajeswari_eyedoctor" target="_blank" rel="noopener noreferrer" class="bg-white/10 border border-white/30 text-white px-6 py-2 rounded-md font-bold hover:bg-white/20 transition">
+            Follow on Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto py-20 px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section>
+      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b border-slate-200 pb-4">Education & Fellowships</h2>
+      <div class="space-y-8">
+        <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-blue-600 before:rounded-full after:absolute after:left-[5px] after:top-5 after:w-0.5 after:h-full after:bg-blue-100 last:after:hidden">
+          <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">2025</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-1">Medical Retina Fellowship</h3>
+          <p class="text-slate-600">Mahathma Eye Hospital, Trichy</p>
+        </div>
+        <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-blue-600 before:rounded-full after:absolute after:left-[5px] after:top-5 after:w-0.5 after:h-full after:bg-blue-100 last:after:hidden">
+          <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">2022</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-1">FAICO (Neuro-ophthalmology)</h3>
+          <p class="text-slate-600">All India Collegium of Ophthalmology</p>
+        </div>
+        <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-blue-600 before:rounded-full after:absolute after:left-[5px] after:top-5 after:w-0.5 after:h-full after:bg-blue-100 last:after:hidden">
+          <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">2017 - 2020</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-1">MD Ophthalmology</h3>
+          <p class="text-slate-600">All India Institute of Medical Sciences (AIIMS), New Delhi</p>
+        </div>
+        <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-blue-600 before:rounded-full">
+          <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">2010 - 2016</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-1">MBBS</h3>
+          <p class="text-slate-600">Coimbatore Medical College</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-3xl font-bold text-blue-900 mb-8 border-b border-slate-200 pb-4">Professional Journey</h2>
+      <div class="space-y-8">
+        <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-slate-400 before:rounded-full after:absolute after:left-[5px] after:top-5 after:w-0.5 after:h-full after:bg-slate-200 last:after:hidden">
+          <span class="text-slate-500 font-bold text-sm tracking-widest uppercase">Jan 2025 - Present</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-1">Consultant Ophthalmologist</h3>
+          <p class="text-slate-600">Maxivision Eye Hospital, Chennai</p>
+        </div>
+        <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-slate-400 before:rounded-full after:absolute after:left-[5px] after:top-5 after:w-0.5 after:h-full after:bg-slate-200 last:after:hidden">
+          <span class="text-slate-500 font-bold text-sm tracking-widest uppercase">Oct 2023 - Dec 2024</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-1">Consultant Ophthalmologist</h3>
+          <p class="text-slate-600">Vasan Eye Care (ASG Hospitals), Chennai</p>
+        </div>
+        <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-slate-400 before:rounded-full">
+          <span class="text-slate-500 font-bold text-sm tracking-widest uppercase">2020 - 2023</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-1">Senior Resident</h3>
+          <p class="text-slate-600">All India Institute of Medical Sciences (AIIMS), New Delhi</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="bg-slate-50 py-20 px-6 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Clinical Expertise</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Cataract Surgery</h3>
+          <p class="text-slate-600 text-sm">Advanced Phacoemulsification and precise intraocular lens implantation.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Squint Surgery</h3>
+          <p class="text-slate-600 text-sm">Specialized Strabismus correction tailored for both children and adults.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Neuro-ophthalmology</h3>
+          <p class="text-slate-600 text-sm">Expert diagnosis and treatment of complex optic nerve and brain-related vision issues.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Medical Retina</h3>
+          <p class="text-slate-600 text-sm">Comprehensive management of Diabetic Retinopathy and Age-related Macular Degeneration.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <h3 class="text-xl font-bold text-slate-900 mb-2">LASIK & Refractive</h3>
+          <p class="text-slate-600 text-sm">Correction of myopia, hyperopia, and astigmatism for clear, glass-free vision.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Clinical Research</h3>
+          <p class="text-slate-600 text-sm">Published researcher contributing valuable insights to global ophthalmic knowledge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA title="Book a Consultation with Dr. Rajeswari" address={siteConfig.contact.address} phone={siteConfig.contact.phone} />
+</MainLayout>
 
