@@ -23,8 +23,14 @@ const latestPosts = allPosts
     whatsappText="Chat on WhatsApp"
   />
 
-<!-- Services Section -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <!-- Services Section -->
+  <section class="py-16 px-6 max-w-7xl mx-auto" id="services">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-4">Advanced Eye Care Services</h2>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">Comprehensive, evidence-based treatments tailored to your vision needs, utilizing modern technology for safe outcomes.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <ServiceCard 
         image="/images/cataract.jpg"
         alt="Microscopic view of cataract surgery"
@@ -61,7 +67,8 @@ const latestPosts = allPosts
         link="/services/neuro"
       />
     </div>
-</section>
+  </section>
+
   <!-- Symptoms/Discomfort Section -->
   <section class="bg-white py-16 px-6 border-y border-slate-200">
     <div class="max-w-4xl mx-auto text-center">
@@ -103,19 +110,33 @@ const latestPosts = allPosts
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {latestPosts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 hover:shadow-md hover:border-blue-300 transition group flex flex-col h-full">
-              <p class="text-sm text-slate-500 mb-3 font-semibold uppercase tracking-wider">
-                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-              </p>
-              <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition line-clamp-2">
-                {post.data.title}
-              </h3>
-              <p class="text-slate-600 mb-6 line-clamp-3 flex-grow">
-                {post.data.description}
-              </p>
-              <span class="text-blue-600 font-semibold mt-auto flex items-center gap-1">
-                Read Article <span aria-hidden="true">&rarr;</span>
-              </span>
+            <a href={`/blog/${post.slug}`} class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-300 group flex flex-col h-full">
+              
+              <!-- Image Header Container -->
+              <div class="relative h-48 overflow-hidden bg-slate-100 border-b border-slate-100">
+                <img 
+                  src={post.data.image || "https://placehold.co/600x400/e2e8f0/1e3a8a?text=Eye+Health+Blog"} 
+                  alt={post.data.title} 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+
+              <!-- Text Content Container -->
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+                <p class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider">
+                  {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </p>
+                <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                  {post.data.title}
+                </h3>
+                <p class="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
+                  {post.data.description}
+                </p>
+                <span class="text-blue-600 font-semibold text-sm mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Read Article <span aria-hidden="true">&rarr;</span>
+                </span>
+              </div>
             </a>
           ))}
         </div>
