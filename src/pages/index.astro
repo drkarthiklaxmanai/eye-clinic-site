@@ -2,13 +2,12 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
 import { getCollection } from 'astro:content';
-import FAQ from '../components/FAQ.astro';
 
-
-// Fetch all blog posts, sort by newest first, and take the top 3
-const allPosts = await getCollection('blog');
+// SAFE FETCH: Get posts, but default to an empty array if none exist to prevent crashes
+const allPosts = await getCollection('blog') || [];
 const latestPosts = allPosts
   .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
   .slice(0, 3);
@@ -24,6 +23,7 @@ const latestPosts = allPosts
     whatsappText="Chat on WhatsApp"
   />
 
+  <!-- Services Section -->
   <section class="py-16 px-6 max-w-7xl mx-auto" id="services">
     <h2 class="text-3xl font-bold text-center mb-10 text-blue-900">Advanced Eye Care Services</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -60,6 +60,7 @@ const latestPosts = allPosts
     </div>
   </section>
 
+  <!-- Symptoms/Discomfort Section -->
   <section class="bg-white py-16 px-6 border-y border-slate-200">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-8 text-blue-900">Experiencing Visual Discomfort?</h2>
@@ -71,10 +72,11 @@ const latestPosts = allPosts
         <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full font-medium">Double Vision</span>
       </div>
       <p class="text-lg text-slate-600 mb-6">Early diagnosis helps protect your vision.</p>
-      <a href="#book" class="text-blue-600 font-bold hover:underline">Contact us now →</a>
+      <a href="#book" class="text-blue-600 font-bold hover:underline">Contact us now &rarr;</a>
     </div>
   </section>
 
+  <!-- About Section -->
   <section class="py-16 px-6 max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-bold mb-6 text-blue-900">About Dr. Rajeswari</h2>
     <p class="text-lg text-slate-700 mb-6 leading-relaxed">
@@ -83,43 +85,50 @@ const latestPosts = allPosts
     <a href="/dr-rajeswari" class="inline-block bg-blue-100 text-blue-800 px-6 py-2 rounded-md font-semibold hover:bg-blue-200 transition">View Full Credentials</a>
   </section>
 
-  <section class="bg-slate-50 py-20 px-6 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 gap-4 text-center md:text-left">
-        <div>
-          <h2 class="text-3xl font-bold text-blue-900 mb-2">Eye Health Blog</h2>
-          <p class="text-lg text-slate-600">Patient guides and clinical insights from our experts.</p>
-        </div>
-        <a href="/blog" class="text-blue-600 font-bold hover:underline flex items-center gap-1 hidden md:flex">
-          View All Posts <span aria-hidden="true">&rarr;</span>
-        </a>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {latestPosts.map((post) => (
-          <a href={`/blog/${post.slug}`} class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 hover:shadow-md hover:border-blue-300 transition group flex flex-col h-full">
-            <p class="text-sm text-slate-500 mb-3 font-semibold uppercase tracking-wider">
-              {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </p>
-            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition line-clamp-2">
-              {post.data.title}
-            </h3>
-            <p class="text-slate-600 mb-6 line-clamp-3 flex-grow">
-              {post.data.description}
-            </p>
-            <span class="text-blue-600 font-semibold mt-auto flex items-center gap-1">
-              Read Article <span aria-hidden="true">&rarr;</span>
-            </span>
+  <!-- Blog Section (Only shows if posts exist) -->
+  {latestPosts.length > 0 && (
+    <section class="bg-slate-50 py-20 px-6 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 gap-4 text-center md:text-left">
+          <div>
+            <h2 class="text-3xl font-bold text-blue-900 mb-2">Eye Health Blog</h2>
+            <p class="text-lg text-slate-600">Patient guides and clinical insights from our experts.</p>
+          </div>
+          <a href="/blog" class="text-blue-600 font-bold hover:underline flex items-center gap-1 hidden md:flex">
+            View All Posts <span aria-hidden="true">&rarr;</span>
           </a>
-        ))}
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {latestPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 hover:shadow-md hover:border-blue-300 transition group flex flex-col h-full">
+              <p class="text-sm text-slate-500 mb-3 font-semibold uppercase tracking-wider">
+                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </p>
+              <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition line-clamp-2">
+                {post.data.title}
+              </h3>
+              <p class="text-slate-600 mb-6 line-clamp-3 flex-grow">
+                {post.data.description}
+              </p>
+              <span class="text-blue-600 font-semibold mt-auto flex items-center gap-1">
+                Read Article <span aria-hidden="true">&rarr;</span>
+              </span>
+            </a>
+          ))}
+        </div>
+        
+        <div class="mt-10 text-center md:hidden">
+           <a href="/blog" class="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-md shadow-sm border border-slate-200 w-full">View All Posts</a>
+        </div>
       </div>
-      
-      <div class="mt-10 text-center md:hidden">
-         <a href="/blog" class="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-md shadow-sm border border-slate-200 w-full">View All Posts</a>
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
+
+  <!-- FAQ Section -->
   <FAQ />
+
+  <!-- Google Maps Section -->
   <section class="py-16 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-10">
       <h2 class="text-3xl font-bold text-blue-900 mb-4">Find Us in KK Nagar</h2>
@@ -128,6 +137,7 @@ const latestPosts = allPosts
     
     <div class="w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-lg border border-slate-200">
       <iframe 
+        title="Google Maps Location for Crispr Eye Care Clinic"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.974836067086!2d80.2017997!3d13.0397028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5266cb2eb18fbb%3A0xc6fbef0f8eee3a3f!2s39%2F2%2C%20RK%20Shanmugam%20Salai%2C%20Goutham%20Colony%2C%20K.%20K.%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu%20600078!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
         width="100%" 
         height="100%" 
@@ -139,6 +149,7 @@ const latestPosts = allPosts
     </div>
   </section>
 
+  <!-- Booking CTA Form -->
   <CTA 
     title="Book Consultation"
     address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
