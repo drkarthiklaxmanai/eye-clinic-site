@@ -11,8 +11,9 @@ collections:
     folder: "src/content/blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
+fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Publish Date", name: "pubDate", widget: "datetime" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Author", name: "author", widget: "string", default: "Dr. Rajeswari" }
