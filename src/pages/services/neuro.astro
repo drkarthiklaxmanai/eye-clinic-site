@@ -1,0 +1,66 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CTA from '../../components/CTA.astro';
+---
+
+<MainLayout title="Neuro-Ophthalmology in Chennai | Crispr Eye Care">
+  <!-- Service Header -->
+  <section class="bg-blue-900 text-white py-20 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2">
+        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">The Brain-Vision Connection</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Neuro-Ophthalmology</h1>
+        <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+          Specialized diagnostics for complex visual problems related to the optic nerve and the brain.
+        </p>
+        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Request a Consultation</a>
+      </div>
+      <div class="md:w-1/2 w-full">
+        <img src="/images/neuro.jpg" alt="Specialized optic nerve and neural vision diagnostic" class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video" onerror="this.src='https://placehold.co/800x500/1e3a8a/ffffff?text=Neural+Pathways'"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-16 px-6 max-w-4xl mx-auto">
+    <div class="prose prose-lg prose-blue max-w-none text-slate-700">
+      <h2 class="text-3xl font-bold text-blue-900 mb-6">Beyond the Eye</h2>
+      <p class="mb-6">
+        Not all vision problems originate in the eye itself. Neuro-ophthalmology is an elite sub-specialty that bridges ophthalmology and neurology. It focuses on visual problems caused by the nervous system—specifically the optic nerve, which transmits visual information from the eye to the brain, and the areas of the brain that process that information.
+      </p>
+
+      <div class="bg-blue-50 p-8 rounded-xl border border-blue-100 my-10">
+        <h3 class="text-xl font-bold text-blue-900 mb-4">Symptoms That Require Expert Evaluation</h3>
+        <p class="mb-4 text-slate-700 font-medium">You should seek a neuro-ophthalmic consultation if you experience:</p>
+        <ul class="list-disc pl-6 space-y-2 font-medium text-red-900">
+          <li>Sudden, unexplained vision loss.</li>
+          <li>Transient visual obscurations (temporary graying or blacking out of vision).</li>
+          <li>Double vision (diplopia) that persists when looking with both eyes.</li>
+          <li>Abnormal eye movements or unexplained pupil size differences.</li>
+          <li>Visual field defects (missing patches of vision).</li>
+        </ul>
+      </div>
+
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Conditions We Manage</h2>
+      <p class="mb-6">
+        With AIIMS-level training, Dr. Rajeswari provides rigorous diagnostic evaluations to uncover the root cause of complex symptoms. We manage and co-manage conditions such as:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mb-10">
+        <li><strong>Optic Neuritis:</strong> Inflammation of the optic nerve, often associated with autoimmune conditions.</li>
+        <li><strong>Ischemic Optic Neuropathy:</strong> Loss of blood flow to the optic nerve.</li>
+        <li><strong>Idiopathic Intracranial Hypertension (IIH):</strong> High pressure in the brain causing swelling of the optic nerve.</li>
+        <li><strong>Ocular Myasthenia Gravis:</strong> Causing drooping eyelids and double vision.</li>
+      </ul>
+      
+      <p class="mb-6">
+        Because these conditions often overlap with neurological and systemic diseases, our approach is highly analytical, often requiring specialized scans (MRI/CT) and close collaboration with neurologists.
+      </p>
+    </div>
+  </section>
+
+  <CTA 
+    title="Schedule a Diagnostic Assessment"
+    address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
+    phone="+91 63813 02828"
+  />
+</MainLayout>
