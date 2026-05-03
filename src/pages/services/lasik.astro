@@ -1,26 +1,63 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
-import { siteConfig } from '../../config/site.js';
 ---
 
-<MainLayout title="LASIK & Vision Correction | Crispr Eye Care">
-  <div class="bg-blue-900 text-white py-20 px-6 text-center">
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">LASIK & Vision Correction</h1>
-    <p class="text-xl max-w-2xl mx-auto opacity-90">Achieve freedom from glasses with precise, evidence-based refractive surgery.</p>
-  </div>
+<MainLayout title="LASIK & Laser Vision Correction in Chennai | Crispr Eye Care">
+  <!-- Service Header -->
+  <section class="bg-blue-900 text-white py-20 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2">
+        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">Refractive Precision</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Advanced LASIK Surgery</h1>
+        <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+          Experience the freedom of clear vision without glasses or contact lenses, utilizing state-of-the-art laser technology.
+        </p>
+        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Check Your Eligibility</a>
+      </div>
+      <div class="md:w-1/2 w-full">
+        <!-- Using the high-tech image we discussed earlier -->
+        <img src="/images/lasik.jpg" alt="Advanced Excimer Laser Technology" class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video" onerror="this.src='https://placehold.co/800x500/1e3a8a/ffffff?text=Laser+Vision+Technology'"/>
+      </div>
+    </div>
+  </section>
 
-  <div class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-blue">
-    <h2>Are You a Candidate for LASIK?</h2>
-    <p>LASIK is a highly successful procedure for correcting myopia (nearsightedness), hyperopia (farsightedness), and astigmatism. However, not everyone is an ideal candidate. We conduct a rigorous, unbiased pre-LASIK evaluation, including corneal topography and pachymetry, to ensure your eyes are healthy enough for the procedure.</p>
-    
-    <h2>Why Choose Us for Vision Correction?</h2>
-    <ul>
-      <li><strong>Strict Safety Protocols:</strong> If your cornea is too thin or irregular, we will advise against LASIK. Your safety is our absolute priority.</li>
-      <li><strong>Advanced Technology:</strong> We utilize state-of-the-art excimer and femtosecond lasers for blade-free precision.</li>
-      <li><strong>Comprehensive Options:</strong> Depending on your eye profile, we offer guidance on LASIK, PRK, or SMILE procedures.</li>
-    </ul>
-  </div>
+  <!-- Content Section -->
+  <section class="py-16 px-6 max-w-4xl mx-auto">
+    <div class="prose prose-lg prose-blue max-w-none text-slate-700">
+      <h2 class="text-3xl font-bold text-blue-900 mb-6">Freedom from Glasses</h2>
+      <p class="mb-6">
+        LASIK (Laser-Assisted In Situ Keratomileusis) is the most popular and proven refractive surgery available today. By gently reshaping the clear front surface of your eye (the cornea) using a highly precise excimer laser, we can correct myopia (nearsightedness), hyperopia (farsightedness), and astigmatism.
+      </p>
 
-  <CTA title="Book a Pre-LASIK Evaluation" address={siteConfig.contact.address} phone={siteConfig.contact.phone} />
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">The Crispr Eye Care Difference</h2>
+      <p class="mb-6">
+        Not everyone is a candidate for LASIK, and <strong>we prioritize safety above all else.</strong> Before any procedure is recommended, Dr. Rajeswari conducts a rigorous, multi-point corneal evaluation using advanced diagnostic topography. If your corneas are not perfectly suited for LASIK, we will not perform the surgery, and will instead discuss safer alternatives like PRK or ICLs.
+      </p>
+      
+      <div class="bg-blue-50 p-8 rounded-xl border border-blue-100 my-10">
+        <h3 class="text-xl font-bold text-blue-900 mb-4">The Procedure: What to Expect</h3>
+        <ol class="list-decimal pl-6 space-y-4 font-medium">
+          <li><strong>Preparation:</strong> Numbing eye drops are applied so you feel no pain.</li>
+          <li><strong>Creating the Flap:</strong> A micro-thin flap is created on the surface of the cornea.</li>
+          <li><strong>Laser Reshaping:</strong> An ultra-precise computer-guided laser reshapes the underlying corneal tissue in a matter of seconds.</li>
+          <li><strong>Healing:</strong> The flap is gently laid back in place, acting as a natural bandage. Recovery is incredibly fast.</li>
+        </ol>
+      </div>
+
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Are You a Candidate?</h2>
+      <p class="mb-6">Ideal candidates for LASIK are generally:</p>
+      <ul class="list-disc pl-6 space-y-2 mb-10">
+        <li>Over 18 years of age with a stable prescription for at least one year.</li>
+        <li>Free of severe dry eye syndrome or active eye diseases.</li>
+        <li>Have adequate corneal thickness (determined during your consultation).</li>
+      </ul>
+    </div>
+  </section>
+
+  <CTA 
+    title="Book Your LASIK Consultation"
+    address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
+    phone="+91 63813 02828"
+  />
 </MainLayout>

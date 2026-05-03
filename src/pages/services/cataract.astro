@@ -1,32 +1,65 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
-import { siteConfig } from '../../config/site.js';
 ---
 
 <MainLayout title="Advanced Cataract Surgery in Chennai | Crispr Eye Care">
-  <div class="bg-blue-900 text-white py-20 px-6 text-center">
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Advanced Cataract Surgery</h1>
-    <p class="text-xl max-w-2xl mx-auto opacity-90">Micro-incision, painless phacoemulsification for rapid visual recovery.</p>
-  </div>
+  <!-- Service Header -->
+  <section class="bg-blue-900 text-white py-20 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2">
+        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">Surgical Excellence</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Advanced Cataract Surgery & Premium IOLs</h1>
+        <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+          Restore crystal-clear vision with stitchless, painless phacoemulsification performed by an AIIMS-trained specialist.
+        </p>
+        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Book an Evaluation</a>
+      </div>
+      <div class="md:w-1/2 w-full">
+        <!-- Using the high-tech image we discussed earlier -->
+        <img src="/images/cataract.jpg" alt="Premium Intraocular Lens for Cataract Surgery" class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video" onerror="this.src='https://placehold.co/800x500/1e3a8a/ffffff?text=Premium+IOL+Technology'"/>
+      </div>
+    </div>
+  </section>
 
-  <div class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-blue">
-    <h2>What is a Cataract?</h2>
-    <p>A cataract is a natural clouding of the eye's internal lens, usually caused by aging. Symptoms include blurred vision, difficulty seeing at night, faded colors, and increased sensitivity to glare.</p>
-    
-    <h2>Our Approach to Surgery</h2>
-    <p>At Crispr Eye Care, we do not push unnecessary surgeries. If your cataract is mild and not interfering with your daily life, we may simply monitor it. When surgery is required, Dr. Rajeswari utilizes <strong>Micro-Incision Cataract Surgery (MICS)</strong> via Phacoemulsification.</p>
-    
-    <ul>
-      <li><strong>Painless:</strong> Performed under topical anesthesia (eye drops only).</li>
-      <li><strong>Stitch-less:</strong> The microscopic incision seals itself naturally.</li>
-      <li><strong>Fast Recovery:</strong> Most patients return to normal activities within days.</li>
-    </ul>
+  <!-- Content Section -->
+  <section class="py-16 px-6 max-w-4xl mx-auto">
+    <div class="prose prose-lg prose-blue max-w-none text-slate-700">
+      <h2 class="text-3xl font-bold text-blue-900 mb-6">What is a Cataract?</h2>
+      <p class="mb-6">
+        A cataract is the clouding of the eye’s natural lens, which lies behind the iris and the pupil. It is a normal part of aging, but it can lead to a progressive decrease in vision. If you are experiencing glare from headlights at night, needing brighter light to read, or feeling like you are looking through a frosty or fogged-up window, a cataract may be forming.
+      </p>
 
-    <h2>Premium IOL Implants</h2>
-    <p>During surgery, the cloudy lens is replaced with an Intraocular Lens (IOL). We offer unbiased counseling on Monofocal, Toric (astigmatism-correcting), and Multifocal lenses to suit your specific lifestyle needs.</p>
-  </div>
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Our Approach: Micro-Incision Phacoemulsification</h2>
+      <p class="mb-6">
+        At Crispr Eye Care, we utilize state-of-the-art <strong>phacoemulsification technology</strong>. This advanced procedure uses ultrasound energy to gently break up the cloudy lens, which is then carefully removed through a microscopic incision. 
+      </p>
+      
+      <div class="bg-blue-50 p-8 rounded-xl border border-blue-100 my-10">
+        <h3 class="text-xl font-bold text-blue-900 mb-4">Benefits of our Surgical Technique:</h3>
+        <ul class="list-disc pl-6 space-y-2 font-medium">
+          <li><strong>No Stitches or Injections:</strong> The micro-incision heals naturally without sutures.</li>
+          <li><strong>Painless Procedure:</strong> Performed under topical anesthesia (eye drops).</li>
+          <li><strong>Rapid Recovery:</strong> Most patients notice a dramatic improvement in vision within 24 hours.</li>
+          <li><strong>Day-Care Surgery:</strong> Walk in, and walk out the same day.</li>
+        </ul>
+      </div>
 
-  <CTA title="Schedule Your Cataract Evaluation" address={siteConfig.contact.address} phone={siteConfig.contact.phone} />
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Premium Intraocular Lenses (IOLs)</h2>
+      <p class="mb-6">
+        Once the cataract is removed, Dr. Rajeswari implants a pristine, artificial intraocular lens (IOL). We offer a range of premium lenses tailored to your lifestyle, including:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mb-10">
+        <li><strong>Monofocal IOLs:</strong> Excellent distance vision (reading glasses may be required).</li>
+        <li><strong>Multifocal & Trifocal IOLs:</strong> Designed to provide clear vision at distance, intermediate, and near, reducing dependence on glasses.</li>
+        <li><strong>Toric IOLs:</strong> Specifically designed to correct astigmatism during cataract surgery.</li>
+      </ul>
+    </div>
+  </section>
+
+  <CTA 
+    title="Schedule Your Cataract Evaluation"
+    address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
+    phone="+91 63813 02828"
+  />
 </MainLayout>
-

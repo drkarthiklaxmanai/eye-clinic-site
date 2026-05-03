@@ -1,4 +1,5 @@
 ---
+import FloatingContact from '../components/FloatingContact.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { siteConfig } from '../config/site.js';
@@ -7,7 +8,8 @@ import '../styles/global.css';
 const { title, description = siteConfig.description } = Astro.props;
 ---
 
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -17,9 +19,17 @@ const { title, description = siteConfig.description } = Astro.props;
     <title>{title} | {siteConfig.name} - Dr. Rajeswari</title>
     <meta name="description" content={description} />
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- 2026 Premium Typography: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-slate-50 text-slate-900 font-sans antialiased">
-    <div class="bg-blue-900 text-white text-sm py-2 px-6 flex justify-between items-center hidden md:flex">
+  
+  <body class="bg-slate-50/50 text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900 flex flex-col min-h-screen">
+    
+    <!-- Emergency Top Bar -->
+    <div class="bg-blue-900 text-white text-sm py-2 px-6 flex justify-between items-center hidden md:flex relative z-50">
       <span>{siteConfig.contact.workingHours}</span>
       <div class="space-x-4">
         <span>Emergency: {siteConfig.contact.phone}</span>
@@ -29,11 +39,69 @@ const { title, description = siteConfig.description } = Astro.props;
     
     <Navbar />
     
-    <main class="min-h-screen">
+    <!-- Main Content Wrapper -->
+    <main class="flex-grow overflow-hidden">
       <slot />
     </main>
     
     <Footer />
+
+    <!-- Global Floating Contact (Call/Chat) -->
+    <FloatingContact />
+
+    <!-- 2026 UX Standard: Global Scroll Reveal Engine -->
+    <script>
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-12');
+            observer.unobserve(entry.target); 
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Targets sections inside main to animate them as you scroll down
+        const elements = document.querySelectorAll('main section > div');
+        elements.forEach((el) => {
+          el.classList.add('transition-all', 'duration-[1200ms]', 'ease-out', 'opacity-0', 'translate-y-12');
+          observer.observe(el);
+        });
+      });
+    </script>
+    
+    <style is:global>
+      /* Enforce the new premium font globally */
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      
+      /* Premium Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f8fafc; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1; 
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8; 
+      }
+
+      /* Tighter letter spacing for a modern, clinical look */
+      h1, h2, h3, h4, h5, h6 {
+        letter-spacing: -0.02em; 
+      }
+    </style>
   </body>
 </html>
-
