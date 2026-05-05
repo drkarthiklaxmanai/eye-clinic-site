@@ -3,7 +3,8 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://crispreyecare.com', // <-- This is the critical line causing the crash!
+  // THIS is the line that fixes the crash. It must be here!
+  site: 'https://crispreyecare.com', 
   integrations: [
     tailwind(),
     sitemap()
