@@ -5,7 +5,16 @@ import Footer from '../components/Footer.astro';
 import { siteConfig } from '../config/site.js';
 import '../styles/global.css';
 
-const { title, description = siteConfig.description } = Astro.props;
+// Accept SEO properties from individual pages, with safe fallbacks
+const { 
+  title, 
+  description = siteConfig.description,
+  image = '/images/hero-doctor.jpg', // Default fallback image for link sharing
+  type = 'website'
+} = Astro.props;
+
+// Automatically generate the exact canonical URL for the current page
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crispreyecare.com');
 ---
 
 <!DOCTYPE html>
@@ -16,27 +25,24 @@ const { title, description = siteConfig.description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- Core SEO -->
     <title>{title} | {siteConfig.name} - Dr. Rajeswari</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || 'https://crispreyecare.com')} />
+    <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph / Facebook / WhatsApp -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site || 'https://crispreyecare.com')} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | Crispr Eye Care`} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL('/images/hero-doctor.jpg', Astro.site || 'https://crispreyecare.com')} />
+    <meta property="og:image" content={new URL(image, Astro.site || 'https://crispreyecare.com')} />
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={`${title} | Crispr Eye Care`} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL('/images/hero-doctor.jpg', Astro.site || 'https://crispreyecare.com')} />
+    <meta property="twitter:image" content={new URL(image, Astro.site || 'https://crispreyecare.com')} />
 
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-    <!-- 2026 Premium Typography: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -44,7 +50,6 @@ const { title, description = siteConfig.description } = Astro.props;
 
   <body class="bg-slate-50/50 text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900 flex flex-col min-h-screen">
     
-    <!-- Emergency Top Bar -->
     <div class="bg-blue-900 text-white text-sm py-2 px-6 flex justify-between items-center hidden md:flex relative z-50">
       <span>{siteConfig.contact.workingHours}</span>
       <div class="space-x-4">
@@ -55,17 +60,14 @@ const { title, description = siteConfig.description } = Astro.props;
     
     <Navbar />
     
-    <!-- Main Content Wrapper -->
     <main class="flex-grow overflow-hidden">
       <slot />
     </main>
     
     <Footer />
 
-    <!-- Global Floating Contact (Call/Chat) -->
     <FloatingContact />
 
-    <!-- 2026 UX Standard: Global Scroll Reveal Engine -->
     <script>
       const observerOptions = {
         root: null,
