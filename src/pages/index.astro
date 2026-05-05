@@ -7,6 +7,10 @@ import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
 import { getCollection } from 'astro:content';
 
+// SEO Optimized Meta Data (Ranking Booster)
+const pageTitle = "Best Eye Clinic in KK Nagar, Chennai";
+const pageDescription = "AIIMS-trained Dr. Rajeswari offers advanced LASIK, stitchless cataract surgery, and comprehensive eye care in KK Nagar, Chennai. Book your evaluation today.";
+
 // SAFE FETCH: Get posts, but default to an empty array if none exist to prevent crashes
 const allPosts = await getCollection('blog') || [];
 const latestPosts = allPosts
@@ -14,7 +18,7 @@ const latestPosts = allPosts
   .slice(0, 3);
 ---
 
-<MainLayout title="Cataract & LASIK Eye Specialist in KK Nagar, Chennai">
+<MainLayout title={pageTitle} description={pageDescription}>
   <Hero 
     title="Cataract & LASIK Eye Specialist" 
     subtitle="Best ophthalmologist in KK Nagar Chennai for cataract surgery, LASIK, and retina care. No unnecessary surgery. Only evidence-based care."
@@ -24,7 +28,6 @@ const latestPosts = allPosts
     whatsappText="Chat on WhatsApp"
   />
 
-  <!-- Services Section -->
   <section class="py-16 px-6 max-w-7xl mx-auto" id="services">
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-4">Advanced Eye Care Services</h2>
@@ -70,7 +73,6 @@ const latestPosts = allPosts
     </div>
   </section>
 
-  <!-- Symptoms/Discomfort Section -->
   <section class="bg-white py-16 px-6 border-y border-slate-200">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-8 text-blue-900">Experiencing Visual Discomfort?</h2>
@@ -82,11 +84,10 @@ const latestPosts = allPosts
         <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full font-medium">Double Vision</span>
       </div>
       <p class="text-lg text-slate-600 mb-6">Early diagnosis helps protect your vision.</p>
-      <a href="#book" class="text-blue-600 font-bold hover:underline">Contact us now &rarr;</a>
+      <a href="#book" class="text-blue-600 font-bold hover:underline">Contact us now →</a>
     </div>
   </section>
 
-  <!-- About Section -->
   <section class="py-16 px-6 max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-bold mb-6 text-blue-900">About Dr. Rajeswari</h2>
     <p class="text-lg text-slate-700 mb-6 leading-relaxed">
@@ -95,10 +96,8 @@ const latestPosts = allPosts
     <a href="/dr-rajeswari" class="inline-block bg-blue-100 text-blue-800 px-6 py-2 rounded-md font-semibold hover:bg-blue-200 transition">View Full Credentials</a>
   </section>
 
-  <!-- Patient Testimonials -->
   <Testimonials />
 
-  <!-- Blog Section (Only shows if posts exist) -->
   {latestPosts.length > 0 && (
     <section class="bg-slate-50 py-20 px-6 border-t border-slate-200">
       <div class="max-w-7xl mx-auto">
@@ -108,7 +107,7 @@ const latestPosts = allPosts
             <p class="text-lg text-slate-600">Patient guides and clinical insights from our experts.</p>
           </div>
           <a href="/blog" class="text-blue-600 font-bold hover:underline flex items-center gap-1 hidden md:flex">
-            View All Posts <span aria-hidden="true">&rarr;</span>
+            View All Posts <span aria-hidden="true">→</span>
           </a>
         </div>
         
@@ -116,7 +115,6 @@ const latestPosts = allPosts
           {latestPosts.map((post) => (
             <a href={`/blog/${post.slug}`} class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-300 group flex flex-col h-full">
               
-              <!-- Image Header Container -->
               <div class="relative h-48 overflow-hidden bg-slate-100 border-b border-slate-100">
                 <img 
                   src={post.data.image || "https://placehold.co/600x400/e2e8f0/1e3a8a?text=Eye+Health+Blog"} 
@@ -126,7 +124,6 @@ const latestPosts = allPosts
                 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
-              <!-- Text Content Container -->
               <div class="p-6 md:p-8 flex flex-col flex-grow">
                 <p class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider">
                   {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
@@ -138,7 +135,7 @@ const latestPosts = allPosts
                   {post.data.description}
                 </p>
                 <span class="text-blue-600 font-semibold text-sm mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Read Article <span aria-hidden="true">&rarr;</span>
+                  Read Article <span aria-hidden="true">→</span>
                 </span>
               </div>
             </a>
@@ -152,10 +149,8 @@ const latestPosts = allPosts
     </section>
   )}
 
-  <!-- FAQ Section -->
   <FAQ />
 
-  <!-- Google Maps Section -->
   <section class="py-16 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-10">
       <h2 class="text-3xl font-bold text-blue-900 mb-4">Find Us in KK Nagar</h2>
@@ -176,40 +171,9 @@ const latestPosts = allPosts
     </div>
   </section>
 
-  <!-- Booking CTA Form -->
   <CTA 
     title="Book Consultation"
     address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
     phone="+91 63813 02828"
   />
-
-<!-- Local Medical Clinic Schema for SEO -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MedicalClinic",
-      "name": "Crispr Eye Care",
-      "image": "https://crispreyecare.com/images/hero-doctor.jpg",
-      "@id": "https://crispreyecare.com",
-      "url": "https://crispreyecare.com",
-      "telephone": "+916381302828",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "39/2, R K Shanmugam Salai, Goutham Colony, K. K. Nagar",
-        "addressLocality": "Chennai",
-        "postalCode": "600078",
-        "addressCountry": "IN"
-      },
-      "medicalSpecialty": "Optometry, Ophthalmology, Cataract Surgery, LASIK",
-      "founder": {
-        "@type": "Physician",
-        "name": "Dr. Rajeswari",
-        "jobTitle": "Ophthalmologist",
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "AIIMS"
-        }
-      }
-    }
-  </script>
 </MainLayout>
