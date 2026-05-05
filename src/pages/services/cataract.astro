@@ -1,9 +1,13 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import CTA from '../../components/CTA.astro';
 
-// Add the description variable here!
-const pageDescription = "Advanced, stitchless cataract surgery and premium IOLs by AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai. Book your evaluation today.";
+// 1. Import the Astro Image component and your specific image
+import { Image } from 'astro:assets';
+import cataractImg from '../../assets/cataract.jpg';
+
+// SEO Optimized Meta Data
+const pageTitle = "Advanced Stitchless Cataract Surgery in Chennai";
+const pageDescription = "Restore crystal-clear vision with painless, stitchless cataract surgery and premium IOLs by AIIMS-trained specialists in KK Nagar. Schedule a consultation.";
 ---
 
 <MainLayout title="Advanced Cataract Surgery in Chennai" description={pageDescription}>  <!-- Service Header -->
