@@ -20,11 +20,12 @@
     <input type="text" id="lastName" placeholder="Last Name" required class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none" />
     <input type="tel" id="phone" placeholder="Mobile Number (+91...)" required class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none" />
     
-    <select id="doctor" class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
-      <option value="" disabled selected>Select Specialist...</option>
-      <option value="dr_rajeswari">Dr. Rajeswari Thangavel</option>
-      <option value="dr_narayanan_a">Dr. Narayanan A</option>
-      <option value="dr_narayanan_b">Dr. Narayanan B</option>
+    <select id="service" class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+      <option value="" disabled selected>Select Service...</option>
+      <option value="General Checkup">General Eye Checkup</option>
+      <option value="Cataract Evaluation">Cataract Evaluation</option>
+      <option value="LASIK Screening">LASIK Screening</option>
+      <option value="Retina Care">Retina Care</option>
     </select>
   </div>
 
@@ -51,15 +52,12 @@
 </div>
 
 <script>
-  // Import our Firebase database connection
   import { collection, addDoc } from "firebase/firestore";
   import { db } from "../lib/firebase.js";
 
-  // Client-side logic for handling the booking
   document.addEventListener('astro:page-load', () => {
     let selectedTime = "";
 
-    // Handle time slot selection visually
     const timeSlots = document.querySelectorAll('.time-slot');
     timeSlots.forEach(slot => {
       slot.addEventListener('click', (e) => {
@@ -72,15 +70,14 @@
     
     if(confirmBtn) {
       confirmBtn.addEventListener('click', async () => {
-        // Gather data
         const prefix = (document.getElementById('prefix') as HTMLSelectElement).value;
         const fName = (document.getElementById('firstName') as HTMLInputElement).value;
         const lName = (document.getElementById('lastName') as HTMLInputElement).value;
         const phone = (document.getElementById('phone') as HTMLInputElement).value;
-        const doctor = (document.getElementById('doctor') as HTMLSelectElement).value;
+        const service = (document.getElementById('service') as HTMLSelectElement).value;
         const date = (document.getElementById('date') as HTMLInputElement).value;
 
-        if(!fName || !phone || !doctor || !date || !selectedTime) {
+        if(!fName || !phone || !service || !date || !selectedTime) {
           alert("Please fill in all details and select a time slot.");
           return;
         }
@@ -89,16 +86,16 @@
           confirmBtn.innerText = "Securing Slot...";
           confirmBtn.disabled = true;
 
-          // Write strictly formatted payload to Firebase
-          const docRef = await addDoc(collection(db, "appointments"), {
+          // Write strictly formatted payload to Firebase (Removed doctorId)
+          await addDoc(collection(db, "appointments"), {
             patient: {
               prefix: prefix,
               firstName: fName,
               lastName: lName,
-              phoneString: String(phone) // Strict coercion
+              phoneString: String(phone) // Strict coercion prevents fatal match bugs
             },
             clinical: {
-              doctorId: doctor,
+              serviceType: service,
               status: "confirmed"
             },
             schedule: {
@@ -108,12 +105,11 @@
             }
           });
 
-          // Success State
           document.getElementById('successMessage')?.classList.remove('hidden');
           confirmBtn.style.display = 'none';
 
         } catch (error) {
-          console.error("Error booking appointment: ", error);
+          console.error("Error booking: ", error);
           alert("Could not connect to the database. Please try again.");
           confirmBtn.innerText = "Confirm Appointment";
           confirmBtn.disabled = false;
