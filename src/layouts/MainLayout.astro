@@ -19,7 +19,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crisprey
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<head>
+  <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,6 +42,44 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crisprey
     <meta property="twitter:image" content={new URL(image, Astro.site || 'https://crispreyecare.com')} />
 
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <script type="application/ld+json" set:html={JSON.stringify({ 
+      "@context": "https://schema.org", 
+      "@type": "MedicalBusiness", 
+      "name": siteConfig.name, 
+      "url": siteConfig.url, 
+      "description": siteConfig.description, 
+      "telephone": siteConfig.contact.phone, 
+      "address": { 
+        "@type": "PostalAddress", 
+        "streetAddress": siteConfig.contact.address.street, 
+        "addressLocality": siteConfig.contact.address.locality, 
+        "addressRegion": siteConfig.contact.address.state, 
+        "postalCode": siteConfig.contact.address.postalCode, 
+        "addressCountry": siteConfig.contact.address.country 
+      }, 
+      "geo": { 
+        "@type": "GeoCoordinates", 
+        "latitude": siteConfig.contact.geo?.latitude, 
+        "longitude": siteConfig.contact.geo?.longitude 
+      }, 
+      "openingHours": siteConfig.contact.workingHours, 
+      "areaServed": { "@type": "City", "name": "Chennai" } 
+    })} /> 
+
+    <script type="application/ld+json" set:html={JSON.stringify({ 
+      "@context": "https://schema.org", 
+      "@type": "Physician", 
+      "name": siteConfig.doctor.name, 
+      "medicalSpecialty": "Ophthalmology", 
+      "worksFor": { "@type": "MedicalBusiness", "name": siteConfig.name }, 
+      "address": { 
+        "@type": "PostalAddress", 
+        "addressLocality": siteConfig.contact.address.locality, 
+        "addressRegion": siteConfig.contact.address.state, 
+        "addressCountry": "India" 
+      } 
+    })} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
