@@ -43,6 +43,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crisprey
 
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-GR0G04EY1M"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GR0G04EY1M');
+    </script>
+
     <script type="application/ld+json" set:html={JSON.stringify({ 
       "@context": "https://schema.org", 
       "@type": "MedicalBusiness", 
