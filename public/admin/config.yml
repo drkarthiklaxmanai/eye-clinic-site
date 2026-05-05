@@ -1,31 +1,42 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Make sure this matches your main GitHub branch name
 
-media_folder: "public/images/blog"
-public_folder: "/images/blog"
+# This ensures images uploaded in the CMS go to your optimized Astro folder
+media_folder: "src/assets"
+public_folder: "../assets"
 
 collections:
+  # 1. THE BLOG CMS
   - name: "blog"
     label: "Blog Posts"
     folder: "src/content/blog"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Featured Image", name: "image", widget: "image", required: false }
-      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Author", name: "author", widget: "string", default: "Dr. Rajeswari" }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: "faqs"
-    label: "FAQs"
-    folder: "src/content/faqs"
-    create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{slug}}"
     fields:
-      - { label: "Question", name: "question", widget: "string" }
-      - { label: "Display Order", name: "order", widget: "number", value_type: "int", required: false }
-      - { label: "Answer", name: "body", widget: "markdown" }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description (SEO Meta)", name: "description", widget: "text"}
+      - {label: "Publish Date", name: "pubDate", widget: "datetime"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  # 2. THE FAQ CMS
+  - name: "faq"
+    label: "FAQs"
+    folder: "src/content/faq"
+    create: true
+    fields:
+      - {label: "Question", name: "question", widget: "string"}
+      - {label: "Answer", name: "answer", widget: "markdown"}
+      - {label: "Category", name: "category", widget: "select", options: ["General", "Cataract", "LASIK", "Retina", "Squint"]}
+
+  # 3. THE SERVICES CMS
+  - name: "services"
+    label: "Services"
+    folder: "src/content/services"
+    create: true
+    fields:
+      - {label: "Service Name", name: "title", widget: "string"}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - {label: "Icon/Image", name: "image", widget: "image"}
+      - {label: "Full Page Content", name: "body", widget: "markdown"}
