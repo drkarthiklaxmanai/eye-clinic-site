@@ -10,14 +10,30 @@ const { title, description = siteConfig.description } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
+<head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- Core SEO -->
     <title>{title} | {siteConfig.name} - Dr. Rajeswari</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || 'https://crispreyecare.com')} />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site || 'https://crispreyecare.com')} />
+    <meta property="og:title" content={`${title} | Crispr Eye Care`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/images/hero-doctor.jpg', Astro.site || 'https://crispreyecare.com')} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={`${title} | Crispr Eye Care`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL('/images/hero-doctor.jpg', Astro.site || 'https://crispreyecare.com')} />
+
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <!-- 2026 Premium Typography: Plus Jakarta Sans -->
@@ -25,7 +41,7 @@ const { title, description = siteConfig.description } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  
+
   <body class="bg-slate-50/50 text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900 flex flex-col min-h-screen">
     
     <!-- Emergency Top Bar -->

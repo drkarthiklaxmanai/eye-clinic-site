@@ -1,20 +1,29 @@
 ---
 import { siteConfig } from '../config/site.js';
 ---
-<header class="bg-white shadow-sm sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="/" class="text-2xl font-bold text-blue-900 tracking-tight">
-      {siteConfig.name}
+<header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/85 border-b border-slate-200/50 shadow-sm transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+    
+    <a href="/" class="flex flex-col justify-center group">
+      <span class="text-2xl font-extrabold text-blue-900 tracking-tight leading-none group-hover:text-blue-700 transition-colors">{siteConfig.name}</span>
+      <span class="text-[0.65rem] font-bold text-slate-500 uppercase tracking-widest mt-1">A Unit of Crispr Speciality Clinics</span>
     </a>
-    <nav class="hidden md:flex space-x-8">
-      <a href="/" class="text-slate-600 hover:text-blue-600 font-medium">Home</a>
-      <a href="/services/cataract" class="text-slate-600 hover:text-blue-600 font-medium">Cataract</a>
-      <a href="/services/lasik" class="text-slate-600 hover:text-blue-600 font-medium">LASIK</a>
-      <a href="/dr-rajeswari" class="text-slate-600 hover:text-blue-600 font-medium">Dr. Rajeswari</a>
+
+    <nav class="hidden md:flex space-x-8 items-center">
+      <a href="/" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Home</a>
+      <a href="/services/cataract" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Cataract</a>
+      <a href="/services/lasik" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">LASIK</a>
+      <a href="/dr-rajeswari" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Dr. Rajeswari</a>
     </nav>
-    <a href="#book" class="bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition">
+
+    <a href="#book" class="hidden md:inline-block bg-blue-600 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg transition-all transform hover:-translate-y-0.5">
       Book Now
     </a>
+
+    <button class="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors" aria-label="Toggle Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
   </div>
 </header>
-

@@ -1,10 +1,12 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
+
+// Add the description variable here!
+const pageDescription = "Advanced, stitchless cataract surgery and premium IOLs by AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai. Book your evaluation today.";
 ---
 
-<MainLayout title="Advanced Cataract Surgery in Chennai | Crispr Eye Care">
-  <!-- Service Header -->
+<MainLayout title="Advanced Cataract Surgery in Chennai" description={pageDescription}>  <!-- Service Header -->
   <section class="bg-blue-900 text-white py-20 px-6">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">

@@ -182,4 +182,34 @@ const latestPosts = allPosts
     address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
     phone="+91 63813 02828"
   />
+
+<!-- Local Medical Clinic Schema for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      "name": "Crispr Eye Care",
+      "image": "https://crispreyecare.com/images/hero-doctor.jpg",
+      "@id": "https://crispreyecare.com",
+      "url": "https://crispreyecare.com",
+      "telephone": "+916381302828",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "39/2, R K Shanmugam Salai, Goutham Colony, K. K. Nagar",
+        "addressLocality": "Chennai",
+        "postalCode": "600078",
+        "addressCountry": "IN"
+      },
+      "medicalSpecialty": "Optometry, Ophthalmology, Cataract Surgery, LASIK",
+      "founder": {
+        "@type": "Physician",
+        "name": "Dr. Rajeswari",
+        "jobTitle": "Ophthalmologist",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "AIIMS"
+        }
+      }
+    }
+  </script>
 </MainLayout>
