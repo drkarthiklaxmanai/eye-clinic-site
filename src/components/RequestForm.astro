@@ -1,0 +1,135 @@
+---
+// src/components/RequestForm.astro
+---
+
+<div class="max-w-2xl mx-auto p-8 md:p-10 bg-white rounded-3xl shadow-xl border border-slate-100">
+
+  <form
+    name="appointment-request"
+    method="POST"
+    data-netlify="true"
+    id="requestForm"
+    class="space-y-5"
+  >
+    <!-- Required hidden field so Netlify's build-time form detection picks this up -->
+    <input type="hidden" name="form-name" value="appointment-request" />
+
+    <div class="flex gap-3">
+      <select name="prefix" class="p-3 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none w-1/4">
+        <option value="Mr.">Mr.</option>
+        <option value="Ms.">Ms.</option>
+        <option value="Mrs.">Mrs.</option>
+        <option value="Dr.">Dr.</option>
+      </select>
+      <input
+        type="text"
+        name="fullName"
+        placeholder="Full Name"
+        required
+        class="p-3 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none w-3/4"
+      />
+    </div>
+
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Mobile Number (+91...)"
+      required
+      class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+    />
+
+    <select
+      name="service"
+      required
+      class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+    >
+      <option value="" disabled selected>Select Service...</option>
+      <option value="General Eye Checkup">General Eye Checkup</option>
+      <option value="Cataract Evaluation">Cataract Evaluation</option>
+      <option value="LASIK Screening">LASIK Screening</option>
+      <option value="Retina Care">Retina Care</option>
+      <option value="Squint Treatment">Squint Treatment</option>
+      <option value="Glaucoma Screening">Glaucoma Screening</option>
+      <option value="Neuro-Ophthalmology">Neuro-Ophthalmology</option>
+      <option value="Other / Not Sure">Other / Not Sure</option>
+    </select>
+
+    <div>
+      <label class="block text-sm font-medium text-slate-600 mb-1">Preferred Date (optional)</label>
+      <input
+        type="date"
+        name="preferredDate"
+        class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+      />
+    </div>
+
+    <textarea
+      name="notes"
+      placeholder="Anything you'd like us to know (optional)"
+      rows="3"
+      class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+    ></textarea>
+
+    <button
+      type="submit"
+      id="requestSubmitBtn"
+      class="w-full py-4 bg-blue-900 text-white font-bold rounded-xl shadow-lg hover:bg-blue-800 transition disabled:opacity-50"
+    >
+      Send Appointment Request
+    </button>
+  </form>
+
+  <div id="requestSuccessMessage" class="hidden text-center py-6">
+    <div class="text-4xl mb-3">✅</div>
+    <h3 class="text-xl font-bold text-blue-900 mb-2">Request Sent</h3>
+    <p class="text-slate-600">
+      Thank you — we've received your request and will call you shortly to confirm your appointment.
+      For anything urgent, please call us directly.
+    </p>
+  </div>
+
+  <div id="requestErrorMessage" class="hidden text-center py-6 text-red-700">
+    <p>Something went wrong sending your request. Please call or WhatsApp us directly instead.</p>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const form = document.getElementById('requestForm') as HTMLFormElement;
+    const submitBtn = document.getElementById('requestSubmitBtn') as HTMLButtonElement;
+    const successMessage = document.getElementById('requestSuccessMessage');
+    const errorMessage = document.getElementById('requestErrorMessage');
+
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Sending...";
+
+      try {
+        const formData = new FormData(form);
+        const body = new URLSearchParams();
+        formData.forEach((value, key) => body.append(key, value.toString()));
+
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
+        });
+
+        if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+
+        form.classList.add('hidden');
+        successMessage?.classList.remove('hidden');
+
+      } catch (error) {
+        console.error("Error submitting request:", error);
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Appointment Request";
+        errorMessage?.classList.remove('hidden');
+      }
+    });
+  });
+</script>
