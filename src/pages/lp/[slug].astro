@@ -13,7 +13,7 @@ import BookingSection from '../../components/LandingPageSections/BookingSection.
 export async function getStaticPaths() {
   const landingPages = await getCollection('landingPages');
   return landingPages.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
