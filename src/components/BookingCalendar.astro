@@ -1,0 +1,202 @@
+---
+// src/components/BookingCalendar.astro
+---
+
+<div class="max-w-5xl mx-auto p-8 bg-white/40 backdrop-blur-xl border border-white/50 rounded-3xl shadow-2xl flex flex-col md:flex-row gap-8">
+  
+  <div class="md:w-1/2 space-y-5 pr-0 md:pr-8 border-b md:border-b-0 md:border-r border-slate-200/60 pb-8 md:pb-0">
+    <h3 class="text-2xl font-bold text-blue-900 mb-6">Patient Details</h3>
+    
+    <div class="flex gap-3">
+      <select id="prefix" class="p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none w-1/4">
+        <option value="Mr.">Mr.</option>
+        <option value="Ms.">Ms.</option>
+        <option value="Mrs.">Mrs.</option>
+        <option value="Dr.">Dr.</option>
+      </select>
+      <input type="text" id="firstName" placeholder="First Name" required class="p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none w-3/4" />
+    </div>
+    
+    <input type="text" id="lastName" placeholder="Last Name" required class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none" />
+    <input type="tel" id="phone" placeholder="Mobile Number (+91...)" required class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none" />
+    
+    <select id="service" class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+      <option value="" disabled selected>Select Service...</option>
+      <option value="General Checkup">General Eye Checkup</option>
+      <option value="Cataract Evaluation">Cataract Evaluation</option>
+      <option value="LASIK Screening">LASIK Screening</option>
+      <option value="Retina Care">Retina Care</option>
+    </select>
+  </div>
+
+  <div class="md:w-1/2 flex flex-col">
+    <h3 class="text-2xl font-bold text-blue-900 mb-6">Select Slot</h3>
+    
+    <input type="date" id="date" required class="w-full p-3 mb-6 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none" />
+    
+    <div class="grid grid-cols-2 gap-3 mb-8">
+      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium focus:bg-blue-600 focus:text-white" data-time="10:00 AM">10:00 AM</button>
+      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium focus:bg-blue-600 focus:text-white" data-time="11:30 AM">11:30 AM</button>
+      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium focus:bg-blue-600 focus:text-white" data-time="02:00 PM">02:00 PM</button>
+      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium focus:bg-blue-600 focus:text-white" data-time="04:30 PM">04:30 PM</button>
+    </div>
+
+    <button id="confirmBtn" class="mt-auto w-full py-4 bg-blue-900 text-white font-bold rounded-xl shadow-lg hover:bg-blue-800 transition disabled:opacity-50">
+      Initializing...
+    </button>
+    
+    <div id="successMessage" class="hidden mt-4 text-center p-3 bg-green-100 text-green-800 rounded-lg font-medium">
+      Appointment confirmed successfully!
+    </div>
+
+    <div id="authErrorMessage" class="hidden mt-4 text-center p-3 bg-red-100 text-red-800 rounded-lg font-medium">
+      Could not initialize booking. Please refresh the page or call us directly.
+    </div>
+  </div>
+</div>
+
+<script>
+  import { collection, addDoc, doc, setDoc, getDocs, query, where } from "firebase/firestore";
+  import { db, ensureAnonymousAuth } from "../lib/firebase.js";
+
+  document.addEventListener('astro:page-load', () => {
+    let selectedTime = "";
+    let authReady = false;
+
+    const dateInput = document.getElementById('date') as HTMLInputElement;
+    const timeSlots = document.querySelectorAll('.time-slot');
+    const confirmBtn = document.getElementById('confirmBtn') as HTMLButtonElement;
+    const authErrorMessage = document.getElementById('authErrorMessage');
+
+    // 0. Establish an anonymous auth session before allowing any booking action.
+    //    The button stays disabled and shows "Initializing..." until this resolves,
+    //    so a patient can never submit before we have a valid request.auth.uid.
+    confirmBtn.disabled = true;
+
+    ensureAnonymousAuth()
+      .then(() => {
+        authReady = true;
+        confirmBtn.innerText = "Confirm Appointment";
+        confirmBtn.disabled = false;
+      })
+      .catch((error) => {
+        console.error("Anonymous auth failed:", error);
+        confirmBtn.innerText = "Booking Unavailable";
+        if (authErrorMessage) {
+          authErrorMessage.textContent =
+            `Could not initialize booking. (${error?.code || 'unknown'}: ${error?.message || error}) Please call us directly.`;
+          authErrorMessage.classList.remove('hidden');
+        }
+      });
+
+    // 1. Handle Time Slot Selection Visuals
+    timeSlots.forEach(slot => {
+      slot.addEventListener('click', (e) => {
+        // Remove active state from all buttons
+        timeSlots.forEach(btn => btn.classList.remove('bg-blue-600', 'text-white'));
+        
+        // Add active state to clicked button
+        const target = e.target as HTMLButtonElement;
+        target.classList.add('bg-blue-600', 'text-white');
+        selectedTime = target.getAttribute('data-time') || "";
+      });
+    });
+
+    // 2. Dynamically Block Taken Slots when a Date is selected
+    if(dateInput) {
+      dateInput.addEventListener('change', async (e) => {
+        const selectedDate = (e.target as HTMLInputElement).value;
+        
+        // Reset all buttons to available first
+        timeSlots.forEach(slot => {
+          const btn = slot as HTMLButtonElement;
+          btn.disabled = false;
+          btn.classList.remove('opacity-50', 'line-through', 'cursor-not-allowed', 'bg-slate-100');
+        });
+
+        try {
+          // Ask Firebase which slots are taken for this specific date
+          const q = query(collection(db, "public_slots"), where("dateISO", "==", selectedDate));
+          const querySnapshot = await getDocs(q);
+          
+          // Cross out the booked buttons
+          querySnapshot.forEach((doc) => {
+            const bookedTime = doc.data().timeSlot;
+            const targetBtn = document.querySelector(`button[data-time="${bookedTime}"]`) as HTMLButtonElement;
+            
+            if(targetBtn) {
+              targetBtn.disabled = true;
+              targetBtn.classList.add('opacity-50', 'line-through', 'cursor-not-allowed', 'bg-slate-100');
+              targetBtn.classList.remove('hover:bg-blue-50');
+            }
+          });
+        } catch(error) {
+          console.error("Error checking availability:", error);
+        }
+      });
+    }
+
+    // 3. The Dual-Write Booking Submission
+    if(confirmBtn) {
+      confirmBtn.addEventListener('click', async () => {
+        if (!authReady) {
+          alert("Booking is still initializing. Please wait a moment and try again.");
+          return;
+        }
+
+        const prefix = (document.getElementById('prefix') as HTMLSelectElement).value;
+        const fName = (document.getElementById('firstName') as HTMLInputElement).value;
+        const lName = (document.getElementById('lastName') as HTMLInputElement).value;
+        const phone = (document.getElementById('phone') as HTMLInputElement).value;
+        const service = (document.getElementById('service') as HTMLSelectElement).value;
+        const date = dateInput.value;
+
+        if(!fName || !phone || !service || !date || !selectedTime) {
+          alert("Please fill in all details and select an available time slot.");
+          return;
+        }
+
+        try {
+          confirmBtn.innerText = "Securing Slot...";
+          confirmBtn.disabled = true;
+
+          // WRITE 1: Securely save the private patient data
+          await addDoc(collection(db, "appointments"), {
+            patient: {
+              prefix: prefix,
+              firstName: fName,
+              lastName: lName,
+              phoneString: String(phone) 
+            },
+            clinical: {
+              serviceType: service,
+              status: "confirmed"
+            },
+            schedule: {
+              dateISO: date,
+              timeSlot: selectedTime,
+              timestamp: Date.now()
+            }
+          });
+
+          // WRITE 2: Save the public dummy slot to block the calendar for others
+          const slotId = `${date}_${selectedTime}`.replace(/\s+/g, '');
+          await setDoc(doc(db, "public_slots", slotId), {
+            dateISO: date,
+            timeSlot: selectedTime,
+            status: "booked"
+          });
+
+          document.getElementById('successMessage')?.classList.remove('hidden');
+          confirmBtn.style.display = 'none';
+
+        } catch (error) {
+          console.error("Error booking: ", error);
+          alert("Could not connect to the database. Please try again.");
+          confirmBtn.innerText = "Confirm Appointment";
+          confirmBtn.disabled = false;
+        }
+      });
+    }
+  });
+</script>
