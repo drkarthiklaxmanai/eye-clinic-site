@@ -1,59 +1,77 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
+import { siteConfig } from '../../config/site.js';
 
-const pageDescription = "Protect your vision with expert medical retina care. We specialize in advanced diagnostics and evidence-based treatments for diabetic retinopathy and macular degeneration in KK Nagar.";
+const pageTitle = "Retina Care: Diabetic Retinopathy & Macular Degeneration";
+const pageDescription = "Specialized retina care for diabetic retinopathy and age-related macular degeneration by AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai.";
 ---
 
-<MainLayout title="Medical Retina Care in Chennai" description={pageDescription}>  <!-- Service Header -->
+<MainLayout title={pageTitle} description={pageDescription}>
   <section class="bg-blue-900 text-white py-20 px-6">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
-        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">Diagnostic Intelligence</span>
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Medical Retina Care</h1>
+        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">Medical Retina Specialist</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Retina Care for Diabetic & Age-Related Conditions</h1>
         <p class="text-xl text-blue-100 mb-8 leading-relaxed">
-          Expert diagnosis and management of Diabetic Retinopathy, Macular Degeneration, and complex retinal disorders.
+          Protecting your vision from diabetic retinopathy and macular degeneration through early detection and expert management.
         </p>
-        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Schedule a Retina Scan</a>
+        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Book a Retina Evaluation</a>
       </div>
       <div class="md:w-1/2 w-full">
-        <img src="/images/retina.jpg" alt="Digital retinal imaging and diagnostic scan" class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video" onerror="this.src='https://placehold.co/800x500/1e3a8a/ffffff?text=Retinal+Diagnostics'"/>
+        <img
+          src="/images/retina-service.png"
+          alt="Retinal imaging and diagnosis"
+          class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video"
+          onerror="this.src='https://placehold.co/800x450/1e3a8a/ffffff?text=Retina+Care'"
+        />
       </div>
     </div>
   </section>
 
-  <!-- Content Section -->
   <section class="py-16 px-6 max-w-4xl mx-auto">
     <div class="prose prose-lg prose-blue max-w-none text-slate-700">
-      <h2 class="text-3xl font-bold text-blue-900 mb-6">Protecting the Back of Your Eye</h2>
+
+      <h2 class="text-3xl font-bold text-blue-900 mb-6">Could This Be You?</h2>
       <p class="mb-6">
-        The retina is the light-sensitive layer of tissue at the back of the inner eye, acting much like the film in a camera. Damage to the retina can cause permanent, irreversible vision loss if not caught early. We specialize in the early detection and evidence-based management of retinal diseases.
+        Retinal conditions often progress silently in their early stages. You may benefit from a retina evaluation if you have:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mb-10">
+        <li>Diabetes of any duration -- diabetic retinopathy can develop even with well-controlled blood sugar</li>
+        <li>Sudden floaters, flashes of light, or a curtain-like shadow in your vision</li>
+        <li>Blurred or distorted central vision, especially when reading or recognizing faces</li>
+        <li>Age 50+, with no recent dilated retina examination</li>
+        <li>A family history of macular degeneration</li>
+      </ul>
+
+      <div class="bg-red-50 border border-red-200 p-8 rounded-xl my-10">
+        <h3 class="text-xl font-bold text-red-900 mb-3">Why Early Detection Matters</h3>
+        <p class="text-red-800 leading-relaxed">
+          Diabetic retinopathy is a leading cause of preventable blindness, but vision loss can often be avoided entirely with timely treatment. Damage to the retina from advanced disease is frequently <strong>irreversible</strong> -- annual screening, even without symptoms, is the most effective protection if you have diabetes.
+        </p>
+      </div>
+
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Our Diagnostic & Treatment Approach</h2>
+      <p class="mb-6">
+        Evaluation includes a dilated retinal examination and imaging to assess the health of your retina and macula. Dr. Rajeswari's Medical Retina Fellowship training ensures management decisions are based on current evidence, not routine escalation.
       </p>
 
-      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Diabetic Retinopathy</h2>
-      <p class="mb-6">
-        Diabetes can cause damage to the blood vessels in the retina. In its early stages, diabetic retinopathy often has no symptoms. However, as the disease progresses, it can lead to severe vision loss. <strong>If you have diabetes, an annual dilated eye exam is absolutely critical.</strong>
-      </p>
-      
       <div class="bg-blue-50 p-8 rounded-xl border border-blue-100 my-10">
-        <h3 class="text-xl font-bold text-blue-900 mb-4">Advanced Diagnostic Technology</h3>
+        <h3 class="text-xl font-bold text-blue-900 mb-4">Treatment Options:</h3>
         <ul class="list-disc pl-6 space-y-2 font-medium">
-          <li><strong>Optical Coherence Tomography (OCT):</strong> A non-invasive imaging test that uses light waves to take cross-section pictures of your retina, allowing us to see each of the retina's distinctive layers.</li>
-          <li><strong>Fundus Photography:</strong> High-resolution digital imaging to monitor disease progression over time.</li>
-          <li><strong>Targeted Treatments:</strong> Including precise retinal lasers and anti-VEGF intraocular injections to halt disease progression.</li>
+          <li><strong>Regular Monitoring:</strong> For early-stage changes that don't yet require active intervention.</li>
+          <li><strong>Anti-VEGF Injections:</strong> For diabetic macular edema or wet macular degeneration, to control fluid and preserve vision.</li>
+          <li><strong>Laser Photocoagulation:</strong> To stabilize specific stages of diabetic retinopathy.</li>
+          <li><strong>Coordinated Diabetes Care:</strong> Guidance alongside your physician to manage the underlying systemic condition.</li>
         </ul>
       </div>
 
-      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Age-Related Macular Degeneration (AMD)</h2>
-      <p class="mb-6">
-        AMD affects the macula, the central part of the retina responsible for sharp, straight-ahead vision. We offer comprehensive management plans for both "Dry" and "Wet" macular degeneration to help preserve your central vision and maintain your quality of life.
-      </p>
     </div>
   </section>
 
-  <CTA 
-    title="Book Your Retina Evaluation"
-    address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
-    phone="+91 63813 02828"
+  <CTA
+    title="Schedule Your Retina Evaluation"
+    address={`${siteConfig.contact.address.street}, ${siteConfig.contact.address.locality} - ${siteConfig.contact.address.postalCode}`}
+    phone={siteConfig.contact.phone}
   />
 </MainLayout>
