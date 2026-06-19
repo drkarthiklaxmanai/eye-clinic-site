@@ -1,0 +1,47 @@
+---
+// src/pages/lp/[slug].astro
+import { getCollection } from 'astro:content';
+import LandingPageLayout from '../../layouts/LandingPageLayout.astro';
+import LandingHero from '../../components/LandingPageSections/LandingHero.astro';
+import TrustBar from '../../components/LandingPageSections/TrustBar.astro';
+import SymptomsSection from '../../components/LandingPageSections/SymptomsSection.astro';
+import TreatmentProcess from '../../components/LandingPageSections/TreatmentProcess.astro';
+import DoctorSection from '../../components/LandingPageSections/DoctorSection.astro';
+import FAQSection from '../../components/LandingPageSections/FAQSection.astro';
+import BookingSection from '../../components/LandingPageSections/BookingSection.astro';
+
+export async function getStaticPaths() {
+  const landingPages = await getCollection('landingPages');
+  return landingPages.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+---
+
+<LandingPageLayout title={data.headline} description={data.metaDescription}>
+  <LandingHero
+    headline={data.headline}
+    subheadline={data.subheadline}
+    urgent={data.urgent}
+  />
+
+  <TrustBar />
+
+  {data.symptoms && data.symptoms.length > 0 && (
+    <SymptomsSection title={data.symptomsTitle} items={data.symptoms} />
+  )}
+
+  {data.processSteps && data.processSteps.length > 0 && (
+    <TreatmentProcess title={data.processTitle} steps={data.processSteps} />
+  )}
+
+  <DoctorSection />
+
+  <FAQSection topicKeywords={data.faqTopicKeywords} />
+
+  <BookingSection />
+</LandingPageLayout>
