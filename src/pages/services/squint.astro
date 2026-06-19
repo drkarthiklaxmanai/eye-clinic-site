@@ -1,61 +1,77 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
+import { siteConfig } from '../../config/site.js';
 
-const pageDescription = "Restore ocular alignment and binocular vision with specialized squint (strabismus) treatment for adults and children by AIIMS-trained Dr. Rajeswari.";
+const pageTitle = "Squint (Strabismus) Treatment for Children & Adults";
+const pageDescription = "Squint and strabismus correction by AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai. Evaluation and treatment for children and adults.";
 ---
 
-<MainLayout title="Squint & Strabismus Treatment in Chennai" description={pageDescription}>  <!-- Service Header -->
+<MainLayout title={pageTitle} description={pageDescription}>
   <section class="bg-blue-900 text-white py-20 px-6">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
-        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">Ocular Alignment</span>
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Squint & Strabismus Treatment</h1>
+        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">Strabismus Specialist</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Squint Evaluation & Correction</h1>
         <p class="text-xl text-blue-100 mb-8 leading-relaxed">
-          Expert evaluation and treatment for eye alignment issues in both children and adults to restore binocular vision and confidence.
+          Specialized care for eye misalignment in children and adults -- the earlier it's addressed, the better the outcome.
         </p>
-        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Consult Dr. Rajeswari</a>
+        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Book a Squint Evaluation</a>
       </div>
       <div class="md:w-1/2 w-full">
-        <img src="/images/squint.jpg" alt="Corrective eye alignment and symmetry evaluation" class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video" onerror="this.src='https://placehold.co/800x500/1e3a8a/ffffff?text=Alignment+Evaluation'"/>
+        <img
+          src="/images/squint-service.png"
+          alt="Eye alignment examination"
+          class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video"
+          onerror="this.src='https://placehold.co/800x450/1e3a8a/ffffff?text=Squint+Care'"
+        />
       </div>
     </div>
   </section>
 
-  <!-- Content Section -->
   <section class="py-16 px-6 max-w-4xl mx-auto">
     <div class="prose prose-lg prose-blue max-w-none text-slate-700">
-      <h2 class="text-3xl font-bold text-blue-900 mb-6">Understanding Squint (Strabismus)</h2>
+
+      <h2 class="text-3xl font-bold text-blue-900 mb-6">Could This Be You or Your Child?</h2>
       <p class="mb-6">
-        A squint, medically known as strabismus, is a condition where the eyes do not look in exactly the same direction at the same time. While one eye looks straight ahead, the other eye may turn inward, outward, upward, or downward. 
+        Squint (strabismus) is a misalignment of the eyes that can affect appearance, depth perception, and -- in children -- normal visual development. Consider an evaluation if you notice:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mb-10">
+        <li>One or both eyes turning inward, outward, up, or down, constantly or intermittently</li>
+        <li>A child tilting or turning their head to see better</li>
+        <li>Double vision, or vision that seems to "compete" between the two eyes</li>
+        <li>A "lazy eye" diagnosis in childhood that was never fully treated</li>
+        <li>Eye strain, fatigue, or headaches with near work</li>
+      </ul>
+
+      <div class="bg-red-50 border border-red-200 p-8 rounded-xl my-10">
+        <h3 class="text-xl font-bold text-red-900 mb-3">Why Early Detection Matters</h3>
+        <p class="text-red-800 leading-relaxed">
+          In children, untreated squint can lead to <strong>amblyopia ("lazy eye")</strong> -- permanent reduced vision in the misaligned eye, because the brain learns to ignore its input during critical developmental years. The earlier this is caught and treated, the more likely vision develops normally in both eyes.
+        </p>
+      </div>
+
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Our Diagnostic & Treatment Approach</h2>
+      <p class="mb-6">
+        Evaluation includes assessing the type and degree of misalignment, checking for any underlying refractive error, and determining whether amblyopia is present. Treatment is matched to the specific cause -- not every squint requires surgery.
       </p>
 
-      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Pediatric Squint & "Lazy Eye"</h2>
-      <p class="mb-6">
-        When a child develops a squint, the brain may begin to ignore the image from the turned eye to prevent double vision. If left untreated, this can lead to Amblyopia, commonly known as "lazy eye," causing permanent visual impairment. <strong>Early intervention is crucial. A squint will not simply "correct itself" as a child grows.</strong>
-      </p>
-      
       <div class="bg-blue-50 p-8 rounded-xl border border-blue-100 my-10">
-        <h3 class="text-xl font-bold text-blue-900 mb-4">Treatment Pathways</h3>
-        <p class="mb-4 text-slate-700 font-medium">Depending on the specific type and severity of the strabismus, treatment may include:</p>
+        <h3 class="text-xl font-bold text-blue-900 mb-4">Treatment Options:</h3>
         <ul class="list-disc pl-6 space-y-2 font-medium">
-          <li><strong>Prescription Glasses:</strong> Often the first step, specifically for refractive squints.</li>
-          <li><strong>Patching Therapy:</strong> Covering the stronger eye to force the brain to use and strengthen the "lazy" eye.</li>
-          <li><strong>Eye Exercises (Orthoptics):</strong> To improve eye coordination and focus.</li>
-          <li><strong>Surgical Correction:</strong> A highly precise day-care procedure to adjust the tension of the eye muscles and restore proper alignment.</li>
+          <li><strong>Corrective Glasses:</strong> Many cases, especially in children, improve significantly with the right prescription alone.</li>
+          <li><strong>Eye Patching / Vision Therapy:</strong> To strengthen a weaker eye and encourage normal visual development.</li>
+          <li><strong>Strabismus Surgery:</strong> For cases where muscle realignment is needed, performed with precision for both function and appearance.</li>
+          <li><strong>Adult Strabismus Care:</strong> Evaluation and treatment for misalignment that develops or persists into adulthood.</li>
         </ul>
       </div>
 
-      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Adult Squint Correction</h2>
-      <p class="mb-6">
-        Adults can develop squints due to medical conditions (like diabetes or thyroid disease), trauma, or untreated childhood strabismus. Adult squint surgery is highly effective, not just for cosmetic reasons, but to eliminate double vision and alleviate severe eye strain.
-      </p>
     </div>
   </section>
 
-  <CTA 
-    title="Book a Strabismus Evaluation"
-    address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
-    phone="+91 63813 02828"
+  <CTA
+    title="Schedule a Squint Evaluation"
+    address={`${siteConfig.contact.address.street}, ${siteConfig.contact.address.locality} - ${siteConfig.contact.address.postalCode}`}
+    phone={siteConfig.contact.phone}
   />
 </MainLayout>
