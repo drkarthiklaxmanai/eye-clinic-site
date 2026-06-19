@@ -8,6 +8,17 @@ const faqCollection = defineCollection({
   }),
 });
 
+const blogCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    image: z.string().optional(),
+  }),
+});
+
 export const collections = {
   'faqs': faqCollection,
+  'blog': blogCollection,
 };
