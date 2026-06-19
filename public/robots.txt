@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://crispreyecare.com/sitemap-index.xml
+Sitemap: https://crispreyecare.com/sitemap.xml
