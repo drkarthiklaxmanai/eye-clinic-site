@@ -1,0 +1,21 @@
+{
+  "headline": "Glaucoma Screening in KK Nagar, Chennai",
+  "subheadline": "Glaucoma often has no symptoms until vision is lost. AIIMS-trained Dr. Rajeswari offers thorough screening to protect your sight before it's too late.",
+  "urgent": false,
+  "metaDescription": "Glaucoma screening and management in KK Nagar, Chennai with AIIMS-trained Dr. Rajeswari. Early detection protects vision permanently. Call or book online.",
+  "symptomsTitle": "Are You at Risk?",
+  "symptoms": [
+    "Family history of glaucoma",
+    "Age over 40 with no recent eye pressure check",
+    "Diabetes or high blood pressure",
+    "Gradually narrowing side vision you may not have noticed",
+    "Never had your optic nerve examined"
+  ],
+  "processTitle": "What to Expect",
+  "processSteps": [
+    { "title": "Eye Pressure Check", "description": "A quick, painless measurement of intraocular pressure (IOP)." },
+    { "title": "Optic Nerve Evaluation", "description": "Assessment of the optic nerve for early signs of damage." },
+    { "title": "Ongoing Protection", "description": "If needed, treatment focused on preserving the vision you currently have." }
+  ],
+  "faqTopicKeywords": ["glaucoma"]
+}

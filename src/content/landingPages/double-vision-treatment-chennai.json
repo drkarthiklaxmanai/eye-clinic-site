@@ -1,0 +1,21 @@
+{
+  "headline": "Double Vision? Find Out Why in Chennai",
+  "subheadline": "Double vision can stem from eye muscle issues, nerve problems, or neurological causes. FAICO-certified Dr. Rajeswari provides specialized evaluation in KK Nagar.",
+  "urgent": false,
+  "metaDescription": "Experiencing double vision? See FAICO-certified Dr. Rajeswari in KK Nagar, Chennai for specialized neuro-ophthalmology evaluation. Call or book online.",
+  "symptomsTitle": "Does This Sound Like You?",
+  "symptoms": [
+    "Seeing two images of a single object",
+    "Double vision that's new or worsening",
+    "Double vision only in certain directions of gaze",
+    "Double vision along with drooping eyelid",
+    "Double vision with headache or other neurological symptoms"
+  ],
+  "processTitle": "How We Find the Cause",
+  "processSteps": [
+    { "title": "Specialized Assessment", "description": "Detailed evaluation of eye alignment, muscle function, and nerve control." },
+    { "title": "Identifying the Source", "description": "Determining whether the cause is muscular, nerve-related, or neurological." },
+    { "title": "Coordinated Treatment", "description": "Direct treatment or neurology referral, based on what's actually found." }
+  ],
+  "faqTopicKeywords": ["neuro", "double vision", "diplopia", "squint"]
+}
