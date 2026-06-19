@@ -4,19 +4,24 @@ import { siteConfig } from '../../config/site.js';
 ---
 
 <section class="py-16 px-6 bg-white">
-  <div class="max-w-2xl mx-auto bg-gradient-to-br from-blue-50 to-white rounded-3xl border border-blue-100 shadow-sm p-8 md:p-10 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-    <img
-      src="/images/hero-doctor.jpg"
-      alt={siteConfig.doctor.name}
-      class="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md shrink-0"
-      onerror="this.src='https://placehold.co/200x200/e2e8f0/1e3a8a?text=Dr'"
-    />
-    <div>
-      <h3 class="text-2xl font-extrabold text-blue-900 tracking-tight">{siteConfig.doctor.name}</h3>
-      <p class="text-sm text-blue-600 font-bold uppercase tracking-widest mb-3">{siteConfig.doctor.specialization} &middot; AIIMS-Trained</p>
-      <p class="text-slate-600 leading-relaxed">
-        Dedicated to ethical, evidence-based eye care in KK Nagar, Chennai — prioritizing long-term visual health over high-volume treatment.
-      </p>
+  <div class="max-w-4xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center gap-10 bg-gradient-to-br from-blue-50 to-white rounded-3xl border border-blue-100 shadow-sm p-8 md:p-12">
+      <img
+        src="/images/hero-doctor.jpg"
+        alt={siteConfig.doctor.name}
+        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-md shrink-0"
+        onerror="this.src='https://placehold.co/200x200/e2e8f0/1e3a8a?text=Dr'"
+      />
+      <div class="text-center md:text-left">
+        <h3 class="text-2xl md:text-3xl font-extrabold text-blue-900 tracking-tight">{siteConfig.doctor.name}</h3>
+        <p class="text-sm text-blue-600 font-bold uppercase tracking-widest mb-4">{siteConfig.doctor.specialization} &middot; AIIMS-Trained</p>
+        <p class="text-slate-700 leading-relaxed mb-4">
+          AIIMS-trained ophthalmologist with deep expertise in managing complex visual disorders. Dr. Rajeswari is committed to providing ethical, evidence-based eye care, prioritizing your long-term visual health over high-volume transactions.
+        </p>
+        <a href="/dr-rajeswari" target="_blank" class="inline-block bg-blue-100 text-blue-800 px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-200 transition text-sm">
+          View Full Credentials
+        </a>
+      </div>
     </div>
   </div>
 </section>
