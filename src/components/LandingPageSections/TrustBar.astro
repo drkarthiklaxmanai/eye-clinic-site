@@ -1,0 +1,29 @@
+---
+// src/components/LandingPageSections/TrustBar.astro
+//
+// IMPORTANT: Keep this strictly factual. Only verifiable, defensible claims --
+// no patient counts, no star ratings, no testimonials -- unless real and
+// approved. This component's copy is meant to be finalized ONCE and reused
+// identically across every landing page.
+
+const trustPoints = [
+  { icon: "shield", label: "AIIMS-Trained Ophthalmologist" },
+  { icon: "check", label: "Evidence-Based Treatment" },
+  { icon: "heart", label: "No Unnecessary Procedures" },
+  { icon: "map", label: "KK Nagar, Chennai" },
+];
+---
+
+<div class="bg-blue-50 border-y border-blue-100 py-4 px-6">
+  <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm md:text-base">
+    {trustPoints.map((point) => (
+      <span class="flex items-center gap-2 text-blue-900 font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        {point.label}
+      </span>
+    ))}
+  </div>
+</div>
