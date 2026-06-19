@@ -82,7 +82,11 @@
       .catch((error) => {
         console.error("Anonymous auth failed:", error);
         confirmBtn.innerText = "Booking Unavailable";
-        authErrorMessage?.classList.remove('hidden');
+        if (authErrorMessage) {
+          authErrorMessage.textContent =
+            `Could not initialize booking. (${error?.code || 'unknown'}: ${error?.message || error}) Please call us directly.`;
+          authErrorMessage.classList.remove('hidden');
+        }
       });
 
     // 1. Handle Time Slot Selection Visuals
@@ -194,5 +198,5 @@
         }
       });
     }
-  }); 
+  });
 </script>
