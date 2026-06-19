@@ -1,0 +1,18 @@
+---
+// src/components/LandingPageSections/SymptomsSection.astro
+const { title = "Do You Have These Symptoms?", items = [] } = Astro.props;
+---
+
+<section class="py-12 px-6 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-2xl md:text-3xl font-bold text-blue-900 mb-6 text-center">{title}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {items.map((item: string) => (
+        <div class="flex items-start gap-3 bg-blue-50 rounded-xl p-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span class="text-slate-700 font-medium">{item}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
