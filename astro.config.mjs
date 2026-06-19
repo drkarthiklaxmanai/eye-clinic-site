@@ -8,10 +8,6 @@ export default defineConfig({
   prefetch: true,
   integrations: [
     tailwind(),
-    sitemap({
-      // Exclude ad landing pages from the sitemap -- they're noindexed
-      // and shouldn't be submitted to Google for organic crawling.
-      filter: (page) => !page.includes('/lp/'),
-    }),
+    sitemap(),
   ],
 });
