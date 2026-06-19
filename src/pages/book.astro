@@ -1,21 +1,21 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import BookingCalendar from '../components/BookingCalendar.astro';
+import RequestForm from '../components/RequestForm.astro';
 
 const pageTitle = "Book Your Eye Consultation | Crispr Eye Care";
-const pageDescription = "Schedule your appointment with Dr. Rajeswari at Crispr Eye Care in KK Nagar, Chennai. Select your preferred date and time for a specialized evaluation.";
+const pageDescription = "Schedule your appointment with Dr. Rajeswari at Crispr Eye Care in KK Nagar, Chennai. Send a request and we'll call you back to confirm.";
 ---
 
 <MainLayout title={pageTitle} description={pageDescription}>
   <section class="bg-blue-900 text-white py-16 px-6 text-center">
     <div class="max-w-3xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Request an Appointment</h1>
-      <p class="text-xl text-blue-200">Select an available time slot below to secure your consultation with Dr. Rajeswari.</p>
+      <p class="text-xl text-blue-200">Fill in your details below and our team will call you back to confirm your consultation with Dr. Rajeswari.</p>
     </div>
   </section>
 
   <section class="py-16 px-6 bg-slate-50 relative -mt-8">
-    <BookingCalendar />
+    <RequestForm />
   </section>
 
   <section class="py-12 px-6 max-w-4xl mx-auto text-center border-t border-slate-200">
@@ -26,3 +26,17 @@ const pageDescription = "Schedule your appointment with Dr. Rajeswari at Crispr 
     </a>
   </section>
 </MainLayout>
+
+<!--
+  NOTE FOR FUTURE WORK (tracked open item):
+  This page previously used <BookingCalendar /> (src/components/BookingCalendar.astro),
+  a real-time Firestore-backed slot picker with dual-write to `appointments` + `public_slots`.
+  It was parked because anonymous Firebase Auth was being rejected with
+  `auth/admin-restricted-operation`, likely due to an Identity Platform / org-level
+  restriction outside this project's visible settings, and the project showed
+  unrelated "ais-*" Cloud Run domains suggesting shared infra we don't fully control.
+
+  BookingCalendar.astro and src/lib/firebase.js are left in the repo, untouched,
+  for when this is revisited -- likely via a Netlify Function using the Firebase
+  Admin SDK (bypasses client-side auth/rules entirely) once ready to invest time there.
+-->
