@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { siteConfig } from '../../config/site.js';
 
 const pageTitle = "Glaucoma Screening & Treatment in Chennai";
@@ -8,6 +9,10 @@ const pageDescription = "Early glaucoma detection and management by AIIMS-traine
 ---
 
 <MainLayout title={pageTitle} description={pageDescription}>
+  <Breadcrumbs items={[
+    { name: "Services", url: "/#services" },
+    { name: "Glaucoma Screening", url: "/services/glaucoma" }
+  ]} />
   <section class="bg-blue-900 text-white py-20 px-6">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
