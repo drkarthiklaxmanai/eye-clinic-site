@@ -42,52 +42,24 @@
     </div>
 
     <button id="confirmBtn" class="mt-auto w-full py-4 bg-blue-900 text-white font-bold rounded-xl shadow-lg hover:bg-blue-800 transition disabled:opacity-50">
-      Initializing...
+      Confirm Appointment
     </button>
     
     <div id="successMessage" class="hidden mt-4 text-center p-3 bg-green-100 text-green-800 rounded-lg font-medium">
       Appointment confirmed successfully!
-    </div>
-
-    <div id="authErrorMessage" class="hidden mt-4 text-center p-3 bg-red-100 text-red-800 rounded-lg font-medium">
-      Could not initialize booking. Please refresh the page or call us directly.
     </div>
   </div>
 </div>
 
 <script>
   import { collection, addDoc, doc, setDoc, getDocs, query, where } from "firebase/firestore";
-  import { db, ensureAnonymousAuth } from "../lib/firebase.js";
+  import { db } from "../lib/firebase.js";
 
   document.addEventListener('astro:page-load', () => {
     let selectedTime = "";
-    let authReady = false;
-
     const dateInput = document.getElementById('date') as HTMLInputElement;
     const timeSlots = document.querySelectorAll('.time-slot');
     const confirmBtn = document.getElementById('confirmBtn') as HTMLButtonElement;
-    const authErrorMessage = document.getElementById('authErrorMessage');
-
-    // 0. Establish an anonymous auth session before allowing any booking action.
-    //    The button stays disabled and shows "Initializing..." until this resolves,
-    //    so a patient can never submit before we have a valid request.auth.uid.
-    confirmBtn.disabled = true;
-
-    ensureAnonymousAuth()
-      .then(() => {
-        authReady = true;
-        confirmBtn.innerText = "Confirm Appointment";
-        confirmBtn.disabled = false;
-      })
-      .catch((error) => {
-        console.error("Anonymous auth failed:", error);
-        confirmBtn.innerText = "Booking Unavailable";
-        if (authErrorMessage) {
-          authErrorMessage.textContent =
-            `Could not initialize booking. (${error?.code || 'unknown'}: ${error?.message || error}) Please call us directly.`;
-          authErrorMessage.classList.remove('hidden');
-        }
-      });
 
     // 1. Handle Time Slot Selection Visuals
     timeSlots.forEach(slot => {
@@ -139,11 +111,6 @@
     // 3. The Dual-Write Booking Submission
     if(confirmBtn) {
       confirmBtn.addEventListener('click', async () => {
-        if (!authReady) {
-          alert("Booking is still initializing. Please wait a moment and try again.");
-          return;
-        }
-
         const prefix = (document.getElementById('prefix') as HTMLSelectElement).value;
         const fName = (document.getElementById('firstName') as HTMLInputElement).value;
         const lName = (document.getElementById('lastName') as HTMLInputElement).value;
