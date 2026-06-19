@@ -1,186 +1,55 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Hero from '../components/Hero.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import Testimonials from '../components/Testimonials.astro';
-import FAQ from '../components/FAQ.astro';
-import CTA from '../components/CTA.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 
-// SEO Optimized Meta Data (Ranking Booster)
-const pageTitle = "Best Eye Clinic in KK Nagar, Chennai";
-const pageDescription = "AIIMS-trained Dr. Rajeswari offers advanced LASIK, stitchless cataract surgery, and comprehensive eye care in KK Nagar, Chennai. Book your evaluation today.";
+const pageTitle = "Eye Health Blog";
+const pageDescription = "Patient guides and clinical insights on cataracts, LASIK, retina care, glaucoma, and more from Dr. Rajeswari at Crispr Eye Care, Chennai.";
 
-// SAFE FETCH: Get posts, but default to an empty array if none exist to prevent crashes
-const allPosts = await getCollection('blog') || [];
-const latestPosts = allPosts
-  .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
-  .slice(0, 3);
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+);
 ---
 
 <MainLayout title={pageTitle} description={pageDescription}>
-  <Hero 
-    title="Cataract & LASIK Eye Specialist" 
-    subtitle="Best ophthalmologist in KK Nagar Chennai for cataract surgery, LASIK, and retina care. No unnecessary surgery. Only evidence-based care."
-    doctor="Dr. Rajeswari"
-    credentials="AIIMS-trained ophthalmologist"
-    ctaText="Book Consultation"
-    whatsappText="Chat on WhatsApp"
-  />
-
-  <section class="py-16 px-6 max-w-7xl mx-auto" id="services">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-4">Advanced Eye Care Services</h2>
-      <p class="text-lg text-slate-600 max-w-2xl mx-auto">Comprehensive, evidence-based treatments tailored to your vision needs, utilizing modern technology for safe outcomes.</p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <ServiceCard 
-        image="/images/cataract.png"
-        alt="Macro view of intraocular lens"
-        title="Cataract Surgery" 
-        description="Cataract causes blurred vision and glare. Advanced surgery using modern phacoemulsification restores vision safely."
-        link="/services/cataract"
-      />
-      <ServiceCard 
-        image="/images/lasik.png"
-        alt="Laser eye surgery technology"
-        title="LASIK Surgery" 
-        description="Correct refractive errors and reduce dependence on glasses. Detailed evaluation ensures safe, precise outcomes."
-        link="/services/lasik"
-      />
-      <ServiceCard 
-        image="/images/retina-service.png"
-        alt="Retinal image"
-        title="Retina Care" 
-        description="Specialized management for Diabetic Retinopathy and macular degeneration to prevent irreversible vision loss."
-        link="/services/retina"
-      />
-      <ServiceCard 
-        image="/images/glaucoma-service.png"
-        alt="Glaucoma eye pressure screening"
-        title="Glaucoma Screening" 
-        description="Early detection through eye pressure and optic nerve evaluation -- glaucoma is irreversible once vision is lost."
-        link="/services/glaucoma"
-      />
-      <ServiceCard 
-        image="/images/squint-service.png"
-        alt="Eye alignment examination"
-        title="Squint Treatment" 
-        description="Ocular alignment evaluations and surgical treatments for pediatric and adult strabismus patients."
-        link="/services/squint"
-      />
-      <ServiceCard 
-        image="/images/neuro-service.png"
-        alt="Optic pathway illustration"
-        title="Neuro-ophthalmology" 
-        description="Diagnosis and management of complex optic nerve and brain-related vision issues."
-        link="/services/neuro"
-      />
+  <section class="bg-blue-900 text-white py-16 px-6 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Eye Health Blog</h1>
+      <p class="text-xl text-blue-200">Patient guides and clinical insights from Dr. Rajeswari.</p>
     </div>
   </section>
-
-  <section class="bg-white py-16 px-6 border-y border-slate-200">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-8 text-blue-900">Experiencing Visual Discomfort?</h2>
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full font-medium">Blurred Vision</span>
-        <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full font-medium">Eye Pain</span>
-        <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full font-medium">Night Vision Difficulty</span>
-        <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full font-medium">Diabetic Eye Problems</span>
-        <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full font-medium">Double Vision</span>
-      </div>
-      <p class="text-lg text-slate-600 mb-6">Early diagnosis helps protect your vision.</p>
-      <a href="/book" class="text-blue-600 font-bold hover:underline">Contact us now →</a>
-    </div>
-  </section>
-
-  <section class="py-16 px-6 max-w-4xl mx-auto text-center">
-    <h2 class="text-3xl font-bold mb-6 text-blue-900">About Dr. Rajeswari</h2>
-    <p class="text-lg text-slate-700 mb-6 leading-relaxed">
-      AIIMS-trained ophthalmologist with deep expertise in managing complex visual disorders. We are committed to providing ethical, evidence-based eye care, prioritizing long-term visual health over high-volume transactions.
-    </p>
-    <a href="/dr-rajeswari" class="inline-block bg-blue-100 text-blue-800 px-6 py-2 rounded-md font-semibold hover:bg-blue-200 transition">View Full Credentials</a>
-  </section>
-
-  <Testimonials />
-
-  {latestPosts.length > 0 && (
-    <section class="bg-slate-50 py-20 px-6 border-t border-slate-200">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 gap-4 text-center md:text-left">
-          <div>
-            <h2 class="text-3xl font-bold text-blue-900 mb-2">Eye Health Blog</h2>
-            <p class="text-lg text-slate-600">Patient guides and clinical insights from our experts.</p>
-          </div>
-          <a href="/blog" class="text-blue-600 font-bold hover:underline flex items-center gap-1 hidden md:flex">
-            View All Posts <span aria-hidden="true">→</span>
-          </a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {latestPosts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-300 group flex flex-col h-full">
-              
-              <div class="relative h-48 overflow-hidden bg-slate-100 border-b border-slate-100">
-                <img 
-                  src={post.data.image || "https://placehold.co/600x400/e2e8f0/1e3a8a?text=Eye+Health+Blog"} 
-                  alt={post.data.title} 
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-
-              <div class="p-6 md:p-8 flex flex-col flex-grow">
-                <p class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider">
-                  {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                </p>
-                <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-                  {post.data.title}
-                </h3>
-                <p class="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
-                  {post.data.description}
-                </p>
-                <span class="text-blue-600 font-semibold text-sm mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Read Article <span aria-hidden="true">→</span>
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-        
-        <div class="mt-10 text-center md:hidden">
-           <a href="/blog" class="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-md shadow-sm border border-slate-200 w-full">View All Posts</a>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <FAQ />
 
   <section class="py-16 px-6 max-w-7xl mx-auto">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl font-bold text-blue-900 mb-4">Find Us in KK Nagar</h2>
-      <p class="text-lg text-slate-600">Conveniently located for patients in Ashok Nagar, Vadapalani, Virugambakkam, and Ramapuram.</p>
-    </div>
-    
-    <div class="w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-lg border border-slate-200">
-      <iframe 
-        title="Google Maps Location for Crispr Eye Care Clinic"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.974836067086!2d80.2017997!3d13.0397028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5266cb2eb18fbb%3A0xc6fbef0f8eee3a3f!2s39%2F2%2C%20RK%20Shanmugam%20Salai%2C%20Goutham%20Colony%2C%20K.%20K.%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu%20600078!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-        width="100%" 
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
+    {sortedPosts.length === 0 ? (
+      <p class="text-center text-slate-600 text-lg">No articles published yet. Check back soon.</p>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {sortedPosts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-300 group flex flex-col h-full">
+            <div class="relative h-48 overflow-hidden bg-slate-100 border-b border-slate-100">
+              <img
+                src={post.data.image || "https://placehold.co/600x400/e2e8f0/1e3a8a?text=Eye+Health+Blog"}
+                alt={post.data.title}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-6 md:p-8 flex flex-col flex-grow">
+              <p class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider">
+                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </p>
+              <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                {post.data.title}
+              </h2>
+              <p class="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
+                {post.data.description}
+              </p>
+              <span class="text-blue-600 font-semibold text-sm mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">
+                Read Article <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
   </section>
-
-  <CTA 
-    title="Book Consultation"
-    address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
-    phone="+91 63813 02828"
-  />
 </MainLayout>
