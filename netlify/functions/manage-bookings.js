@@ -52,7 +52,7 @@ exports.handler = async (event) => {
     };
   }
 
-  const supabase = createClient(SUPABASE_URL, serviceRoleKey);
+  // Disable the Realtime client entirely -- we never use subscriptions   // in this function, and Realtime's WebSocket setup crashes on   // Netlify's Node 20 runtime (no native WebSocket support pre-Node 22).   const supabase = createClient(SUPABASE_URL, serviceRoleKey, {     realtime: { disabled: true },   });
 
   try {
     switch (action) {
