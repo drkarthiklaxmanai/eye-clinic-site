@@ -4,8 +4,18 @@
 // and schedule data. Uses the Supabase service role key (server-side
 // only, never exposed to the browser) so it can bypass RLS safely --
 // access is gated entirely by the ADMIN_PASSWORD check below.
+//
+// NOTE: includes temporary verbose error reporting (the "debug" field
+// in error responses) to diagnose a deployment issue. Safe to leave in
+// short-term since this endpoint is already password-gated, but should
+// be removed once confirmed working.
 
-const { createClient } = require("@supabase/supabase-js");
+let createClient;
+try {
+  createClient = require("@supabase/supabase-js").createClient;
+} catch (importError) {
+  console.error("Failed to import @supabase/supabase-js:", importError);
+}
 
 const SUPABASE_URL = "https://tvvknokblzmjxlixdqce.supabase.co";
 
@@ -27,9 +37,19 @@ exports.handler = async (event) => {
     return { statusCode: 401, body: JSON.stringify({ error: "Incorrect password" }) };
   }
 
+  if (!createClient) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Server module @supabase/supabase-js failed to load. Check Netlify function dependencies." }),
+    };
+  }
+
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!serviceRoleKey) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Server is not configured correctly." }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "SUPABASE_SERVICE_ROLE_KEY environment variable is missing." }),
+    };
   }
 
   const supabase = createClient(SUPABASE_URL, serviceRoleKey);
@@ -132,10 +152,16 @@ exports.handler = async (event) => {
     }
   } catch (error) {
     console.error("manage-bookings error:", error);
-    return { statusCode: 500, body: JSON.stringify({ error: error.message || "Something went wrong." }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: error.message || "Something went wrong.",
+        debug: { name: error.name, stack: error.stack?.split("\n").slice(0, 3) },
+      }),
+    };
   }
 };
 
 function ok(body) {
   return { statusCode: 200, body: JSON.stringify(body) };
-                  }
+}
