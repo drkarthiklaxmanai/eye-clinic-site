@@ -1,0 +1,175 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Staff Admin" description="Internal content management">
+  <div class="max-w-3xl mx-auto py-16 px-6">
+    <h1 class="text-3xl font-extrabold text-blue-900 mb-2">Staff Admin</h1>
+    <p class="text-slate-600 mb-10">Add new blog posts or FAQs. Submissions create a Pull Request for review before going live.</p>
+
+    <!-- Password gate -->
+    <div id="passwordGate" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 max-w-md">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Admin Password</label>
+      <input
+        type="password"
+        id="passwordInput"
+        class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500 mb-4"
+      />
+      <button id="unlockBtn" class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-md hover:bg-blue-700 transition">
+        Unlock
+      </button>
+      <p id="unlockError" class="hidden text-red-600 text-sm mt-3"></p>
+    </div>
+
+    <!-- Main panel, hidden until unlocked -->
+    <div id="adminPanel" class="hidden space-y-10">
+
+      <div class="flex gap-3 border-b border-slate-200">
+        <button id="tabBlog" class="px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600">New Blog Post</button>
+        <button id="tabFaq" class="px-4 py-2 font-semibold text-slate-500">New FAQ</button>
+      </div>
+
+      <!-- Blog form -->
+      <form id="blogForm" class="space-y-4 bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Title *</label>
+          <input type="text" name="title" required class="w-full px-4 py-2 border border-slate-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Description (SEO meta) *</label>
+          <textarea name="description" required rows="2" class="w-full px-4 py-2 border border-slate-300 rounded-md"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Publish Date *</label>
+          <input type="date" name="pubDate" required class="w-full px-4 py-2 border border-slate-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Author</label>
+          <input type="text" name="author" placeholder="Dr. Rajeswari" class="w-full px-4 py-2 border border-slate-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Tags (comma separated)</label>
+          <input type="text" name="tags" placeholder="Cataract, Surgery" class="w-full px-4 py-2 border border-slate-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Body (Markdown) *</label>
+          <textarea name="body" required rows="12" class="w-full px-4 py-2 border border-slate-300 rounded-md font-mono text-sm" placeholder="## Heading&#10;&#10;Write your post content here using Markdown."></textarea>
+        </div>
+        <button type="submit" class="bg-blue-900 text-white font-bold px-6 py-3 rounded-md hover:bg-blue-800 transition">
+          Create Pull Request
+        </button>
+      </form>
+
+      <!-- FAQ form -->
+      <form id="faqForm" class="hidden space-y-4 bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Question *</label>
+          <input type="text" name="question" required class="w-full px-4 py-2 border border-slate-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Display Order</label>
+          <input type="number" name="order" placeholder="1" class="w-full px-4 py-2 border border-slate-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Answer (Markdown) *</label>
+          <textarea name="body" required rows="8" class="w-full px-4 py-2 border border-slate-300 rounded-md font-mono text-sm"></textarea>
+        </div>
+        <button type="submit" class="bg-blue-900 text-white font-bold px-6 py-3 rounded-md hover:bg-blue-800 transition">
+          Create Pull Request
+        </button>
+      </form>
+
+      <div id="resultBox" class="hidden p-6 rounded-xl"></div>
+    </div>
+
+  </div>
+</MainLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    let adminPassword = '';
+
+    const passwordGate = document.getElementById('passwordGate');
+    const adminPanel = document.getElementById('adminPanel');
+    const passwordInput = document.getElementById('passwordInput') as HTMLInputElement;
+    const unlockBtn = document.getElementById('unlockBtn');
+    const unlockError = document.getElementById('unlockError');
+
+    const tabBlog = document.getElementById('tabBlog');
+    const tabFaq = document.getElementById('tabFaq');
+    const blogForm = document.getElementById('blogForm') as HTMLFormElement;
+    const faqForm = document.getElementById('faqForm') as HTMLFormElement;
+    const resultBox = document.getElementById('resultBox');
+
+    // Simple client-side gate -- the REAL check happens server-side in the function.
+    // This just avoids showing the forms until a password is entered; submitting
+    // still requires the server to validate it again.
+    unlockBtn?.addEventListener('click', () => {
+      if (!passwordInput.value) {
+        unlockError.textContent = 'Please enter a password.';
+        unlockError.classList.remove('hidden');
+        return;
+      }
+      adminPassword = passwordInput.value;
+      passwordGate?.classList.add('hidden');
+      adminPanel?.classList.remove('hidden');
+    });
+
+    tabBlog?.addEventListener('click', () => {
+      blogForm.classList.remove('hidden');
+      faqForm.classList.add('hidden');
+      tabBlog.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+      tabFaq?.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+      tabFaq?.classList.add('text-slate-500');
+    });
+
+    tabFaq?.addEventListener('click', () => {
+      faqForm.classList.remove('hidden');
+      blogForm.classList.add('hidden');
+      tabFaq.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+      tabBlog?.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+      tabBlog?.classList.add('text-slate-500');
+    });
+
+    async function submitContent(contentType: string, formData: FormData) {
+      const fields: Record<string, string> = {};
+      formData.forEach((value, key) => { fields[key] = value.toString(); });
+
+      resultBox?.classList.remove('hidden', 'bg-red-50', 'bg-green-50');
+      resultBox.textContent = 'Creating pull request...';
+      resultBox?.classList.add('bg-slate-100');
+
+      try {
+        const response = await fetch('/.netlify/functions/create-content', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: adminPassword, contentType, fields }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Something went wrong');
+        }
+
+        resultBox?.classList.remove('bg-slate-100');
+        resultBox?.classList.add('bg-green-50');
+        resultBox.innerHTML = `✅ Pull request created! <a href="${data.prUrl}" target="_blank" class="text-blue-600 font-bold underline">Review and merge it here</a>`;
+      } catch (error: any) {
+        resultBox?.classList.remove('bg-slate-100');
+        resultBox?.classList.add('bg-red-50');
+        resultBox.textContent = `❌ ${error.message}`;
+      }
+    }
+
+    blogForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitContent('blog', new FormData(blogForm));
+    });
+
+    faqForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitContent('faq', new FormData(faqForm));
+    });
+  });
+</script>
