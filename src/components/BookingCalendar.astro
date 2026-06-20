@@ -37,11 +37,8 @@
 
     <input type="date" id="date" required class="w-full p-3 mb-6 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none" />
 
-    <div class="grid grid-cols-2 gap-3 mb-8">
-      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium" data-time="10:00 AM">10:00 AM</button>
-      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium" data-time="11:30 AM">11:30 AM</button>
-      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium" data-time="05:00 PM">05:00 PM</button>
-      <button type="button" class="time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium" data-time="06:30 PM">06:30 PM</button>
+    <div id="slotsContainer" class="grid grid-cols-2 gap-3 mb-8">
+      <p class="col-span-2 text-slate-400 text-sm">Select a date to see available times.</p>
     </div>
 
     <button id="confirmBtn" class="mt-auto w-full py-4 bg-blue-900 text-white font-bold rounded-xl shadow-lg hover:bg-blue-800 transition disabled:opacity-50">
@@ -63,62 +60,109 @@
     let selectedTime = "";
 
     const dateInput = document.getElementById('date') as HTMLInputElement;
-    const timeSlots = document.querySelectorAll('.time-slot');
+    const slotsContainer = document.getElementById('slotsContainer');
     const confirmBtn = document.getElementById('confirmBtn') as HTMLButtonElement;
     const successMessage = document.getElementById('successMessage');
     const errorMessage = document.getElementById('errorMessage');
 
-    // Set min date to today, so patients can't pick a past date
     const today = new Date().toISOString().split('T')[0];
     if (dateInput) dateInput.min = today;
 
-    // 1. Handle Time Slot Selection Visuals
-    timeSlots.forEach(slot => {
-      slot.addEventListener('click', (e) => {
-        timeSlots.forEach(btn => btn.classList.remove('bg-blue-600', 'text-white'));
-        const target = e.target as HTMLButtonElement;
-        if (target.disabled) return;
-        target.classList.add('bg-blue-600', 'text-white');
-        selectedTime = target.getAttribute('data-time') || "";
-      });
-    });
+    function showError(message: string) {
+      errorMessage.textContent = message;
+      errorMessage?.classList.remove('hidden');
+    }
 
-    // 2. Check availability for the selected date via the public,
-    //    PII-free slot_availability view -- no auth needed to read this.
-    if (dateInput) {
-      dateInput.addEventListener('change', async (e) => {
-        const selectedDate = (e.target as HTMLInputElement).value;
-
-        timeSlots.forEach(slot => {
-          const btn = slot as HTMLButtonElement;
-          btn.disabled = false;
-          btn.classList.remove('opacity-50', 'line-through', 'cursor-not-allowed', 'bg-slate-100');
+    function renderSlots(times: string[]) {
+      selectedTime = "";
+      if (times.length === 0) {
+        slotsContainer.innerHTML = '<p class="col-span-2 text-slate-500 text-sm">No slots available on this date. Please try another day, or call us directly.</p>';
+        return;
+      }
+      slotsContainer.innerHTML = '';
+      times.forEach((time) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium';
+        btn.textContent = time;
+        btn.dataset.time = time;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.time-slot').forEach((b) => b.classList.remove('bg-blue-600', 'text-white'));
+          btn.classList.add('bg-blue-600', 'text-white');
+          selectedTime = time;
         });
-
-        try {
-          const { data, error } = await supabase
-            .from('slot_availability')
-            .select('appointment_time')
-            .eq('appointment_date', selectedDate);
-
-          if (error) throw error;
-
-          data?.forEach((row) => {
-            const targetBtn = document.querySelector(`button[data-time="${row.appointment_time}"]`) as HTMLButtonElement;
-            if (targetBtn) {
-              targetBtn.disabled = true;
-              targetBtn.classList.add('opacity-50', 'line-through', 'cursor-not-allowed', 'bg-slate-100');
-            }
-          });
-        } catch (err) {
-          console.error("Error checking availability:", err);
-        }
+        slotsContainer.appendChild(btn);
       });
     }
 
-    // 3. Submit the booking. No auth step needed -- RLS allows anonymous
-    //    inserts directly. The database's unique index prevents double
-    //    booking automatically, even under concurrent requests.
+    // Fetch and combine: weekly schedule + blocked dates + blocked slots
+    // + already-confirmed appointments, to compute real availability.
+    async function loadAvailableSlots(dateStr: string) {
+      slotsContainer.innerHTML = '<p class="col-span-2 text-slate-400 text-sm">Checking availability...</p>';
+      errorMessage?.classList.add('hidden');
+
+      try {
+        const dayOfWeek = new Date(dateStr + 'T00:00:00').getDay();
+
+        // 1. Is the whole day blocked (holiday/leave)?
+        const { data: blockedDateRows, error: bdError } = await supabase
+          .from('blocked_dates')
+          .select('reason')
+          .eq('blocked_date', dateStr);
+        if (bdError) throw bdError;
+
+        if (blockedDateRows && blockedDateRows.length > 0) {
+          slotsContainer.innerHTML = `<p class="col-span-2 text-slate-500 text-sm">Clinic closed on this date${blockedDateRows[0].reason ? `: ${blockedDateRows[0].reason}` : ''}. Please choose another day.</p>`;
+          return;
+        }
+
+        // 2. What times are normally open on this day of week?
+        const { data: scheduleRows, error: schError } = await supabase
+          .from('weekly_schedule')
+          .select('time_slot')
+          .eq('day_of_week', dayOfWeek)
+          .eq('is_active', true);
+        if (schError) throw schError;
+
+        let possibleTimes = (scheduleRows || []).map((r) => r.time_slot);
+
+        if (possibleTimes.length === 0) {
+          slotsContainer.innerHTML = '<p class="col-span-2 text-slate-500 text-sm">Clinic closed on this day of the week. Please choose another day.</p>';
+          return;
+        }
+
+        // 3. Remove ad-hoc blocked slots for this specific date
+        const { data: blockedSlotRows, error: bsError } = await supabase
+          .from('blocked_slots')
+          .select('time_slot')
+          .eq('blocked_date', dateStr);
+        if (bsError) throw bsError;
+
+        const blockedTimes = new Set((blockedSlotRows || []).map((r) => r.time_slot));
+        possibleTimes = possibleTimes.filter((t) => !blockedTimes.has(t));
+
+        // 4. Remove already-confirmed appointment times
+        const { data: takenRows, error: takenError } = await supabase
+          .from('slot_availability')
+          .select('appointment_time')
+          .eq('appointment_date', dateStr);
+        if (takenError) throw takenError;
+
+        const takenTimes = new Set((takenRows || []).map((r) => r.appointment_time));
+        possibleTimes = possibleTimes.filter((t) => !takenTimes.has(t));
+
+        renderSlots(possibleTimes);
+      } catch (err) {
+        console.error("Error loading availability:", err);
+        slotsContainer.innerHTML = '<p class="col-span-2 text-red-500 text-sm">Could not load availability. Please try again.</p>';
+      }
+    }
+
+    dateInput?.addEventListener('change', (e) => {
+      const selectedDate = (e.target as HTMLInputElement).value;
+      if (selectedDate) loadAvailableSlots(selectedDate);
+    });
+
     if (confirmBtn) {
       confirmBtn.addEventListener('click', async () => {
         const prefix = (document.getElementById('prefix') as HTMLSelectElement).value;
@@ -131,8 +175,7 @@
         errorMessage?.classList.add('hidden');
 
         if (!fName || !phone || !service || !date || !selectedTime) {
-          errorMessage.textContent = "Please fill in all details and select an available time slot.";
-          errorMessage?.classList.remove('hidden');
+          showError("Please fill in all details and select an available time slot.");
           return;
         }
 
@@ -151,7 +194,6 @@
           });
 
           if (error) {
-            // Postgres unique constraint violation = someone else just took this slot
             if (error.code === '23505') {
               throw new Error("Sorry, that slot was just booked by someone else. Please pick another time.");
             }
@@ -163,8 +205,7 @@
 
         } catch (err: any) {
           console.error("Error booking:", err);
-          errorMessage.textContent = err.message || "Could not complete your booking. Please try again or call us directly.";
-          errorMessage?.classList.remove('hidden');
+          showError(err.message || "Could not complete your booking. Please try again or call us directly.");
           confirmBtn.innerText = "Confirm Appointment";
           confirmBtn.disabled = false;
         }
