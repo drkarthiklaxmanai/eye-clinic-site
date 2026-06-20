@@ -1,7 +1,7 @@
 // netlify/functions/list-content.js
 //
-// Lists existing blog posts or FAQs, and can fetch one file's full content
-// for editing. Read-only -- no write access needed for this function.
+// Lists existing blog posts or FAQs, and fetches one file's full content
+// for editing. Read-only.
 
 const GITHUB_OWNER = "drkarthiklaxmanai";
 const GITHUB_REPO = "eye-clinic-site";
