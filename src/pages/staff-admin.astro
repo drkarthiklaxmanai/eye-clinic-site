@@ -280,7 +280,9 @@ import MainLayout from '../layouts/MainLayout.astro';
       }
     }
 
-    // Very simple frontmatter parser -- good enough for our own generated files
+    // Very simple frontmatter parser -- good enough for our own generated files.
+    // Special-cases "tags" since it's a YAML array, not a plain string,
+    // unlike every other field in our schema.
     function parseFrontmatter(raw: string) {
       const match = raw.match(/^---\n([\s\S]*?)\n---\n*([\s\S]*)$/);
       if (!match) return { frontmatter: {}, body: raw };
@@ -291,7 +293,19 @@ import MainLayout from '../layouts/MainLayout.astro';
         if (idx === -1) return;
         const key = line.slice(0, idx).trim();
         let value = line.slice(idx + 1).trim();
-        value = value.replace(/^"(.*)"$/, '$1');
+
+        if (key === 'tags') {
+          // Parse ["Cataract", "FAQ", "Surgery"] into: Cataract, FAQ, Surgery
+          const inner = value.replace(/^\[/, '').replace(/\]$/, '');
+          const items = inner
+            .split(',')
+            .map((item) => item.trim().replace(/^"(.*)"$/, '$1'))
+            .filter((item) => item.length > 0);
+          value = items.join(', ');
+        } else {
+          value = value.replace(/^"(.*)"$/, '$1');
+        }
+
         frontmatter[key] = value;
       });
       return { frontmatter, body: body.trim() };
