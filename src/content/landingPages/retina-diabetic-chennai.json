@@ -1,0 +1,21 @@
+{
+  "headline": "Retina & Diabetic Eye Care in Chennai",
+  "subheadline": "Specialized retina evaluation for diabetic retinopathy and macular degeneration by AIIMS-trained, Medical Retina Fellowship-certified Dr. Rajeswari in KK Nagar.",
+  "urgent": false,
+  "metaDescription": "Diabetic retinopathy and macular degeneration screening in KK Nagar, Chennai with Medical Retina Fellowship-trained Dr. Rajeswari. Call or book online.",
+  "symptomsTitle": "Could You Need a Retina Checkup?",
+  "symptoms": [
+    "You have diabetes, regardless of how well controlled",
+    "Sudden floaters or flashes of light",
+    "Blurred or distorted central vision",
+    "Difficulty recognizing faces or reading",
+    "Age 50+ with no recent dilated eye exam"
+  ],
+  "processTitle": "What to Expect",
+  "processSteps": [
+    { "title": "Dilated Retina Exam", "description": "A thorough examination of the retina and macula to detect early changes." },
+    { "title": "Imaging & Diagnosis", "description": "Retinal imaging to precisely assess the extent of any damage." },
+    { "title": "Tailored Management", "description": "From monitoring to injections or laser treatment -- matched to what your eyes actually need." }
+  ],
+  "faqTopicKeywords": ["retina", "diabetic", "macular"]
+}

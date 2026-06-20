@@ -1,0 +1,21 @@
+{
+  "headline": "Sudden Vision Loss -- Seek Care Immediately",
+  "subheadline": "Sudden vision loss in one or both eyes can be a medical emergency. AIIMS-trained Dr. Rajeswari is available to evaluate urgent cases promptly in KK Nagar, Chennai.",
+  "urgent": true,
+  "metaDescription": "Sudden vision loss requires urgent evaluation. Contact AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai immediately. Call now.",
+  "symptomsTitle": "Seek Immediate Care If You Notice",
+  "symptoms": [
+    "Sudden loss of vision in one or both eyes",
+    "A curtain-like shadow moving across your vision",
+    "Sudden flashes of light with new floaters",
+    "Sudden double vision",
+    "Vision loss with severe headache or eye pain"
+  ],
+  "processTitle": "What Happens Next",
+  "processSteps": [
+    { "title": "Call Immediately", "description": "Sudden vision loss should never wait -- call our emergency line right away." },
+    { "title": "Urgent Evaluation", "description": "Prompt assessment to identify the cause, including retina and optic nerve examination." },
+    { "title": "Immediate Action", "description": "Treatment or referral initiated as quickly as the situation requires." }
+  ],
+  "faqTopicKeywords": ["retina", "neuro", "optic nerve"]
+}

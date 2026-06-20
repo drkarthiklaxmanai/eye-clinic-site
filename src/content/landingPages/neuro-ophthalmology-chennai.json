@@ -1,0 +1,21 @@
+{
+  "headline": "Neuro-Ophthalmology Specialist in Chennai",
+  "subheadline": "FAICO-certified Dr. Rajeswari diagnoses and manages complex vision problems rooted in the optic nerve and brain -- not just the eye.",
+  "urgent": false,
+  "metaDescription": "Neuro-ophthalmology evaluation in KK Nagar, Chennai with FAICO-certified Dr. Rajeswari. Optic nerve and vision-brain disorders. Call or book online.",
+  "symptomsTitle": "Could This Be You?",
+  "symptoms": [
+    "Sudden or unexplained vision loss",
+    "Double vision that doesn't resolve",
+    "Unexplained patches of missing vision",
+    "Headaches with visual disturbance",
+    "Drooping eyelid or abnormal pupil reaction"
+  ],
+  "processTitle": "What to Expect",
+  "processSteps": [
+    { "title": "Specialized Evaluation", "description": "Visual field testing and optic nerve assessment using fellowship-level expertise." },
+    { "title": "Clear Diagnosis", "description": "Identifying whether the cause lies in the eye, nerve, or brain pathway." },
+    { "title": "Coordinated Care", "description": "Referral to neurology when findings indicate a broader evaluation is needed." }
+  ],
+  "faqTopicKeywords": ["neuro", "optic nerve", "double vision", "diplopia"]
+}

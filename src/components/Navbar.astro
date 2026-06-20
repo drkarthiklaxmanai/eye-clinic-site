@@ -3,27 +3,94 @@ import { siteConfig } from '../config/site.js';
 ---
 <header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/85 border-b border-slate-200/50 shadow-sm transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-    
+
     <a href="/" class="flex flex-col justify-center group">
       <span class="text-2xl font-extrabold text-blue-900 tracking-tight leading-none group-hover:text-blue-700 transition-colors">{siteConfig.name}</span>
       <span class="text-[0.65rem] font-bold text-slate-500 uppercase tracking-widest mt-1">A Unit of Crispr Speciality Clinics</span>
     </a>
 
-    <nav class="hidden md:flex space-x-8 items-center">
+    <nav class="hidden lg:flex space-x-6 items-center">
       <a href="/" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Home</a>
-      <a href="/services/cataract" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Cataract</a>
-      <a href="/services/lasik" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">LASIK</a>
+
+      <div class="relative group">
+        <button class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1">
+          Services
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="absolute top-full left-0 pt-2 hidden group-hover:block">
+          <div class="bg-white rounded-xl shadow-lg border border-slate-100 py-2 w-56">
+            <a href="/services/cataract" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Cataract Surgery</a>
+            <a href="/services/lasik" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">LASIK Surgery</a>
+            <a href="/services/retina" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Retina Care</a>
+            <a href="/services/glaucoma" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Glaucoma Screening</a>
+            <a href="/services/squint" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Squint Treatment</a>
+            <a href="/services/neuro" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Neuro-Ophthalmology</a>
+          </div>
+        </div>
+      </div>
+
       <a href="/dr-rajeswari" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Dr. Rajeswari</a>
+      <a href="/blog" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Blog</a>
+      <a href="/contact" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
     </nav>
 
-    <a href="#book" class="hidden md:inline-block bg-blue-600 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+    <a href="/book" class="hidden lg:inline-block bg-blue-600 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg transition-all transform hover:-translate-y-0.5">
       Book Now
     </a>
 
-    <button class="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors" aria-label="Toggle Menu">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button id="mobileMenuBtn" class="lg:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors" aria-label="Toggle Menu" aria-expanded="false">
+      <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="menuIconClose" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
+
+  <!-- Mobile menu panel -->
+  <div id="mobileMenuPanel" class="hidden lg:hidden border-t border-slate-200 bg-white">
+    <nav class="px-6 py-4 flex flex-col gap-1">
+      <a href="/" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Home</a>
+      <a href="/services/cataract" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Cataract Surgery</a>
+      <a href="/services/lasik" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">LASIK Surgery</a>
+      <a href="/services/retina" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Retina Care</a>
+      <a href="/services/glaucoma" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Glaucoma Screening</a>
+      <a href="/services/squint" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Squint Treatment</a>
+      <a href="/services/neuro" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Neuro-Ophthalmology</a>
+      <a href="/dr-rajeswari" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Dr. Rajeswari</a>
+      <a href="/blog" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Blog</a>
+      <a href="/contact" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Contact</a>
+      <a href="/book" class="mt-3 bg-blue-600 text-white text-sm font-bold px-6 py-3 rounded-full text-center shadow-md hover:bg-blue-700 transition-colors">Book Now</a>
+    </nav>
+  </div>
 </header>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.getElementById('mobileMenuBtn');
+    const panel = document.getElementById('mobileMenuPanel');
+    const iconOpen = document.getElementById('menuIconOpen');
+    const iconClose = document.getElementById('menuIconClose');
+
+    if (!btn || !panel || !iconOpen || !iconClose) return;
+
+    btn.addEventListener('click', () => {
+      const isHidden = panel.classList.contains('hidden');
+      panel.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(isHidden));
+    });
+
+    // Close menu when a link inside it is tapped
+    panel.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        panel.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+</script>

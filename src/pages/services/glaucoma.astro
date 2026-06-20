@@ -1,1 +1,96 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CTA from '../../components/CTA.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { siteConfig } from '../../config/site.js';
 
+const pageTitle = "Glaucoma Screening & Treatment in Chennai";
+const pageDescription = "Early glaucoma detection and management by AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai. Glaucoma is irreversible if untreated -- screening protects your vision permanently.";
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <Breadcrumbs items={[
+    { name: "Services", url: "/#services" },
+    { name: "Glaucoma Screening", url: "/services/glaucoma" }
+  ]} />
+  <section class="bg-blue-900 text-white py-20 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2">
+        <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">Sight-Saving Screening</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Glaucoma Screening & Management</h1>
+        <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+          Glaucoma often has no symptoms until vision is already lost. Early detection is the only way to protect your sight permanently.
+        </p>
+        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">Book a Glaucoma Screening</a>
+      </div>
+      <div class="md:w-1/2 w-full">
+        <img
+          src="/images/glaucoma-service.png"
+          alt="Glaucoma eye pressure screening"
+          class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video"
+          onerror="this.src='https://placehold.co/800x450/1e3a8a/ffffff?text=Glaucoma+Care'"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 px-6 max-w-4xl mx-auto">
+    <div class="prose prose-lg prose-blue max-w-none text-slate-700">
+
+      <h2 class="text-3xl font-bold text-blue-900 mb-6">Could This Be You?</h2>
+      <p class="mb-6">
+        Glaucoma is often called the "silent thief of sight" because most people feel no pain and notice no vision change in its early stages -- by the time symptoms appear, some vision loss may already be permanent. You may be at higher risk if you experience or have:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mb-10">
+        <li>A family history of glaucoma</li>
+        <li>Gradual loss of side (peripheral) vision that you've adapted to without noticing</li>
+        <li>Age over 40, or diabetes / high blood pressure</li>
+        <li>Eye pain, headaches, or blurred vision with halos around lights (in acute cases)</li>
+        <li>Never had your eye pressure (IOP) checked</li>
+      </ul>
+
+      <div class="bg-red-50 border border-red-200 p-8 rounded-xl my-10">
+        <h3 class="text-xl font-bold text-red-900 mb-3">Why Early Detection Matters</h3>
+        <p class="text-red-800 leading-relaxed">
+          Vision lost to glaucoma <strong>cannot be restored</strong> -- treatment can only preserve the vision you have left. This is why routine screening matters even if your vision currently feels normal. A simple eye pressure check and optic nerve evaluation can catch glaucoma years before you'd ever notice symptoms yourself.
+        </p>
+      </div>
+
+      <h2 class="text-3xl font-bold text-blue-900 mt-12 mb-6">Our Diagnostic & Treatment Approach</h2>
+      <p class="mb-6">
+        Dr. Rajeswari's glaucoma evaluation includes intraocular pressure (IOP) measurement, optic nerve assessment, and visual field testing where indicated. Treatment is tailored to what's clinically necessary -- never more aggressive than the diagnosis calls for.
+      </p>
+
+      <div class="bg-blue-50 p-8 rounded-xl border border-blue-100 my-10">
+        <h3 class="text-xl font-bold text-blue-900 mb-4">Treatment Options:</h3>
+        <ul class="list-disc pl-6 space-y-2 font-medium">
+          <li><strong>Pressure-Lowering Eye Drops:</strong> The first-line treatment for most cases, often sufficient to control progression.</li>
+          <li><strong>Laser Treatment:</strong> For specific glaucoma types, a quick outpatient procedure to improve fluid drainage.</li>
+          <li><strong>Regular Monitoring:</strong> Ongoing IOP and optic nerve checks to track stability over time.</li>
+          <li><strong>Surgical Options:</strong> Reserved for advanced or uncontrolled cases, discussed only if truly necessary.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-12 px-6 max-w-4xl mx-auto border-t border-slate-200">
+    <h2 class="text-2xl font-bold text-blue-900 mb-6">Related Reading</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <a href="/blog/glaucoma-care" class="block p-5 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors">
+        <p class="text-xs text-blue-600 font-bold uppercase tracking-wider mb-1">Blog</p>
+        <p class="font-semibold text-slate-900">Glaucoma Care Guide</p>
+      </a>
+      <a href="/services/retina" class="block p-5 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors">
+        <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Related Service</p>
+        <p class="font-semibold text-slate-900">Retina Care</p>
+      </a>
+    </div>
+  </section>
+
+  <CTA
+    title="Book Your Glaucoma Screening"
+    address={`${siteConfig.contact.address.street}, ${siteConfig.contact.address.locality} - ${siteConfig.contact.address.postalCode}`}
+    phone={siteConfig.contact.phone}
+  />
+</MainLayout>

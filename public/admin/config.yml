@@ -1,42 +1,35 @@
 backend:
   name: git-gateway
-  branch: main # Make sure this matches your main GitHub branch name
+  branch: main
 
-# This ensures images uploaded in the CMS go to your optimized Astro folder
 media_folder: "src/assets"
 public_folder: "../assets"
 
 collections:
-  # 1. THE BLOG CMS
+  # 1. BLOG POSTS -- matches src/content/blog/ and content/config.ts schema
   - name: "blog"
     label: "Blog Posts"
     folder: "src/content/blog"
     create: true
-    slug: "{{year}}-{{month}}-{{slug}}"
+    slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description (SEO Meta)", name: "description", widget: "text"}
       - {label: "Publish Date", name: "pubDate", widget: "datetime"}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Author", name: "author", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Featured Image", name: "image", widget: "string", required: false, hint: "Path like /images/example.jpg, or leave blank to use the default placeholder"}
       - {label: "Body", name: "body", widget: "markdown"}
 
-  # 2. THE FAQ CMS
-  - name: "faq"
+  # 2. FAQs -- matches src/content/faqs/ and content/config.ts schema
+  # Note: the "Answer" is the markdown body, not a separate field --
+  # this matches how FAQ.astro and FAQSection.astro read faq.body
+  - name: "faqs"
     label: "FAQs"
-    folder: "src/content/faq"
+    folder: "src/content/faqs"
     create: true
+    slug: "{{slug}}"
     fields:
       - {label: "Question", name: "question", widget: "string"}
-      - {label: "Answer", name: "answer", widget: "markdown"}
-      - {label: "Category", name: "category", widget: "select", options: ["General", "Cataract", "LASIK", "Retina", "Squint"]}
-
-  # 3. THE SERVICES CMS
-  - name: "services"
-    label: "Services"
-    folder: "src/content/services"
-    create: true
-    fields:
-      - {label: "Service Name", name: "title", widget: "string"}
-      - {label: "Short Description", name: "description", widget: "text"}
-      - {label: "Icon/Image", name: "image", widget: "image"}
-      - {label: "Full Page Content", name: "body", widget: "markdown"}
+      - {label: "Display Order", name: "order", widget: "number", required: false, hint: "Lower numbers show first within their service area"}
+      - {label: "Answer", name: "body", widget: "markdown"}

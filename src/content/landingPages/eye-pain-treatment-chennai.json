@@ -1,0 +1,21 @@
+{
+  "headline": "Eye Pain? Get Evaluated by a Specialist in Chennai",
+  "subheadline": "Eye pain can stem from minor irritation or more serious underlying conditions. AIIMS-trained Dr. Rajeswari provides prompt, thorough evaluation in KK Nagar.",
+  "urgent": false,
+  "metaDescription": "Experiencing eye pain? See AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai for prompt evaluation. Call or book online.",
+  "symptomsTitle": "Does This Sound Like You?",
+  "symptoms": [
+    "Persistent ache in or around one or both eyes",
+    "Pain with eye movement",
+    "Pain along with redness or sensitivity to light",
+    "Pain accompanied by blurred vision",
+    "Sudden, severe eye pain"
+  ],
+  "processTitle": "How We Find the Cause",
+  "processSteps": [
+    { "title": "Detailed Examination", "description": "Assessing the eye surface, internal pressure, and overall eye health." },
+    { "title": "Identifying the Source", "description": "Determining whether the cause is on the surface, inside the eye, or related to the optic nerve." },
+    { "title": "Prompt Treatment", "description": "Addressing the cause directly -- not just masking the discomfort." }
+  ],
+  "faqTopicKeywords": ["glaucoma", "neuro"]
+}
