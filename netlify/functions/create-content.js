@@ -20,7 +20,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Invalid request body" }) };
   }
 
-  const { password, contentType, fields } = payload;
+  const { password, contentType, fields, action, filePath: existingFilePath, sha } = payload;
 
   // 1. Check password
   if (!password || password !== process.env.ADMIN_PASSWORD) {
@@ -37,16 +37,26 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Unknown content type" }) };
   }
 
+  const isDelete = action === "delete";
+  const isEdit = action === "edit";
+
   try {
     let filePath, fileContent, prTitle;
+
+    if (isDelete) {
+      if (!existingFilePath || !sha) {
+        return { statusCode: 400, body: JSON.stringify({ error: "Missing filePath or sha for delete" }) };
+      }
+      const prUrl = await deleteGithubFilePR({ token, filePath: existingFilePath, sha, prTitle: `Delete: ${existingFilePath}` });
+      return { statusCode: 200, body: JSON.stringify({ success: true, prUrl }) };
+    }
 
     if (contentType === "blog") {
       const { title, description, pubDate, author, tags, body } = fields;
       if (!title || !description || !pubDate || !body) {
         return { statusCode: 400, body: JSON.stringify({ error: "Missing required blog fields" }) };
       }
-      const slug = slugify(title);
-      filePath = `src/content/blog/${slug}.md`;
+      filePath = isEdit ? existingFilePath : `src/content/blog/${slugify(title)}.md`;
       const tagsLine = tags && tags.trim().length > 0
         ? `tags: [${tags.split(",").map(t => `"${t.trim()}"`).join(", ")}]\n`
         : "";
@@ -61,13 +71,12 @@ exports.handler = async (event) => {
         `---\n\n` +
         body;
       prTitle = `New blog post: ${title}`;
-    } else {
+      } else {
       const { question, order, body } = fields;
       if (!question || !body) {
         return { statusCode: 400, body: JSON.stringify({ error: "Missing required FAQ fields" }) };
       }
-      const slug = slugify(question);
-      filePath = `src/content/faqs/${slug}.md`;
+      filePath = isEdit ? existingFilePath : `src/content/faqs/${slugify(question)}.md`;
       const orderLine = order ? `order: ${order}\n` : "";
       fileContent =
         `---\n` +
@@ -78,7 +87,7 @@ exports.handler = async (event) => {
       prTitle = `New FAQ: ${question}`;
     }
 
-    const prUrl = await createGithubPR({ token, filePath, fileContent, prTitle });
+    const prUrl = await createGithubPR({ token, filePath, fileContent, prTitle, sha: isEdit ? sha : undefined });
 
     return {
       statusCode: 200,
@@ -124,7 +133,7 @@ async function githubRequest(url, token, options = {}) {
   return response.json();
 }
 
-async function createGithubPR({ token, filePath, fileContent, prTitle }) {
+async function createGithubPR({ token, filePath, fileContent, prTitle, sha }) {
   const apiBase = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`;
 
   // 1. Get the latest commit SHA on the base branch
@@ -138,15 +147,20 @@ async function createGithubPR({ token, filePath, fileContent, prTitle }) {
     body: JSON.stringify({ ref: `refs/heads/${branchName}`, sha: baseSha }),
   });
 
-  // 3. Create the file on the new branch
+  // 3. Create or update the file on the new branch.
+  //    If "sha" is provided (editing an existing file), GitHub requires it
+  //    to confirm we're updating the version we think we're updating.
   const contentBase64 = Buffer.from(fileContent, "utf-8").toString("base64");
+  const putBody = {
+    message: prTitle,
+    content: contentBase64,
+    branch: branchName,
+  };
+  if (sha) putBody.sha = sha;
+
   await githubRequest(`${apiBase}/contents/${filePath}`, token, {
     method: "PUT",
-    body: JSON.stringify({
-      message: prTitle,
-      content: contentBase64,
-      branch: branchName,
-    }),
+    body: JSON.stringify(putBody),
   });
 
   // 4. Open a Pull Request
@@ -157,6 +171,40 @@ async function createGithubPR({ token, filePath, fileContent, prTitle }) {
       head: branchName,
       base: BASE_BRANCH,
       body: "Created via the staff admin panel. Review the content below, then merge to publish it live.",
+    }),
+  });
+
+  return pr.html_url;
+}
+
+async function deleteGithubFilePR({ token, filePath, sha, prTitle }) {
+  const apiBase = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`;
+
+  const baseRef = await githubRequest(`${apiBase}/git/ref/heads/${BASE_BRANCH}`, token);
+  const baseSha = baseRef.object.sha;
+
+  const branchName = `staff-admin/${Date.now()}`;
+  await githubRequest(`${apiBase}/git/refs`, token, {
+    method: "POST",
+    body: JSON.stringify({ ref: `refs/heads/${branchName}`, sha: baseSha }),
+  });
+
+  await githubRequest(`${apiBase}/contents/${filePath}`, token, {
+    method: "DELETE",
+    body: JSON.stringify({
+      message: prTitle,
+      sha,
+      branch: branchName,
+    }),
+  });
+
+  const pr = await githubRequest(`${apiBase}/pulls`, token, {
+    method: "POST",
+    body: JSON.stringify({
+      title: prTitle,
+      head: branchName,
+      base: BASE_BRANCH,
+      body: "Deletion requested via the staff admin panel. Review, then merge to confirm.",
     }),
   });
 
