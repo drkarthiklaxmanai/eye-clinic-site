@@ -7,7 +7,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     <h1 class="text-3xl font-extrabold text-blue-900 mb-2">Staff Admin</h1>
     <p class="text-slate-600 mb-10">Manage blog posts, FAQs, bookings, and clinic schedule.</p>
 
-    <!-- Password gate -->
     <div id="passwordGate" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 max-w-md">
       <label class="block text-sm font-medium text-slate-700 mb-2">Admin Password</label>
       <input type="password" id="passwordInput" class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500 mb-4" />
@@ -80,7 +79,6 @@ import MainLayout from '../layouts/MainLayout.astro';
       <!-- BOOKINGS & SCHEDULE SECTION -->
       <div id="bookingsSection" class="hidden space-y-12">
 
-        <!-- Upcoming appointments -->
         <div>
           <h2 class="text-xl font-bold text-slate-900 mb-4">Upcoming Appointments</h2>
           <div id="appointmentsList" class="space-y-2">
@@ -88,11 +86,46 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
         </div>
 
-        <!-- Weekly schedule -->
+        <!-- Schedule sessions: opening/closing time + slot duration -->
         <div>
           <h2 class="text-xl font-bold text-slate-900 mb-2">Weekly Schedule</h2>
-          <p class="text-sm text-slate-500 mb-4">Toggle which time slots are open on each day of the week.</p>
-          <div id="weeklyScheduleGrid" class="space-y-4">
+          <p class="text-sm text-slate-500 mb-4">Define opening and closing times per day, and how long each appointment slot should be. Individual booking times are generated automatically.</p>
+
+          <div class="flex flex-wrap gap-3 mb-4 bg-white rounded-xl border border-slate-100 p-4 items-end">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Day</label>
+              <select id="newSessionDay" class="px-4 py-2 border border-slate-300 rounded-md">
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="0">Sunday</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Opening Time</label>
+              <input type="time" id="newSessionStart" class="px-4 py-2 border border-slate-300 rounded-md" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Closing Time</label>
+              <input type="time" id="newSessionEnd" class="px-4 py-2 border border-slate-300 rounded-md" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">Slot Duration</label>
+              <select id="newSessionDuration" class="px-4 py-2 border border-slate-300 rounded-md">
+                <option value="15">15 min</option>
+                <option value="20">20 min</option>
+                <option value="30" selected>30 min</option>
+                <option value="45">45 min</option>
+                <option value="60">60 min</option>
+              </select>
+            </div>
+            <button id="addSessionBtn" class="bg-blue-900 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-800 transition">Add Session</button>
+          </div>
+
+          <div id="sessionsByDay" class="space-y-3">
             <p class="text-slate-400 text-sm">Loading...</p>
           </div>
         </div>
@@ -114,15 +147,10 @@ import MainLayout from '../layouts/MainLayout.astro';
         <!-- Blocked slots -->
         <div>
           <h2 class="text-xl font-bold text-slate-900 mb-2">Block a Specific Time Slot</h2>
-          <p class="text-sm text-slate-500 mb-4">Block just one time on a specific date, without closing the whole day.</p>
+          <p class="text-sm text-slate-500 mb-4">Block just one time on a specific date, without closing the whole day. Type the exact time as it appears to patients (e.g. "10:00 AM").</p>
           <div class="flex flex-wrap gap-3 mb-4 bg-white rounded-xl border border-slate-100 p-4">
             <input type="date" id="newBlockedSlotDate" class="px-4 py-2 border border-slate-300 rounded-md" />
-            <select id="newBlockedSlotTime" class="px-4 py-2 border border-slate-300 rounded-md">
-              <option value="09:30 AM">09:30 AM</option>
-              <option value="10:30 AM">10:30 AM</option>
-              <option value="05:00 PM">05:00 PM</option>
-              <option value="06:30 PM">06:30 PM</option>
-            </select>
+            <input type="text" id="newBlockedSlotTime" placeholder="e.g. 10:00 AM" class="px-4 py-2 border border-slate-300 rounded-md" />
             <input type="text" id="newBlockedSlotReason" placeholder="Reason (optional)" class="px-4 py-2 border border-slate-300 rounded-md flex-grow" />
             <button id="addBlockedSlotBtn" class="bg-red-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-red-700 transition">Block This Slot</button>
           </div>
@@ -175,14 +203,20 @@ import MainLayout from '../layouts/MainLayout.astro';
     const resultBox = document.getElementById('resultBox');
 
     const appointmentsList = document.getElementById('appointmentsList');
-    const weeklyScheduleGrid = document.getElementById('weeklyScheduleGrid');
+    const sessionsByDay = document.getElementById('sessionsByDay');
+    const newSessionDay = document.getElementById('newSessionDay') as HTMLSelectElement;
+    const newSessionStart = document.getElementById('newSessionStart') as HTMLInputElement;
+    const newSessionEnd = document.getElementById('newSessionEnd') as HTMLInputElement;
+    const newSessionDuration = document.getElementById('newSessionDuration') as HTMLSelectElement;
+    const addSessionBtn = document.getElementById('addSessionBtn');
+
     const blockedDatesList = document.getElementById('blockedDatesList');
     const blockedSlotsList = document.getElementById('blockedSlotsList');
     const newBlockedDateInput = document.getElementById('newBlockedDateInput') as HTMLInputElement;
     const newBlockedDateReason = document.getElementById('newBlockedDateReason') as HTMLInputElement;
     const addBlockedDateBtn = document.getElementById('addBlockedDateBtn');
     const newBlockedSlotDate = document.getElementById('newBlockedSlotDate') as HTMLInputElement;
-    const newBlockedSlotTime = document.getElementById('newBlockedSlotTime') as HTMLSelectElement;
+    const newBlockedSlotTime = document.getElementById('newBlockedSlotTime') as HTMLInputElement;
     const newBlockedSlotReason = document.getElementById('newBlockedSlotReason') as HTMLInputElement;
     const addBlockedSlotBtn = document.getElementById('addBlockedSlotBtn');
 
@@ -195,35 +229,27 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
 
     async function callBookingFunction(action: string, data: any = {}) {
-      let response: Response;
-      try {
-        response = await fetch('/.netlify/functions/manage-bookings', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: adminPassword, action, data }),
-        });
-      } catch (networkError: any) {
-        // The request never reached the server at all (network failure,
-        // wrong URL, CORS block before any response, etc.)
-        throw new Error(`Network error calling function: ${networkError.message}`);
-      }
-
+      const response = await fetch('/.netlify/functions/manage-bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: adminPassword, action, data }),
+      });
       const rawText = await response.text();
       let result: any;
       try {
         result = JSON.parse(rawText);
       } catch {
-        // The response wasn't valid JSON at all -- likely an HTML error
-        // page (404, 500 from Netlify itself) rather than our function's
-        // own JSON response.
         throw new Error(`Unexpected response (status ${response.status}): ${rawText.slice(0, 200)}`);
       }
-
-      if (!response.ok) {
-        const debugInfo = result.debug ? ` [${JSON.stringify(result.debug)}]` : '';
-        throw new Error(`(${response.status}) ${result.error || 'Something went wrong'}${debugInfo}`);
-      }
+      if (!response.ok) throw new Error(result.error || 'Something went wrong');
       return result;
+    }
+
+    function formatTime12h(time24: string): string {
+      const [h, m] = time24.split(':').map(Number);
+      const period = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 === 0 ? 12 : h % 12;
+      return `${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${period}`;
     }
 
     // ---- Tag chip UI ----
@@ -285,12 +311,12 @@ import MainLayout from '../layouts/MainLayout.astro';
     tabBookings?.addEventListener('click', async () => {
       activateTab('bookings');
       await loadAppointments();
-      await loadWeeklySchedule();
+      await loadSessions();
       await loadBlockedDates();
       await loadBlockedSlots();
     });
 
-    // ---- Blog/FAQ list loading (GitHub-based, unchanged from before) ----
+    // ---- Blog/FAQ (GitHub-based, unchanged) ----
     async function loadList(contentType: 'blog' | 'faq') {
       const listEl = contentType === 'blog' ? blogList : faqList;
       try {
@@ -447,8 +473,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     deleteBlogBtn?.addEventListener('click', () => deleteItem('blog', blogForm));
     deleteFaqBtn?.addEventListener('click', () => deleteItem('faq', faqForm));
 
-    // ---- BOOKINGS & SCHEDULE (Supabase-based, immediate, no PR step) ----
-
+    // ---- Appointments ----
     async function loadAppointments() {
       appointmentsList.innerHTML = '<p class="text-slate-400 text-sm">Loading...</p>';
       try {
@@ -467,7 +492,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               <p class="font-semibold text-slate-800">${appt.prefix || ''} ${appt.first_name} ${appt.last_name || ''} -- ${appt.service_type}</p>
               <p class="text-sm text-slate-500">${appt.appointment_date} at ${appt.appointment_time} &middot; ${appt.phone} &middot; <span class="${appt.status === 'cancelled' ? 'text-red-500' : 'text-green-600'}">${appt.status}</span></p>
             </div>
-            <button class="text-red-600 text-sm font-semibold hover:underline" data-id="${appt.id}">Cancel</button>
+            <button class="text-red-600 text-sm font-semibold hover:underline">Cancel</button>
           `;
           row.querySelector('button')?.addEventListener('click', async () => {
             if (!confirm(`Cancel the appointment for ${appt.first_name}?`)) return;
@@ -485,50 +510,84 @@ import MainLayout from '../layouts/MainLayout.astro';
       }
     }
 
-    async function loadWeeklySchedule() {
-      weeklyScheduleGrid.innerHTML = '<p class="text-slate-400 text-sm">Loading...</p>';
+    // ---- Schedule sessions ----
+    async function loadSessions() {
+      sessionsByDay.innerHTML = '<p class="text-slate-400 text-sm">Loading...</p>';
       try {
-        const { schedule } = await callBookingFunction('list_weekly_schedule');
+        const { sessions } = await callBookingFunction('list_schedule_sessions');
         const byDay: Record<number, any[]> = {};
-        schedule.forEach((row: any) => {
-          if (!byDay[row.day_of_week]) byDay[row.day_of_week] = [];
-          byDay[row.day_of_week].push(row);
+        sessions.forEach((s: any) => {
+          if (!byDay[s.day_of_week]) byDay[s.day_of_week] = [];
+          byDay[s.day_of_week].push(s);
         });
 
-        weeklyScheduleGrid.innerHTML = '';
+        sessionsByDay.innerHTML = '';
         for (let day = 0; day <= 6; day++) {
-          const dayRow = document.createElement('div');
-          dayRow.className = 'bg-white border border-slate-200 rounded-lg p-4';
-          const slots = byDay[day] || [];
-          dayRow.innerHTML = `
-            <p class="font-semibold text-slate-800 mb-2">${DAY_NAMES[day]}</p>
-            <div class="flex flex-wrap gap-2" data-day="${day}">
-              ${slots.length === 0 ? '<span class="text-sm text-slate-400">No slots configured</span>' : ''}
-            </div>
-          `;
-          const container = dayRow.querySelector(`[data-day="${day}"]`);
-          slots.forEach((slot: any) => {
-            const chip = document.createElement('button');
-            chip.type = 'button';
-            chip.className = `text-sm font-semibold px-3 py-1.5 rounded-full transition ${slot.is_active ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-400 line-through'}`;
-            chip.textContent = slot.time_slot;
-            chip.addEventListener('click', async () => {
-              try {
-                await callBookingFunction('toggle_schedule_slot', { id: slot.id, is_active: !slot.is_active });
-                await loadWeeklySchedule();
-              } catch (error: any) {
-                showResult(`❌ ${error.message}`, true);
-              }
+          const dayBox = document.createElement('div');
+          dayBox.className = 'bg-white border border-slate-200 rounded-lg p-4';
+          const daySessions = byDay[day] || [];
+          dayBox.innerHTML = `<p class="font-semibold text-slate-800 mb-2">${DAY_NAMES[day]}</p><div class="space-y-2" data-day="${day}"></div>`;
+          const container = dayBox.querySelector(`[data-day="${day}"]`);
+
+          if (daySessions.length === 0) {
+            container.innerHTML = '<span class="text-sm text-slate-400">Closed -- no sessions configured</span>';
+          } else {
+            daySessions.forEach((session: any) => {
+              const row = document.createElement('div');
+              row.className = `flex justify-between items-center px-3 py-2 rounded-lg ${session.is_active ? 'bg-green-50' : 'bg-slate-50'}`;
+              row.innerHTML = `
+                <span class="text-sm font-medium ${session.is_active ? 'text-green-800' : 'text-slate-400 line-through'}">
+                  ${formatTime12h(session.start_time)} -- ${formatTime12h(session.end_time)} (${session.slot_duration_minutes} min slots)
+                </span>
+                <div class="flex gap-3">
+                  <button class="text-xs font-semibold text-blue-600 hover:underline" data-action="toggle">${session.is_active ? 'Disable' : 'Enable'}</button>
+                  <button class="text-xs font-semibold text-red-600 hover:underline" data-action="delete">Delete</button>
+                </div>
+              `;
+              row.querySelector('[data-action="toggle"]')?.addEventListener('click', async () => {
+                await callBookingFunction('toggle_schedule_session', { id: session.id, is_active: !session.is_active });
+                await loadSessions();
+              });
+              row.querySelector('[data-action="delete"]')?.addEventListener('click', async () => {
+                if (!confirm('Delete this session entirely?')) return;
+                await callBookingFunction('delete_schedule_session', { id: session.id });
+                await loadSessions();
+              });
+              container?.appendChild(row);
             });
-            container?.appendChild(chip);
-          });
-          weeklyScheduleGrid.appendChild(dayRow);
+          }
+          sessionsByDay.appendChild(dayBox);
         }
       } catch (error: any) {
-        weeklyScheduleGrid.innerHTML = `<p class="text-red-600 text-sm">${error.message}</p>`;
+        sessionsByDay.innerHTML = `<p class="text-red-600 text-sm">${error.message}</p>`;
       }
     }
 
+    addSessionBtn?.addEventListener('click', async () => {
+      if (!newSessionStart.value || !newSessionEnd.value) {
+        showResult('❌ Please set both opening and closing time.', true);
+        return;
+      }
+      if (newSessionStart.value >= newSessionEnd.value) {
+        showResult('❌ Closing time must be after opening time.', true);
+        return;
+      }
+      try {
+        await callBookingFunction('add_schedule_session', {
+          day_of_week: Number(newSessionDay.value),
+          start_time: newSessionStart.value,
+          end_time: newSessionEnd.value,
+          slot_duration_minutes: Number(newSessionDuration.value),
+        });
+        newSessionStart.value = '';
+        newSessionEnd.value = '';
+        await loadSessions();
+      } catch (error: any) {
+        showResult(`❌ ${error.message}`, true);
+      }
+    });
+
+    // ---- Blocked dates ----
     async function loadBlockedDates() {
       blockedDatesList.innerHTML = '<p class="text-slate-400 text-sm">Loading...</p>';
       try {
@@ -565,6 +624,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       }
     });
 
+    // ---- Blocked slots ----
     async function loadBlockedSlots() {
       blockedSlotsList.innerHTML = '<p class="text-slate-400 text-sm">Loading...</p>';
       try {
@@ -590,10 +650,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
 
     addBlockedSlotBtn?.addEventListener('click', async () => {
-      if (!newBlockedSlotDate.value) return;
+      if (!newBlockedSlotDate.value || !newBlockedSlotTime.value) return;
       try {
         await callBookingFunction('add_blocked_slot', { blocked_date: newBlockedSlotDate.value, time_slot: newBlockedSlotTime.value, reason: newBlockedSlotReason.value });
         newBlockedSlotDate.value = '';
+        newBlockedSlotTime.value = '';
         newBlockedSlotReason.value = '';
         await loadBlockedSlots();
       } catch (error: any) {
