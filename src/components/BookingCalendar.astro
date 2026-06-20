@@ -56,6 +56,28 @@
 <script>
   import { supabase } from '../lib/supabase.js';
 
+  // Generates display-formatted time slots (e.g. "09:30 AM") between a
+  // start and end time (24h "HH:MM:SS" from Postgres), at the given
+  // duration in minutes. The last slot must still fit before end_time.
+  function generateSlotsForSession(startTime: string, endTime: string, durationMinutes: number): string[] {
+    const slots: string[] = [];
+    const [startH, startM] = startTime.split(':').map(Number);
+    const [endH, endM] = endTime.split(':').map(Number);
+
+    let current = startH * 60 + startM;
+    const end = endH * 60 + endM;
+
+    while (current + durationMinutes <= end) {
+      const h24 = Math.floor(current / 60);
+      const m = current % 60;
+      const period = h24 >= 12 ? 'PM' : 'AM';
+      const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+      slots.push(`${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${period}`);
+      current += durationMinutes;
+    }
+    return slots;
+  }
+
   document.addEventListener('astro:page-load', () => {
     let selectedTime = "";
 
@@ -95,8 +117,9 @@
       });
     }
 
-    // Fetch and combine: weekly schedule + blocked dates + blocked slots
-    // + already-confirmed appointments, to compute real availability.
+    // Fetch and combine: schedule sessions (computed into individual times)
+    // + blocked dates + blocked slots + already-confirmed appointments,
+    // to compute real availability.
     async function loadAvailableSlots(dateStr: string) {
       slotsContainer.innerHTML = '<p class="col-span-2 text-slate-400 text-sm">Checking availability...</p>';
       errorMessage?.classList.add('hidden');
@@ -116,15 +139,20 @@
           return;
         }
 
-        // 2. What times are normally open on this day of week?
-        const { data: scheduleRows, error: schError } = await supabase
-          .from('weekly_schedule')
-          .select('time_slot')
+        // 2. What sessions are normally open on this day of week?
+        //    Each session is a time range + slot duration -- we compute
+        //    the actual bookable times from it here.
+        const { data: sessionRows, error: schError } = await supabase
+          .from('schedule_sessions')
+          .select('start_time, end_time, slot_duration_minutes')
           .eq('day_of_week', dayOfWeek)
           .eq('is_active', true);
         if (schError) throw schError;
 
-        let possibleTimes = (scheduleRows || []).map((r) => r.time_slot);
+        let possibleTimes: string[] = [];
+        (sessionRows || []).forEach((session) => {
+          possibleTimes.push(...generateSlotsForSession(session.start_time, session.end_time, session.slot_duration_minutes));
+        });
 
         if (possibleTimes.length === 0) {
           slotsContainer.innerHTML = '<p class="col-span-2 text-slate-500 text-sm">Clinic closed on this day of the week. Please choose another day.</p>';
