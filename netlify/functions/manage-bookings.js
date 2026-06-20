@@ -4,11 +4,6 @@
 // and schedule data. Uses the Supabase service role key (server-side
 // only, never exposed to the browser) so it can bypass RLS safely --
 // access is gated entirely by the ADMIN_PASSWORD check below.
-//
-// NOTE: includes temporary verbose error reporting (the "debug" field
-// in error responses) to diagnose a deployment issue. Safe to leave in
-// short-term since this endpoint is already password-gated, but should
-// be removed once confirmed working.
 
 let createClient;
 try {
@@ -40,7 +35,7 @@ exports.handler = async (event) => {
   if (!createClient) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Server module @supabase/supabase-js failed to load. Check Netlify function dependencies." }),
+      body: JSON.stringify({ error: "Server module @supabase/supabase-js failed to load." }),
     };
   }
 
@@ -52,7 +47,12 @@ exports.handler = async (event) => {
     };
   }
 
-  // Disable the Realtime client entirely -- we never use subscriptions   // in this function, and Realtime's WebSocket setup crashes on   // Netlify's Node 20 runtime (no native WebSocket support pre-Node 22).   const supabase = createClient(SUPABASE_URL, serviceRoleKey, {     realtime: { disabled: true },   });
+  // Disable the Realtime client entirely -- we never use subscriptions
+  // in this function, and Realtime's WebSocket setup crashes on
+  // Netlify's Node 20 runtime (no native WebSocket support pre-Node 22).
+  const supabase = createClient(SUPABASE_URL, serviceRoleKey, {
+    realtime: { disabled: true },
+  });
 
   try {
     switch (action) {
