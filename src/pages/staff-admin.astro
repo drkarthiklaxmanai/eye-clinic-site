@@ -195,13 +195,34 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
 
     async function callBookingFunction(action: string, data: any = {}) {
-      const response = await fetch('/.netlify/functions/manage-bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: adminPassword, action, data }),
-      });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || 'Something went wrong');
+      let response: Response;
+      try {
+        response = await fetch('/.netlify/functions/manage-bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: adminPassword, action, data }),
+        });
+      } catch (networkError: any) {
+        // The request never reached the server at all (network failure,
+        // wrong URL, CORS block before any response, etc.)
+        throw new Error(`Network error calling function: ${networkError.message}`);
+      }
+
+      const rawText = await response.text();
+      let result: any;
+      try {
+        result = JSON.parse(rawText);
+      } catch {
+        // The response wasn't valid JSON at all -- likely an HTML error
+        // page (404, 500 from Netlify itself) rather than our function's
+        // own JSON response.
+        throw new Error(`Unexpected response (status ${response.status}): ${rawText.slice(0, 200)}`);
+      }
+
+      if (!response.ok) {
+        const debugInfo = result.debug ? ` [${JSON.stringify(result.debug)}]` : '';
+        throw new Error(`(${response.status}) ${result.error || 'Something went wrong'}${debugInfo}`);
+      }
       return result;
     }
 
