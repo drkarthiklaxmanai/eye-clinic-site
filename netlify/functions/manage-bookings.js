@@ -49,8 +49,8 @@ exports.handler = async (event) => {
 
   // Provide a no-op WebSocket constructor so Supabase's Realtime client
   // can initialize without crashing, even though we never actually use
-  // realtime features in this function. This works around Node 20's
-  // lack of native WebSocket support on Netlify's runtime.
+  // realtime features in this function. Works around Node 20's lack of
+  // native WebSocket support on Netlify's runtime.
   if (typeof globalThis.WebSocket === "undefined") {
     globalThis.WebSocket = class NoOpWebSocket {
       constructor() {}
@@ -82,31 +82,46 @@ exports.handler = async (event) => {
         return ok({ success: true });
       }
 
-      case "list_weekly_schedule": {
+      // ---- Schedule sessions (replaces old per-slot weekly_schedule) ----
+
+      case "list_schedule_sessions": {
         const { data: rows, error } = await supabase
-          .from("weekly_schedule")
+          .from("schedule_sessions")
           .select("*")
-          .order("day_of_week", { ascending: true });
+          .order("day_of_week", { ascending: true })
+          .order("start_time", { ascending: true });
         if (error) throw error;
-        return ok({ schedule: rows });
+        return ok({ sessions: rows });
       }
 
-      case "toggle_schedule_slot": {
+      case "add_schedule_session": {
+        const { error } = await supabase.from("schedule_sessions").insert({
+          day_of_week: data.day_of_week,
+          start_time: data.start_time,
+          end_time: data.end_time,
+          slot_duration_minutes: data.slot_duration_minutes,
+          is_active: true,
+        });
+        if (error) throw error;
+        return ok({ success: true });
+      }
+
+      case "toggle_schedule_session": {
         const { error } = await supabase
-          .from("weekly_schedule")
+          .from("schedule_sessions")
           .update({ is_active: data.is_active })
           .eq("id", data.id);
         if (error) throw error;
         return ok({ success: true });
       }
 
-      case "add_schedule_slot": {
-        const { error } = await supabase
-          .from("weekly_schedule")
-          .insert({ day_of_week: data.day_of_week, time_slot: data.time_slot, is_active: true });
+      case "delete_schedule_session": {
+        const { error } = await supabase.from("schedule_sessions").delete().eq("id", data.id);
         if (error) throw error;
         return ok({ success: true });
       }
+
+      // ---- Blocked dates ----
 
       case "list_blocked_dates": {
         const { data: rows, error } = await supabase
@@ -130,6 +145,8 @@ exports.handler = async (event) => {
         if (error) throw error;
         return ok({ success: true });
       }
+
+      // ---- Blocked slots ----
 
       case "list_blocked_slots": {
         const { data: rows, error } = await supabase
