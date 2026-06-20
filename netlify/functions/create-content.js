@@ -1,8 +1,8 @@
 // netlify/functions/create-content.js
 //
-// Receives content from the staff-admin form, validates the password,
-// builds the correct markdown file, and opens a GitHub Pull Request
-// for review rather than committing directly to main.
+// Handles create, edit, and delete for blog posts and FAQs.
+// All actions open a GitHub Pull Request for review rather than
+// committing directly to main.
 
 const GITHUB_OWNER = "drkarthiklaxmanai";
 const GITHUB_REPO = "eye-clinic-site";
@@ -32,7 +32,7 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: JSON.stringify({ error: "Server is not configured correctly. Contact developer." }) };
   }
 
-  // 2. Validate content type and required fields
+  // 2. Validate content type
   if (contentType !== "blog" && contentType !== "faq") {
     return { statusCode: 400, body: JSON.stringify({ error: "Unknown content type" }) };
   }
@@ -41,15 +41,20 @@ exports.handler = async (event) => {
   const isEdit = action === "edit";
 
   try {
-    let filePath, fileContent, prTitle;
-
     if (isDelete) {
       if (!existingFilePath || !sha) {
         return { statusCode: 400, body: JSON.stringify({ error: "Missing filePath or sha for delete" }) };
       }
-      const prUrl = await deleteGithubFilePR({ token, filePath: existingFilePath, sha, prTitle: `Delete: ${existingFilePath}` });
+      const prUrl = await deleteGithubFilePR({
+        token,
+        filePath: existingFilePath,
+        sha,
+        prTitle: `Delete: ${existingFilePath}`,
+      });
       return { statusCode: 200, body: JSON.stringify({ success: true, prUrl }) };
     }
+
+    let filePath, fileContent, prTitle;
 
     if (contentType === "blog") {
       const { title, description, pubDate, author, tags, body } = fields;
@@ -58,7 +63,7 @@ exports.handler = async (event) => {
       }
       filePath = isEdit ? existingFilePath : `src/content/blog/${slugify(title)}.md`;
       const tagsLine = tags && tags.trim().length > 0
-        ? `tags: [${tags.split(",").map(t => `"${t.trim()}"`).join(", ")}]\n`
+        ? `tags: [${tags.split(",").map((t) => `"${t.trim()}"`).join(", ")}]\n`
         : "";
       const authorLine = author && author.trim().length > 0 ? `author: "${author.trim()}"\n` : "";
       fileContent =
@@ -70,8 +75,8 @@ exports.handler = async (event) => {
         tagsLine +
         `---\n\n` +
         body;
-      prTitle = `New blog post: ${title}`;
-      } else {
+      prTitle = isEdit ? `Update blog post: ${title}` : `New blog post: ${title}`;
+    } else {
       const { question, order, body } = fields;
       if (!question || !body) {
         return { statusCode: 400, body: JSON.stringify({ error: "Missing required FAQ fields" }) };
@@ -84,10 +89,16 @@ exports.handler = async (event) => {
         orderLine +
         `---\n\n` +
         body;
-      prTitle = `New FAQ: ${question}`;
+      prTitle = isEdit ? `Update FAQ: ${question}` : `New FAQ: ${question}`;
     }
 
-    const prUrl = await createGithubPR({ token, filePath, fileContent, prTitle, sha: isEdit ? sha : undefined });
+    const prUrl = await createGithubPR({
+      token,
+      filePath,
+      fileContent,
+      prTitle,
+      sha: isEdit ? sha : undefined,
+    });
 
     return {
       statusCode: 200,
@@ -136,20 +147,15 @@ async function githubRequest(url, token, options = {}) {
 async function createGithubPR({ token, filePath, fileContent, prTitle, sha }) {
   const apiBase = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`;
 
-  // 1. Get the latest commit SHA on the base branch
   const baseRef = await githubRequest(`${apiBase}/git/ref/heads/${BASE_BRANCH}`, token);
   const baseSha = baseRef.object.sha;
 
-  // 2. Create a new branch from that commit
   const branchName = `staff-admin/${Date.now()}`;
   await githubRequest(`${apiBase}/git/refs`, token, {
     method: "POST",
     body: JSON.stringify({ ref: `refs/heads/${branchName}`, sha: baseSha }),
   });
 
-  // 3. Create or update the file on the new branch.
-  //    If "sha" is provided (editing an existing file), GitHub requires it
-  //    to confirm we're updating the version we think we're updating.
   const contentBase64 = Buffer.from(fileContent, "utf-8").toString("base64");
   const putBody = {
     message: prTitle,
@@ -163,7 +169,6 @@ async function createGithubPR({ token, filePath, fileContent, prTitle, sha }) {
     body: JSON.stringify(putBody),
   });
 
-  // 4. Open a Pull Request
   const pr = await githubRequest(`${apiBase}/pulls`, token, {
     method: "POST",
     body: JSON.stringify({
