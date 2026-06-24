@@ -1,8 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 
+const { limit } = Astro.props;
+
 const allFaqs = await getCollection('faqs');
-const sortedFaqs = allFaqs.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+const sortedAll = allFaqs.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+const sortedFaqs = limit ? sortedAll.slice(0, limit) : sortedAll;
 
 // This creates the invisible SEO code for Google
 const schema = {
@@ -40,5 +43,13 @@ const schema = {
         </details>
       ))}
     </div>
+
+    {limit && allFaqs.length > limit && (
+      <div class="text-center mt-8">
+        <a href="/faq" class="inline-flex items-center gap-1 text-blue-600 font-bold hover:underline">
+          View All FAQs <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    )}
   </div>
 </section>

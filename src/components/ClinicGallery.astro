@@ -1,0 +1,44 @@
+---
+// src/components/ClinicGallery.astro
+import { Image } from 'astro:assets';
+import reception from '../assets/clinic-reception.jpg';
+import waitingArea from '../assets/clinic-waiting-area.jpg';
+import hallway from '../assets/clinic-hallway.jpg';
+import opticals from '../assets/clinic-opticals.jpg';
+import optometry1 from '../assets/clinic-optometry-1.jpg';
+import optometry2 from '../assets/clinic-optometry-2.jpg';
+import slitLamp from '../assets/dr-rajeswari-slitlamp.jpg';
+
+const photos = [
+  { src: slitLamp, alt: "Dr. Rajeswari examining a patient at the slit lamp" },
+  { src: reception, alt: "Reception area at Crispr Eye Care" },
+  { src: waitingArea, alt: "Patient waiting area at Crispr Eye Care" },
+  { src: optometry1, alt: "Optometry diagnostic equipment at Crispr Eye Care" },
+  { src: optometry2, alt: "Optometry examination room at Crispr Eye Care" },
+  { src: opticals, alt: "Optical and eyewear section at Crispr Eye Care" },
+  { src: hallway, alt: "Clinic hallway at Crispr Eye Care" },
+];
+---
+
+<section class="py-16 px-6 bg-white border-t border-slate-200">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-3 tracking-tight">Visit Our Clinic</h2>
+      <p class="text-lg text-slate-600">A look inside Crispr Eye Care, KK Nagar.</p>
+    </div>
+
+    <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth -mx-6 px-6 md:mx-0 md:px-0">
+      {photos.map((photo) => (
+        <div class="shrink-0 w-72 sm:w-80 snap-start">
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            class="w-full h-56 object-cover rounded-2xl shadow-md border border-slate-100"
+            widths={[320, 480, 640]}
+            sizes="(max-width: 640px) 280px, 320px"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
