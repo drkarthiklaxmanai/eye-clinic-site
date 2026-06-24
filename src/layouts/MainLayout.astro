@@ -107,11 +107,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crisprey
 
   <body class="bg-slate-50/50 text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900 flex flex-col min-h-screen">
     
-    <div class="bg-blue-900 text-white text-sm py-2 px-6 flex justify-between items-center hidden md:flex relative z-50">
+    <div class="bg-blue-900 text-white text-xs sm:text-sm py-2 px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-0 relative z-50 text-center sm:text-left">
       <span>{siteConfig.contact.workingHoursDisplay}</span>
-      <div class="space-x-4">
+      <div class="flex flex-col sm:flex-row sm:space-x-4 items-center">
         <span>Emergency: {siteConfig.contact.phone}</span>
-        <a href={`mailto:${siteConfig.contact.email}`} class="hover:underline">{siteConfig.contact.email}</a>
+        <a href={`mailto:${siteConfig.contact.email}`} class="hover:underline hidden sm:inline">{siteConfig.contact.email}</a>
       </div>
     </div>
     
