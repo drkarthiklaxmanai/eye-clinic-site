@@ -362,7 +362,10 @@ tabBlog?.addEventListener('click', () => activateTab('blog'));
           body: JSON.stringify({ password: adminPassword, contentType, action: 'list' }),
         });
         const data = await response.json();
-        if (!response.ok) throw new Error(data.error || 'Failed to load list');
+        if (!response.ok) {
+          const debugInfo = data.debug ? ` [${JSON.stringify(data.debug)}]` : '';
+          throw new Error((data.error || 'Failed to load list') + debugInfo);
+        }
 
         if (data.items.length === 0) {
           listEl.innerHTML = '<p class="text-slate-400 text-sm">No items yet.</p>';
