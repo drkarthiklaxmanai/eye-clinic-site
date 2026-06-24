@@ -22,7 +22,23 @@ exports.handler = async (event) => {
   const { password, contentType, action, filePath } = payload;
 
   if (!password || password !== process.env.ADMIN_PASSWORD) {
-    return { statusCode: 401, body: JSON.stringify({ error: "Incorrect password" }) };
+    // TEMPORARY DEBUG: lengths and char codes let us spot invisible
+    // characters or encoding mismatches without ever exposing the
+    // actual password value in the response.
+    const received = password || "";
+    const expected = process.env.ADMIN_PASSWORD || "";
+    return {
+      statusCode: 401,
+      body: JSON.stringify({
+        error: "Incorrect password",
+        debug: {
+          receivedLength: received.length,
+          expectedLength: expected.length,
+          receivedCodes: received.split('').map(c => c.charCodeAt(0)),
+          expectedCodes: expected.split('').map(c => c.charCodeAt(0)),
+        },
+      }),
+    };
   }
 
   const token = process.env.GITHUB_TOKEN;
