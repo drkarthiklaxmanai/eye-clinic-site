@@ -78,6 +78,18 @@
     return slots;
   }
 
+// Converts a display time like "09:30 AM" back into minutes-since-midnight,
+  // so it can be compared against the current time.
+  function parseTimeToMinutes(displayTime: string): number {
+    const [time, period] = displayTime.split(' ');
+    const [hStr, mStr] = time.split(':');
+    let h = parseInt(hStr, 10);
+    const m = parseInt(mStr, 10);
+    if (period === 'PM' && h !== 12) h += 12;
+    if (period === 'AM' && h === 12) h = 0;
+    return h * 60 + m;
+  }
+
   document.addEventListener('astro:page-load', () => {
     let selectedTime = "";
 
@@ -178,6 +190,15 @@
 
         const takenTimes = new Set((takenRows || []).map((r) => r.appointment_time));
         possibleTimes = possibleTimes.filter((t) => !takenTimes.has(t));
+
+        // 5. If the selected date is TODAY, remove any time slot that has
+        //    already passed -- prevents booking a 10 AM slot at 2 PM.
+        const todayStr = new Date().toISOString().split('T')[0];
+        if (dateStr === todayStr) {
+          const now = new Date();
+          const currentMinutes = now.getHours() * 60 + now.getMinutes();
+          possibleTimes = possibleTimes.filter((t) => parseTimeToMinutes(t) > currentMinutes);
+        }
 
         renderSlots(possibleTimes);
       } catch (err) {
