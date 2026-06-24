@@ -19,7 +19,8 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="flex gap-3 border-b border-slate-200 flex-wrap">
         <button id="tabBlog" class="px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600">Blog Posts</button>
         <button id="tabFaq" class="px-4 py-2 font-semibold text-slate-500">FAQs</button>
-        <button id="tabBookings" class="px-4 py-2 font-semibold text-slate-500">Bookings &amp; Schedule</button>
+        <button id="tabBookings" class="px-4 py-2 font-semibold text-slate-500">Bookings &amp; Schedule</button>         
+        <button id="tabLandingPages" class="px-4 py-2 font-semibold text-slate-500">Landing Pages</button>
       </div>
 
       <!-- BLOG SECTION -->
@@ -161,6 +162,37 @@ import MainLayout from '../layouts/MainLayout.astro';
 
       </div>
 
+      <!-- LANDING PAGES SECTION -->
+      <div id="landingPagesSection" class="hidden">
+        <h2 class="text-xl font-bold text-slate-900 mb-4">Landing Pages (Google Ads)</h2>
+        <p class="text-sm text-slate-500 mb-6">These pages are not linked anywhere on the site and are excluded from search engines -- use these links to preview them, or paste as Final URLs in Google Ads campaigns.</p>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-sm font-bold text-blue-900 uppercase tracking-wider mb-3">Service-Intent Pages</h3>
+            <div class="space-y-2">
+              <a href="/lp/lasik-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">LASIK Surgery (Chennai)</a>
+              <a href="/lp/cataract-surgery-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Cataract Surgery (Chennai)</a>
+              <a href="/lp/retina-diabetic-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Retina / Diabetic Eye Care</a>
+              <a href="/lp/glaucoma-screening-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Glaucoma Screening</a>
+              <a href="/lp/squint-treatment-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Squint Treatment</a>
+              <a href="/lp/neuro-ophthalmology-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Neuro-Ophthalmology</a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-bold text-blue-900 uppercase tracking-wider mb-3">Symptom-Intent Pages</h3>
+            <div class="space-y-2">
+              <a href="/lp/blurred-vision-doctor-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Blurred Vision</a>
+              <a href="/lp/eye-pain-treatment-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Eye Pain</a>
+              <a href="/lp/sudden-vision-loss-chennai" target="_blank" class="block bg-red-50 border border-red-200 rounded-lg px-4 py-3 hover:border-red-300 hover:bg-red-100 transition-colors text-sm font-medium text-red-800">Sudden Vision Loss (Urgent styling)</a>
+              <a href="/lp/double-vision-treatment-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Double Vision</a>
+              <a href="/lp/diabetic-eye-checkup-chennai" target="_blank" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm font-medium text-slate-700">Diabetic Eye Checkup</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="resultBox" class="hidden p-6 rounded-xl"></div>
     </div>
   </div>
@@ -177,12 +209,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     const unlockBtn = document.getElementById('unlockBtn');
     const unlockError = document.getElementById('unlockError');
 
-    const tabBlog = document.getElementById('tabBlog');
+const tabBlog = document.getElementById('tabBlog');
     const tabFaq = document.getElementById('tabFaq');
     const tabBookings = document.getElementById('tabBookings');
+    const tabLandingPages = document.getElementById('tabLandingPages');
     const blogSection = document.getElementById('blogSection');
     const faqSection = document.getElementById('faqSection');
     const bookingsSection = document.getElementById('bookingsSection');
+    const landingPagesSection = document.getElementById('landingPagesSection');
 
     const blogList = document.getElementById('blogList');
     const faqList = document.getElementById('faqList');
@@ -292,22 +326,24 @@ import MainLayout from '../layouts/MainLayout.astro';
     });
 
     // ---- Tabs ----
-    function activateTab(tab: 'blog' | 'faq' | 'bookings') {
+    function activateTab(tab: 'blog' | 'faq' | 'bookings' | 'landingPages') {
       blogSection?.classList.toggle('hidden', tab !== 'blog');
       faqSection?.classList.toggle('hidden', tab !== 'faq');
       bookingsSection?.classList.toggle('hidden', tab !== 'bookings');
+      landingPagesSection?.classList.toggle('hidden', tab !== 'landingPages');
 
-      [tabBlog, tabFaq, tabBookings].forEach((btn) => {
+      [tabBlog, tabFaq, tabBookings, tabLandingPages].forEach((btn) => {
         btn?.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
         btn?.classList.add('text-slate-500');
       });
-      const activeBtn = tab === 'blog' ? tabBlog : tab === 'faq' ? tabFaq : tabBookings;
+      const activeBtn = tab === 'blog' ? tabBlog : tab === 'faq' ? tabFaq : tab === 'bookings' ? tabBookings : tabLandingPages;
       activeBtn?.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
       activeBtn?.classList.remove('text-slate-500');
     }
 
-    tabBlog?.addEventListener('click', () => activateTab('blog'));
+tabBlog?.addEventListener('click', () => activateTab('blog'));
     tabFaq?.addEventListener('click', () => activateTab('faq'));
+    tabLandingPages?.addEventListener('click', () => activateTab('landingPages'));
     tabBookings?.addEventListener('click', async () => {
       activateTab('bookings');
       await loadAppointments();
