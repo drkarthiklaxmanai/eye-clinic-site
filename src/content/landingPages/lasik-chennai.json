@@ -18,5 +18,23 @@
     { "title": "Honest Discussion", "description": "A clear conversation about your results and whether LASIK is truly right for you." },
     { "title": "The Procedure", "description": "If suitable, the laser procedure takes only minutes per eye." }
   ],
-  "faqTopicKeywords": ["lasik", "refractive", "laser"]
+  "faqTopicKeywords": ["lasik", "refractive", "laser"],
+  "decisionSupport": {
+    "suitabilityTitle": "Is LASIK Right for Everyone?",
+    "suitabilityIntro": "Not everyone who wants LASIK is a suitable candidate. Factors such as corneal thickness, prescription stability, dry eye disease, and overall eye health all influence whether LASIK is the right option. Our goal is not to recommend surgery to everyone who walks in -- it's to determine whether LASIK is safe, appropriate, and likely to deliver the outcome you expect. If another option is better for your eyes, we'll explain that clearly.",
+    "evaluationSteps": [
+      "Vision Assessment",
+      "Corneal Mapping",
+      "Suitability Discussion",
+      "Recommendation"
+    ],
+    "notSuitableTitle": "Common Reasons Someone May Not Be Suitable",
+    "notSuitableReasons": [
+      "Unstable prescription",
+      "Thin corneas",
+      "Significant dry eye",
+      "Certain eye diseases",
+      "Unrealistic expectations"
+    ]
+  }
 }
