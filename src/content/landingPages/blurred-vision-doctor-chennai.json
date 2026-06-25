@@ -18,7 +18,11 @@
     { "title": "Eye Health Examination", "description": "Ruling out cataracts, retina conditions, or other underlying issues." },
     { "title": "Clear Next Steps", "description": "Whether it's glasses, treatment, or reassurance -- you'll know what's going on." }
   ],
-  "faqTopicKeywords": ["cataract", "retina", "macular"],
+  "landingFaqs": [
+    { "question": "Should blurred vision always be checked?", "answer": "Not every episode of blurred vision indicates a serious problem, but persistent, worsening, or unexplained blurring deserves evaluation to determine the cause." },
+    { "question": "How urgently should I be seen?", "answer": "Gradual blurring can usually be evaluated with a routine appointment. Sudden blurred vision, especially in one eye, should be assessed promptly." },
+    { "question": "What if it turns out to be something simple?", "answer": "Many cases of blurred vision are caused by issues such as prescription changes or dry eyes. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed." }
+  ],
   "causeExploration": {
     "title": "Possible Causes of Blurred Vision",
     "causesIntro": "Blurred vision is a symptom, not a diagnosis -- it's your eyes' way of signaling that something needs attention, but it doesn't tell you what on its own. In many cases, the cause is straightforward and treatable. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed.",
