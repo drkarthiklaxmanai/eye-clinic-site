@@ -51,8 +51,10 @@ const landingPageCollection = defineCollection({
     // genuinely ambiguous (e.g. blurred vision, eye pain) -- not
     // service-intent pages where the diagnosis is already known.
     causeExploration: z.object({
+      title: z.string(),
       causesIntro: z.string(),
       commonCauses: z.array(z.string()),
+      urgentTitle: z.string(),
       urgentIntro: z.string(),
       urgentScenarios: z.array(z.string()),
     }).optional(),
