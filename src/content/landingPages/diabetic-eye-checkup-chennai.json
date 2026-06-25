@@ -13,7 +13,11 @@
     { "title": "Retinal Imaging", "description": "Precise documentation to track any changes over time." },
     { "title": "Proactive Management", "description": "Catching diabetic retinopathy early, when it's most treatable." }
   ],
-  "faqTopicKeywords": ["diabetic", "retina"],
+  "landingFaqs": [
+    { "question": "My vision seems normal. Do I still need a retina check?", "answer": "Often, yes. Diabetic eye changes can develop before vision is affected at all, which is exactly why screening matters even when you feel fine." },
+    { "question": "How often should people with diabetes have their eyes examined?", "answer": "Generally once a year, even without symptoms. If changes are already present, more frequent monitoring may be recommended." },
+    { "question": "What happens if early diabetic changes are found?", "answer": "Many early-stage changes simply require closer monitoring, not immediate treatment. We'll explain exactly what was found and what, if anything, needs to happen next." }
+  ],
   "educationalInsight": {
     "title": "Why Screening Matters Even If Your Vision Seems Normal",
     "body": "Many people assume that if they can see clearly, their eyes must be healthy. Unfortunately, diabetic eye disease often develops silently. Early changes in the retina may not affect vision at all, which means significant damage can occur before symptoms appear. Regular retinal examinations allow problems to be detected and treated before vision is permanently affected -- which is why annual retinal examinations are recommended for most people with diabetes, even when vision seems completely normal. If you cannot remember your last one, it's probably a good time to schedule it.",
