@@ -18,5 +18,34 @@
     { "title": "Identifying the Source", "description": "Determining whether the cause is muscular, nerve-related, or neurological." },
     { "title": "Coordinated Treatment", "description": "Direct treatment or neurology referral, based on what's actually found." }
   ],
-  "faqTopicKeywords": ["neuro", "double vision", "diplopia", "squint"]
+  "landingFaqs": [
+    { "question": "Is double vision always serious?", "answer": "Not always. Some causes are relatively straightforward, while others require more urgent investigation. The purpose of the evaluation is to determine which applies in your case." },
+    { "question": "Will I need brain imaging?", "answer": "Not everyone with double vision needs imaging. The decision depends on the findings from your examination and whether there are signs suggesting a neurological cause." },
+    { "question": "What happens after the cause is identified?", "answer": "That depends on the diagnosis. Some patients need observation, some benefit from glasses or prism correction, some require treatment of an underlying medical condition, and others may need coordinated care with neurology." }
+  ],
+  "causeExploration": {
+    "title": "Why Double Vision Should Be Evaluated Carefully",
+    "causesIntro": "Double vision can occur for several different reasons. Sometimes the cause is related to the eye muscles themselves. In other cases, it may involve the nerves controlling those muscles, or a condition affecting the brain's visual pathways. The purpose of the examination is not simply to confirm that double vision exists, but to determine where the problem is originating and what should happen next.",
+    "commonCauses": [
+      "An eye muscle imbalance",
+      "A long-standing squint becoming noticeable",
+      "A nerve affecting eye movement",
+      "Diabetes-related nerve palsy",
+      "Thyroid eye disease",
+      "A neurological condition affecting visual pathways"
+    ],
+    "urgentTitle": "When Should Double Vision Be Evaluated Promptly?",
+    "urgentIntro": "Double vision should generally be assessed soon. A few situations deserve especially prompt evaluation:",
+    "urgentScenarios": [
+      "Sudden onset double vision",
+      "Double vision with drooping of the eyelid",
+      "Double vision with headache",
+      "Double vision with facial weakness or numbness",
+      "Double vision after an injury"
+    ]
+  },
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "Doctor, do I need to worry that this is something neurological?",
+    "response": "Not every case of double vision is neurological, but it is one of the possibilities we consider carefully. The examination helps determine whether the problem is coming from the eye muscles, the nerves controlling them, or another part of the visual system. Often the most important outcome of the consultation is understanding exactly which category you fall into and whether any further testing is needed."
+  }
 }
