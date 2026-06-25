@@ -1,17 +1,24 @@
 ---
 // src/components/LandingPageSections/WhyPatientsChooseCrispr.astro
 //
-// This is the page's real positioning -- not AIIMS, not technology,
-// not equipment. The differentiation is continuity, time, and access.
-// Framed as observational ("why patients choose us") rather than
-// promotional ("why choose us") -- subtle but deliberate.
+// Three universal cards are always shown; 1-2 page-specific
+// differentiators come from props, letting each landing page feel
+// distinct without forking the architecture.
 
-const points = [
+interface Differentiator {
+  title: string;
+  description: string;
+}
+
+const { pageSpecific = [] as Differentiator[] } = Astro.props;
+
+const universal: Differentiator[] = [
   { title: "Same Ophthalmologist, Every Visit", description: "You see Dr. Rajeswari throughout your care -- not a different specialist each time." },
   { title: "Time to Ask Questions", description: "Consultations aren't rushed. You leave understanding your diagnosis and your options." },
   { title: "Recommendations Based on Need", description: "Treatment is suggested because it's clinically right for you -- never to fill a schedule." },
-  { title: "Easy Follow-Up, Close to Home", description: "No traveling across the city for a routine check -- your records and your doctor are right here." },
 ];
+
+const points = [...universal, ...pageSpecific];
 ---
 
 <section class="py-14 px-6 bg-white">
