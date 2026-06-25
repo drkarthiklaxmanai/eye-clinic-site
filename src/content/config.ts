@@ -54,6 +54,7 @@ const landingPageCollection = defineCollection({
       title: z.string(),
       causesIntro: z.string(),
       commonCauses: z.array(z.string()),
+      causesOutro: z.string().optional(),
       urgentTitle: z.string(),
       urgentIntro: z.string(),
       urgentScenarios: z.array(z.string()),
