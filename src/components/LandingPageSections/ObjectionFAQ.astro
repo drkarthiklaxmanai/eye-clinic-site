@@ -1,45 +1,40 @@
 ---
 // src/components/LandingPageSections/ObjectionFAQ.astro
 //
-// Capped at 3. Objection-handling only ("will I be rushed," cost
-// ambiguity, urgency) -- NOT clinical "what is this condition" FAQs.
-// Reuses the faqs collection but filters and hard-limits.
+// Renders page-specific, hand-written objection-handling FAQs.
+// Deliberately NOT derived from the global faqs collection -- each
+// page's actual booking objections (Cataract vs. LASIK vs. Diabetic
+// Eye) are different, and keyword-filtering an educational FAQ
+// collection produced generic "what is this condition" answers
+// instead of objection-handling ones.
 
-import { getCollection } from 'astro:content';
-
-const { topicKeywords = [] as string[] } = Astro.props;
-
-const allFaqs = await getCollection('faqs');
-
-let filtered = allFaqs;
-if (topicKeywords.length > 0) {
-  const matches = allFaqs.filter((faq) =>
-    topicKeywords.some((kw) =>
-      faq.data.question.toLowerCase().includes(kw.toLowerCase()) ||
-      faq.body.toLowerCase().includes(kw.toLowerCase())
-    )
-  );
-  if (matches.length > 0) filtered = matches;
+interface FAQ {
+  question: string;
+  answer: string;
 }
 
-const limited = filtered.sort((a, b) => (a.data.order || 0) - (b.data.order || 0)).slice(0, 3);
+interface Props {
+  faqs: FAQ[];
+}
+
+const { faqs } = Astro.props;
 ---
 
-{limited.length > 0 && (
+{faqs && faqs.length > 0 && (
   <section class="py-12 px-6 bg-white border-t border-slate-100">
     <div class="max-w-2xl mx-auto">
       <h2 class="text-xl md:text-2xl font-bold text-blue-900 mb-6 text-center">A Few Common Questions</h2>
       <div class="space-y-3">
-        {limited.map((faq) => (
+        {faqs.map((faq: FAQ) => (
           <details class="group bg-slate-50 rounded-lg border border-slate-200">
             <summary class="flex items-center justify-between cursor-pointer p-4 font-semibold text-slate-900 group-hover:text-blue-600 transition text-sm">
-              {faq.data.question}
+              {faq.question}
               <span class="transition group-open:rotate-180 shrink-0 ml-3">
                 <svg fill="none" height="18" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="18"><path d="M6 9l6 6 6-6"></path></svg>
               </span>
             </summary>
             <div class="p-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100 mt-2">
-              {faq.body}
+              {faq.answer}
             </div>
           </details>
         ))}
