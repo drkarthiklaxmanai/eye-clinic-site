@@ -16,7 +16,7 @@
   "faqTopicKeywords": ["diabetic", "retina"],
   "educationalInsight": {
     "title": "Why Screening Matters Even If Your Vision Seems Normal",
-    "body": "Many people assume that if they can see clearly, their eyes must be healthy. Unfortunately, diabetic eye disease often develops silently. Early changes in the retina may not affect vision at all, which means significant damage can occur before symptoms appear. Regular retinal examinations allow problems to be detected and treated before vision is permanently affected. The goal of screening is not to find disease -- it's to find it early enough that it can be managed effectively.",
+    "body": "Many people assume that if they can see clearly, their eyes must be healthy. Unfortunately, diabetic eye disease often develops silently. Early changes in the retina may not affect vision at all, which means significant damage can occur before symptoms appear. Regular retinal examinations allow problems to be detected and treated before vision is permanently affected -- which is why annual retinal examinations are recommended for most people with diabetes, even when vision seems completely normal. If you cannot remember your last one, it's probably a good time to schedule it.",
     "pathway": {
       "steps": ["Diabetes", "Retinal Examination"],
       "branches": [
@@ -32,7 +32,6 @@
       "You have recently been diagnosed with diabetes"
     ]
   },
-  "actionPrompt": "Annual retinal examinations are recommended for most people with Type 1 or Type 2 diabetes, even when vision seems completely normal. If you have diabetes and cannot remember your last retinal examination, it's probably a good time to schedule one.",
   "doctorsPerspectiveStructured": {
     "patientConcern": "Doctor, my vision is fine. Do I still need a retina check?",
     "response": "The answer is often yes. Many diabetic retinal changes occur before vision becomes noticeably affected. By the time symptoms develop, treatment can become more complex. A retinal examination allows us to identify problems early and decide whether monitoring or treatment is needed."
