@@ -4,8 +4,9 @@ import LandingPageLayout from '../../layouts/LandingPageLayout.astro';
 import LandingHero from '../../components/LandingPageSections/LandingHero.astro';
 import WhyPatientsChooseCrispr from '../../components/LandingPageSections/WhyPatientsChooseCrispr.astro';
 import ConvenienceSection from '../../components/LandingPageSections/ConvenienceSection.astro';
-import DoctorSection from '../../components/LandingPageSections/DoctorSection.astro';
+import QuickCTA from '../../components/LandingPageSections/QuickCTA.astro';
 import SymptomRecognition from '../../components/LandingPageSections/SymptomRecognition.astro';
+import DoctorSection from '../../components/LandingPageSections/DoctorSection.astro';
 import WhatHappensNext from '../../components/LandingPageSections/WhatHappensNext.astro';
 import MidPageCTA from '../../components/LandingPageSections/MidPageCTA.astro';
 import ObjectionFAQ from '../../components/LandingPageSections/ObjectionFAQ.astro';
@@ -27,15 +28,17 @@ const data = entry.data;
 <LandingPageLayout title={data.headline} description={data.metaDescription}>
   <LandingHero headline={data.headline} subheadline={data.subheadline} urgent={data.urgent} />
 
-  <WhyPatientsChooseCrispr />
+  <WhyPatientsChooseCrispr pageSpecific={data.whyPatientsChoose} />
 
   <ConvenienceSection />
 
-  <DoctorSection />
+  <QuickCTA />
 
   {data.showSymptomCheck && data.symptoms && data.symptoms.length > 0 && (
     <SymptomRecognition items={data.symptoms} />
   )}
+
+  <DoctorSection />
 
   <WhatHappensNext steps={data.processSteps} />
 
