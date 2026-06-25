@@ -67,12 +67,19 @@ const data = entry.data;
       evaluationSteps={data.decisionSupport.evaluationSteps}
       notSuitableTitle={data.decisionSupport.notSuitableTitle}
       notSuitableReasons={data.decisionSupport.notSuitableReasons}
-      lensOptions={data.decisionSupport.lensOptions}
+      showLensOptions={false}
     />
   )}
 
   {data.doctorsPerspective && (
     <DoctorsPerspective perspective={data.doctorsPerspective} />
+  )}
+
+  {data.decisionSupport?.lensOptions && data.decisionSupport.lensOptions.length > 0 && (
+    <SurgicalDecisionSupport
+      lensOptions={data.decisionSupport.lensOptions}
+      onlyLensTable={true}
+    />
   )}
 
   <WhatHappensNext steps={data.processSteps} />
