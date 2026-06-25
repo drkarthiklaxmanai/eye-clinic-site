@@ -1,4 +1,20 @@
-"educationalInsight": {
+{
+  "headline": "Diabetic Eye Checkup in KK Nagar, Chennai",
+  "subheadline": "If you have diabetes, an annual dilated eye exam is essential -- even without symptoms.",
+  "urgent": false,
+  "metaDescription": "Diabetic eye checkup and diabetic retinopathy screening in KK Nagar, Chennai with Dr. Rajeswari. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Early Detection, Before Vision Is Affected", "description": "Diabetic eye damage is most treatable before you'd ever notice symptoms -- that's exactly when we look for it." },
+    { "title": "Convenient Annual Follow-Up", "description": "Diabetic eye screening isn't a one-time visit. Being close to home makes regular follow-up easier and more consistent." }
+  ],
+  "showSymptomCheck": false,
+  "processSteps": [
+    { "title": "Dilated Examination", "description": "A thorough look at the retina to catch silent, early-stage changes." },
+    { "title": "Retinal Imaging", "description": "Precise documentation to track any changes over time." },
+    { "title": "Proactive Management", "description": "Catching diabetic retinopathy early, when it's most treatable." }
+  ],
+  "faqTopicKeywords": ["diabetic", "retina"],
+  "educationalInsight": {
     "title": "Why Screening Matters Even If Your Vision Seems Normal",
     "body": "Many people assume that if they can see clearly, their eyes must be healthy. Unfortunately, diabetic eye disease often develops silently. Early changes in the retina may not affect vision at all, which means significant damage can occur before symptoms appear. Regular retinal examinations allow problems to be detected and treated before vision is permanently affected. The goal of screening is not to find disease -- it's to find it early enough that it can be managed effectively.",
     "pathway": {
@@ -21,3 +37,4 @@
     "patientConcern": "Doctor, my vision is fine. Do I still need a retina check?",
     "response": "The answer is often yes. Many diabetic retinal changes occur before vision becomes noticeably affected. By the time symptoms develop, treatment can become more complex. A retinal examination allows us to identify problems early and decide whether monitoring or treatment is needed."
   }
+}
