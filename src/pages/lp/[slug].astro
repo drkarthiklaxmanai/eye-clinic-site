@@ -107,8 +107,8 @@ const data = entry.data;
 
   {/* Reviews intentionally omitted until real, consented testimonials replace placeholder content */}
 
-  {data.showObjectionFAQ !== false && (
-    <ObjectionFAQ topicKeywords={data.faqTopicKeywords} />
+  {data.landingFaqs && data.landingFaqs.length > 0 && (
+    <ObjectionFAQ faqs={data.landingFaqs} />
   )}
 
   <ClinicPhotoStrip />
