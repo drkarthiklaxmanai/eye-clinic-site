@@ -16,16 +16,14 @@ interface Pathway {
   steps: string[];
   branches?: PathwayBranch[];
 }
-
 interface Props {
   title: string;
   body: string;
-  personalRelevance?: string;
   pathway?: Pathway;
   prioritizeIf?: string[];
 }
 
-const { title, body, personalRelevance, pathway, prioritizeIf } = Astro.props;
+const { title, body, pathway, prioritizeIf } = Astro.props;
 ---
 
 <section class="py-12 px-6 bg-gradient-to-br from-blue-50 to-white border-t border-slate-100">
