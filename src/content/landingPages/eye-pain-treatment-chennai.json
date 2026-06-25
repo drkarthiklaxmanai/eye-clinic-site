@@ -20,9 +20,10 @@
   ],
   "faqTopicKeywords": ["glaucoma", "neuro"],
   "causeExploration": {
-    "title": "What Could Be Causing Your Eye Pain?",
+    "title": "Possible Causes of Eye Pain",
     "causesIntro": "Eye pain can come from something minor that resolves quickly, or from a condition that genuinely needs treatment -- and it's not always possible to tell which from how it feels alone. In many cases, the cause is straightforward and treatable. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed.",
     "commonCauses": [
+      "Eye strain or digital eye strain",
       "Dry eye disease",
       "A corneal problem, such as a scratch or irritation",
       "An eye infection",
@@ -38,7 +39,8 @@
       "Eye pain along with blurred vision",
       "Pain that worsens with eye movement",
       "Eye pain after an injury or something getting into the eye",
-      "Pain severe enough to affect daily activities"
+      "Eye pain that is worsening or associated with reduced vision"
     ]
+  }
   }
 }
