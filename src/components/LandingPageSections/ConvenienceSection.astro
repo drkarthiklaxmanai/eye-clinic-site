@@ -1,9 +1,6 @@
 ---
 // src/components/LandingPageSections/ConvenienceSection.astro
-//
-// Promoted high in the architecture deliberately -- convenience affects
-// more booking decisions than credentials. Reframed from "where we are"
-// to "why coming here is genuinely easy."
+import { siteConfig } from '../../config/site.js';
 ---
 
 <section class="py-14 px-6 bg-blue-50/60 border-y border-blue-100">
@@ -15,7 +12,7 @@
       <div class="bg-white rounded-2xl p-4 shadow-sm">
         <p class="text-2xl mb-1">🕔</p>
         <p class="text-sm font-bold text-slate-900">Evening Hours</p>
-        <p class="text-xs text-slate-500 mt-1">Mon-Sat, 5-8 PM</p>
+        <p class="text-xs text-slate-500 mt-1">{siteConfig.contact.workingHoursDisplay}</p>
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm">
         <p class="text-2xl mb-1">💼</p>
@@ -24,7 +21,7 @@
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm">
         <p class="text-2xl mb-1">📍</p>
-        <p class="text-sm font-bold text-slate-900">KK Nagar</p>
+        <p class="text-sm font-bold text-slate-900">{siteConfig.contact.address.locality}</p>
         <p class="text-xs text-slate-500 mt-1">Near Ashok Nagar, Vadapalani</p>
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm">
