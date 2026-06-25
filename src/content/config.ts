@@ -94,12 +94,6 @@ const landingPageCollection = defineCollection({
       prioritizeIf: z.array(z.string()).optional(),
     }).optional(),
 
-    // Universal conversion element -- a single "is this you?" prompt
-    // that can appear on ANY page type (symptom, screening, surgical).
-    // Extracted from educationalInsight so it's reusable everywhere,
-    // not just screening pages.
-    actionPrompt: z.string().optional(),
-
     // Standardized structure for doctorsPerspective, replacing the
     // free-form string. Keeps a consistent "patient concern -> doctor
     // response -> what we do" shape across every page while content
