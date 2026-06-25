@@ -43,8 +43,10 @@ const data = entry.data;
 
   {data.causeExploration && (
     <CauseExploration
+      title={data.causeExploration.title}
       causesIntro={data.causeExploration.causesIntro}
       commonCauses={data.causeExploration.commonCauses}
+      urgentTitle={data.causeExploration.urgentTitle}
       urgentIntro={data.causeExploration.urgentIntro}
       urgentScenarios={data.causeExploration.urgentScenarios}
     />
