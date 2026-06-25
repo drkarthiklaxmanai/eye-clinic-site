@@ -1,0 +1,36 @@
+---
+// src/components/LandingPageSections/WhyPatientsChooseCrispr.astro
+//
+// This is the page's real positioning -- not AIIMS, not technology,
+// not equipment. The differentiation is continuity, time, and access.
+// Framed as observational ("why patients choose us") rather than
+// promotional ("why choose us") -- subtle but deliberate.
+
+const points = [
+  { title: "Same Ophthalmologist, Every Visit", description: "You see Dr. Rajeswari throughout your care -- not a different specialist each time." },
+  { title: "Time to Ask Questions", description: "Consultations aren't rushed. You leave understanding your diagnosis and your options." },
+  { title: "Recommendations Based on Need", description: "Treatment is suggested because it's clinically right for you -- never to fill a schedule." },
+  { title: "Easy Follow-Up, Close to Home", description: "No traveling across the city for a routine check -- your records and your doctor are right here." },
+];
+---
+
+<section class="py-14 px-6 bg-white">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl md:text-3xl font-extrabold text-blue-900 mb-8 text-center tracking-tight">
+      Why Patients Choose Crispr
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {points.map((point) => (
+        <div class="flex gap-3 items-start p-5 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="shrink-0 bg-blue-600 text-white rounded-full p-1.5 mt-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900 mb-1">{point.title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{point.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
