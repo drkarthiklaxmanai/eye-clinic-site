@@ -14,8 +14,9 @@ const { pageSpecific = [] as Differentiator[] } = Astro.props;
 
 const universal: Differentiator[] = [
   { title: "See the Same Doctor Throughout Your Care", description: "You see Dr. Rajeswari at every visit -- not a different specialist each time." },
-  { title: "Time to Ask Questions", description: "Consultations aren't rushed. You leave understanding your diagnosis and your options." },
+  { title: "Time to Ask Questions", description: "We believe patients deserve time to understand their diagnosis, treatment options, and next steps -- not a rushed consultation." },
   { title: "Recommendations Based on Need", description: "Treatment is suggested because it's clinically right for you -- never to fill a schedule." },
+  { title: "Convenient Follow-Up, Close to Home", description: "No traveling across the city for routine visits -- your doctor and your records are right here." },
 ];
 
 const points = [...universal, ...pageSpecific].slice(0, 5);
