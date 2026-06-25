@@ -85,12 +85,29 @@ const landingPageCollection = defineCollection({
       body: z.string(),
       personalRelevance: z.string().optional(), // short "who specifically should act" sentence
       pathway: z.object({
-        steps: z.array(z.string()), // linear steps before the branch, e.g. ["Diabetes", "Retinal Examination"]
+        steps: z.array(z.string()),
         branches: z.array(z.object({
           finding: z.string(),
           outcome: z.string(),
-        })).optional(), // branches AFTER the linear steps, rendered side by side
+        })).optional(),
       }).optional(),
+      prioritizeIf: z.array(z.string()).optional(),
+    }).optional(),
+
+    // Universal conversion element -- a single "is this you?" prompt
+    // that can appear on ANY page type (symptom, screening, surgical).
+    // Extracted from educationalInsight so it's reusable everywhere,
+    // not just screening pages.
+    actionPrompt: z.string().optional(),
+
+    // Standardized structure for doctorsPerspective, replacing the
+    // free-form string. Keeps a consistent "patient concern -> doctor
+    // response -> what we do" shape across every page while content
+    // stays page-specific.
+    doctorsPerspectiveStructured: z.object({
+      patientConcern: z.string(), // the quoted question patients commonly ask
+      response: z.string(),
+    }).optional(),
       prioritizeIf: z.array(z.string()).optional(),
     }).optional(),   
     
