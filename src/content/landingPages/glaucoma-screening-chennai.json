@@ -5,7 +5,7 @@
   "metaDescription": "Glaucoma screening and management in KK Nagar, Chennai with Dr. Rajeswari. Early detection protects vision permanently. Call or book online.",
   "whyPatientsChoose": [
     { "title": "Focused on Preserving Your Vision", "description": "Our priority is catching changes early, when treatment can still protect what you have." },
-    { "title": "Convenient Ongoing Monitoring", "description": "Glaucoma care means regular checks over time -- being close to home makes that easy to keep up with." }
+    { "title": "Close to Home for Long-Term Care", "description": "Glaucoma monitoring is often lifelong. Having your eye doctor nearby makes regular follow-up easier and more consistent." }
   ],
   "showSymptomCheck": false,
   "processSteps": [
@@ -16,11 +16,11 @@
   "landingFaqs": [
     { "question": "If my vision is normal, why should I be screened?", "answer": "Glaucoma typically causes no symptoms until significant, often permanent vision loss has already occurred. A simple pressure check and optic nerve evaluation can catch it years before you'd ever notice anything yourself." },
     { "question": "How often should glaucoma screening be done?", "answer": "Generally every 1-2 years after age 40, or annually if you have risk factors like diabetes, high blood pressure, or a family history of glaucoma. We'll recommend a schedule based on your specific risk." },
-    { "question": "What happens if glaucoma is detected early?", "answer": "Most cases are managed effectively with eye drops alone. The goal of early detection is simple -- protect the vision you currently have before any is lost." }
+    { "question": "Does a high eye pressure reading mean I have glaucoma?", "answer": "Not necessarily. Eye pressure is only one part of glaucoma assessment. Some people have elevated pressure without glaucoma, while others develop glaucoma despite having pressures within the normal range. That's why screening includes both pressure measurement and optic nerve evaluation." }
   ],
   "educationalInsight": {
     "title": "Why Glaucoma Often Goes Unnoticed",
-    "body": "Many people assume that if their vision feels normal, their eyes must be healthy. Glaucoma is often called the 'silent thief of sight' precisely because it doesn't work that way -- peripheral vision is lost so gradually that most people don't notice until significant, often permanent damage has occurred. A simple eye pressure check and optic nerve evaluation can catch it years before you'd ever notice symptoms yourself. The goal of screening is not to find disease -- it's to find it early enough that the vision you have can be protected.",
+    "body": "Many people assume that if their vision feels normal, their eyes must be healthy. Glaucoma often develops gradually and without obvious symptoms, which is why many people are unaware they have it until screening identifies early changes. A simple eye pressure check and optic nerve evaluation can catch it years before you'd ever notice symptoms yourself. The goal of screening is not to find disease -- it's to find it early enough that the vision you have can be protected.",
     "pathway": {
       "steps": ["Risk Factors Present", "Pressure Check & Optic Nerve Evaluation"],
       "branches": [
@@ -37,6 +37,6 @@
   },
   "doctorsPerspectiveStructured": {
     "patientConcern": "Doctor, my vision seems normal. Why should I worry about glaucoma?",
-    "response": "This is the question I hear most often, and it's an important one. Glaucoma rarely announces itself -- by the time someone notices a change in vision, some damage has typically already happened, and that loss cannot be reversed. Screening isn't about finding something wrong. It's about making sure nothing is happening silently that we could otherwise have caught and managed in time."
+    "response": "This is probably the most common question I hear about glaucoma. The challenge is that glaucoma usually develops gradually, and many people notice no change in vision during the early stages. By the time symptoms become obvious, some vision may already have been permanently lost. A screening examination allows us to look for changes before they affect your daily life. Most people we screen do not have glaucoma, but when we do find early changes, we have the opportunity to protect vision before damage progresses."
   }
 }
