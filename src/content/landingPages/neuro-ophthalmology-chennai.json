@@ -1,22 +1,33 @@
 {
   "headline": "Neuro-Ophthalmology Specialist in Chennai",
-  "subheadline": "FAICO-certified Dr. Rajeswari diagnoses and manages complex vision problems rooted in the optic nerve and brain.",
+  "subheadline": "When the cause of a vision problem isn't straightforward, specialized neuro-ophthalmology evaluation can help identify where the problem is coming from and what should happen next.",
   "urgent": false,
   "metaDescription": "Neuro-ophthalmology evaluation in KK Nagar, Chennai with FAICO-certified Dr. Rajeswari. Call or book online.",
   "whyPatientsChoose": [
-    { "title": "Specialist Evaluation of Complex Cases", "description": "FAICO fellowship training in neuro-ophthalmology means problems beyond the eye itself are evaluated properly." }
+    { "title": "Specialist Evaluation of Complex Cases", "description": "FAICO fellowship training in neuro-ophthalmology means problems beyond the eye itself are evaluated properly." },
+    { "title": "Rarely Available Outside Large Centres", "description": "Neuro-ophthalmology is a highly specialized field that sits between ophthalmology and neurology. Fellowship-level expertise is available locally in KK Nagar." }
   ],
   "showSymptomCheck": true,
   "symptoms": [
-    "Sudden or unexplained vision loss",
-    "Double vision that doesn't resolve",
-    "Unexplained patches of missing vision",
-    "Drooping eyelid or abnormal pupil reaction"
+    "Unexplained vision loss",
+    "Double vision",
+    "Visual field defects or missing patches of vision",
+    "Abnormal pupil findings or drooping eyelid",
+    "Vision symptoms with headaches",
+    "Suspected optic neuritis or optic nerve disorder"
   ],
   "processSteps": [
     { "title": "Specialized Evaluation", "description": "Visual field testing and optic nerve assessment using fellowship-level expertise." },
     { "title": "Clear Diagnosis", "description": "Identifying whether the cause lies in the eye, nerve, or brain pathway." },
     { "title": "Coordinated Care", "description": "Referral to neurology when findings indicate a broader evaluation is needed." }
   ],
-  "faqTopicKeywords": ["neuro", "optic nerve", "double vision", "diplopia"]
+  "landingFaqs": [
+    { "question": "Why would someone be referred to a neuro-ophthalmologist?", "answer": "Usually because a vision problem doesn't fit a typical eye diagnosis -- unexplained vision loss, persistent double vision, visual field changes, or symptoms that involve both vision and neurological signs. This evaluation looks at where the problem is actually coming from." },
+    { "question": "Will I need brain imaging?", "answer": "Not always. Whether imaging is needed depends on the findings during your evaluation. Many neuro-ophthalmic conditions can be assessed and managed without it." },
+    { "question": "What happens if a neurological cause is found?", "answer": "We coordinate directly with neurology when findings indicate a broader evaluation is needed, so you're not left to navigate a referral on your own." }
+  ],
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "Doctor, I've seen multiple doctors and still don't know why my vision is changing.",
+    "response": "Neuro-ophthalmology consultations are often sought when the answer isn't immediately obvious. The goal is to determine whether the problem originates in the eye, the optic nerve, brain pathways, or somewhere else entirely. Sometimes the most important outcome of the consultation is not a treatment, but a clear diagnosis and a clear plan."
+  }
 }
