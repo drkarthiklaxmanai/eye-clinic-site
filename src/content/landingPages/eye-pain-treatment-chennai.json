@@ -18,7 +18,11 @@
     { "title": "Identifying the Source", "description": "Determining whether the cause is surface-level, internal, or nerve-related." },
     { "title": "Prompt Treatment", "description": "Addressing the cause directly -- not just masking the discomfort." }
   ],
-  "faqTopicKeywords": ["glaucoma", "neuro"],
+  "landingFaqs": [
+    { "question": "Is eye pain ever an emergency?", "answer": "Sometimes. Severe pain, pain with vision changes, significant redness, or pain after an injury should be evaluated promptly." },
+    { "question": "How quickly should I be evaluated?", "answer": "That depends on the severity and associated symptoms. Mild discomfort may wait for a routine appointment, while sudden or severe pain deserves earlier assessment." },
+    { "question": "What if the examination finds nothing serious?", "answer": "That's valuable information. Many causes of eye discomfort are straightforward to treat, and ruling out more serious conditions is often the most important part of the evaluation." }
+  ],
   "causeExploration": {
     "title": "Possible Causes of Eye Pain",
     "causesIntro": "Eye pain can come from something minor that resolves quickly, or from a condition that genuinely needs treatment -- and it's not always possible to tell which from how it feels alone. In many cases, the cause is straightforward and treatable. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed.",
