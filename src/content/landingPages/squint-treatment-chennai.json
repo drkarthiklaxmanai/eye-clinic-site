@@ -4,7 +4,8 @@
   "urgent": false,
   "metaDescription": "Squint (strabismus) evaluation and treatment for children and adults in KK Nagar, Chennai. Call or book online.",
   "whyPatientsChoose": [
-    { "title": "Care for Both Children and Adults", "description": "Whether it's a childhood squint or one that's persisted into adulthood, we evaluate and treat both." }
+    { "title": "Care for Both Children and Adults", "description": "Whether it's a childhood squint or one that's persisted into adulthood, we evaluate and treat both." },
+    { "title": "Treatment for Children and Adults", "description": "Squint is not only a childhood condition. Adults can also benefit from evaluation and treatment." }
   ],
   "showSymptomCheck": true,
   "symptoms": [
@@ -18,5 +19,9 @@
     { "title": "Matched Treatment", "description": "Glasses, patching, or vision therapy first where appropriate." },
     { "title": "Surgical Correction", "description": "When needed, precise muscle realignment for function and appearance." }
   ],
-  "faqTopicKeywords": ["squint", "strabismus", "amblyopia"]
+  "landingFaqs": [
+    { "question": "Can adults still be treated for squint?", "answer": "Yes. Squint treatment is not limited to children. Adults may benefit from glasses, prisms, surgery, or other treatments depending on the cause." },
+    { "question": "Does every squint require surgery?", "answer": "No. Some patients are managed with glasses, observation, or other non-surgical approaches. Treatment depends on the type and severity of the squint." },
+    { "question": "Is treatment mainly cosmetic or functional?", "answer": "Both may be important. Treatment can improve eye alignment, binocular vision, comfort, confidence, and in some cases reduce double vision." }
+  ]
 }
