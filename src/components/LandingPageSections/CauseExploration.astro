@@ -23,7 +23,7 @@ const { title, causesIntro, commonCauses, causesOutro, urgentTitle, urgentIntro,
   <div class="max-w-2xl mx-auto">
     <h2 class="text-2xl md:text-3xl font-extrabold text-blue-900 mb-4 tracking-tight">{title}</h2>
     <p class="text-slate-600 leading-relaxed mb-6">{causesIntro}</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
       {commonCauses.map((cause: string) => (
         <div class="flex items-start gap-2 bg-slate-50 rounded-lg px-4 py-3">
           <span class="text-blue-500 mt-0.5">•</span>
@@ -31,6 +31,9 @@ const { title, causesIntro, commonCauses, causesOutro, urgentTitle, urgentIntro,
         </div>
       ))}
     </div>
+    {causesOutro && (
+      <p class="text-sm text-slate-500 italic leading-relaxed">{causesOutro}</p>
+    )}
   </div>
 </section>
 
