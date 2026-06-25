@@ -71,6 +71,22 @@ const landingPageCollection = defineCollection({
       finding: z.string(),
       nextStep: z.string(),
     })).optional(),
+
+    // Surgical decision-support, distinct from CauseExploration.
+    // Used on LASIK/Cataract -- the patient already knows the
+    // condition; the anxiety is whether/when to proceed, not what's
+    // wrong. NOT used on symptom-intent pages.
+    decisionSupport: z.object({
+      suitabilityTitle: z.string(),
+      suitabilityIntro: z.string(),
+      evaluationSteps: z.array(z.string()), // simple pathway, e.g. ["Vision Assessment", "Corneal Mapping", ...]
+      notSuitableTitle: z.string().optional(),
+      notSuitableReasons: z.array(z.string()).optional(),
+      lensOptions: z.array(z.object({
+        name: z.string(),
+        benefit: z.string(),
+      })).optional(),
+    }).optional(),
   }),
 });
 
