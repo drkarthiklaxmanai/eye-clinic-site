@@ -7,9 +7,7 @@ import ConvenienceSection from '../../components/LandingPageSections/Convenience
 import QuickCTA from '../../components/LandingPageSections/QuickCTA.astro';
 import SymptomRecognition from '../../components/LandingPageSections/SymptomRecognition.astro';
 import DoctorSection from '../../components/LandingPageSections/DoctorSection.astro';
-import ScreeningRationale from '../../components/LandingPageSections/ScreeningRationale.astro';
-import ScreeningPathway from '../../components/LandingPageSections/ScreeningPathway.astro';
-import PrioritizeIf from '../../components/LandingPageSections/PrioritizeIf.astro';
+import EducationalInsightSection from '../../components/LandingPageSections/EducationalInsightSection.astro';
 import CauseExploration from '../../components/LandingPageSections/CauseExploration.astro';
 import AfterEvaluation from '../../components/LandingPageSections/AfterEvaluation.astro';
 import SurgicalDecisionSupport from '../../components/LandingPageSections/SurgicalDecisionSupport.astro';
@@ -47,20 +45,18 @@ const data = entry.data;
 
   <DoctorSection />
 
-  {data.screeningRationale && (
-    <ScreeningRationale title={data.screeningRationale.title} body={data.screeningRationale.body} />
+  {data.educationalInsight && (
+    <EducationalInsightSection
+      title={data.educationalInsight.title}
+      body={data.educationalInsight.body}
+      personalRelevance={data.educationalInsight.personalRelevance}
+      pathway={data.educationalInsight.pathway}
+      prioritizeIf={data.educationalInsight.prioritizeIf}
+    />
   )}
 
   {data.doctorsPerspective && (
     <DoctorsPerspective perspective={data.doctorsPerspective} />
-  )}
-
-  {data.screeningPathway && data.screeningPathway.length > 0 && (
-    <ScreeningPathway steps={data.screeningPathway} />
-  )}
-
-  {data.prioritizeIf && data.prioritizeIf.length > 0 && (
-    <PrioritizeIf reasons={data.prioritizeIf} />
   )}
 
   {data.causeExploration && (
