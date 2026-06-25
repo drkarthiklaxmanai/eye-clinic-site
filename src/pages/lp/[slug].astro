@@ -46,10 +46,19 @@ const data = entry.data;
       title={data.causeExploration.title}
       causesIntro={data.causeExploration.causesIntro}
       commonCauses={data.causeExploration.commonCauses}
+      causesOutro={data.causeExploration.causesOutro}
       urgentTitle={data.causeExploration.urgentTitle}
       urgentIntro={data.causeExploration.urgentIntro}
       urgentScenarios={data.causeExploration.urgentScenarios}
     />
+  )}
+
+  {data.afterEvaluation && data.afterEvaluation.length > 0 && (
+    <AfterEvaluation pathways={data.afterEvaluation} />
+  )}
+
+  {data.doctorsPerspective && (
+    <DoctorsPerspective perspective={data.doctorsPerspective} />
   )}
 
   <WhatHappensNext steps={data.processSteps} />
