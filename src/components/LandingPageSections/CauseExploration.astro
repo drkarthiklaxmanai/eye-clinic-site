@@ -10,12 +10,13 @@ interface Props {
   title: string;
   causesIntro: string;
   commonCauses: string[];
+  causesOutro?: string;
   urgentTitle: string;
   urgentIntro: string;
   urgentScenarios: string[];
 }
 
-const { title, causesIntro, commonCauses, urgentTitle, urgentIntro, urgentScenarios } = Astro.props;
+const { title, causesIntro, commonCauses, causesOutro, urgentTitle, urgentIntro, urgentScenarios } = Astro.props;
 ---
 
 <section class="py-12 px-6 bg-white border-t border-slate-100">
