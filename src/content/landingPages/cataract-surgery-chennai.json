@@ -1,21 +1,22 @@
 {
   "headline": "Cataract Surgery in KK Nagar, Chennai",
-  "subheadline": "AIIMS-trained Dr. Rajeswari offers painless, stitchless cataract surgery with premium IOL options. Evidence-based evaluation -- no unnecessary procedures.",
+  "subheadline": "AIIMS-trained Dr. Rajeswari offers painless, stitchless cataract surgery with premium IOL options.",
   "urgent": false,
-  "metaDescription": "Stitchless cataract surgery in KK Nagar, Chennai with AIIMS-trained Dr. Rajeswari. Premium IOL options, painless procedure. Call or book online.",
-  "symptomsTitle": "Could You Have a Cataract?",
+  "metaDescription": "Stitchless cataract surgery in KK Nagar, Chennai with Dr. Rajeswari. Premium IOL options, painless procedure. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Same Surgeon, Start to Finish", "description": "From evaluation through surgery and every follow-up, you're cared for by the same doctor." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
     "Blurred or cloudy vision",
     "Glare or halos around lights at night",
     "Frequent changes in glasses prescription",
-    "Colors appearing faded or yellowed",
-    "Difficulty reading in dim light"
+    "Colors appearing faded or yellowed"
   ],
-  "processTitle": "What to Expect",
   "processSteps": [
-    { "title": "Comprehensive Evaluation", "description": "Detailed eye exam to confirm the cataract and assess your overall eye health." },
-    { "title": "Honest Discussion", "description": "Dr. Rajeswari explains your results, IOL options, and timing -- no pressure to rush into surgery." },
-    { "title": "The Procedure", "description": "Stitchless, painless phacoemulsification surgery, typically with same-day discharge." }
+    { "title": "Comprehensive Evaluation", "description": "A detailed eye exam to confirm the cataract and assess your eye health." },
+    { "title": "Honest Discussion", "description": "We explain your results and IOL options -- no pressure to rush into surgery." },
+    { "title": "The Procedure", "description": "Stitchless, painless phacoemulsification, typically with same-day discharge." }
   ],
   "faqTopicKeywords": ["cataract", "iol", "phacoemulsification"]
 }

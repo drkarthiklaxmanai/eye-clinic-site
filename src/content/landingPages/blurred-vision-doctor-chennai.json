@@ -1,21 +1,22 @@
 {
   "headline": "Blurred Vision? See an Eye Specialist in Chennai",
-  "subheadline": "Blurred vision can have many causes -- from a simple prescription change to early cataracts or retina conditions. AIIMS-trained Dr. Rajeswari will identify the real cause.",
+  "subheadline": "Blurred vision can have many causes -- Dr. Rajeswari will identify the real cause, not just guess.",
   "urgent": false,
-  "metaDescription": "Experiencing blurred vision? See AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai for a thorough evaluation. Call or book online.",
-  "symptomsTitle": "Does This Sound Like You?",
+  "metaDescription": "Experiencing blurred vision? See Dr. Rajeswari in KK Nagar, Chennai for a thorough evaluation. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "We Find the Real Cause", "description": "A comprehensive evaluation, not a quick glasses prescription, to identify what's actually going on." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
-    "Gradual blurring that's worsened over weeks or months",
+    "Gradual blurring over weeks or months",
     "Sudden blurred vision in one or both eyes",
     "Blurring that comes and goes",
-    "Difficulty seeing clearly at distance or up close",
-    "Blurred vision along with glare or halos at night"
+    "Blurred vision with glare or halos at night"
   ],
-  "processTitle": "How We Find the Cause",
   "processSteps": [
     { "title": "Vision & Refraction Test", "description": "Checking whether a simple glasses prescription is the cause." },
     { "title": "Eye Health Examination", "description": "Ruling out cataracts, retina conditions, or other underlying issues." },
-    { "title": "Clear Next Steps", "description": "Whether it's glasses, treatment, or reassurance -- you'll know exactly what's going on." }
+    { "title": "Clear Next Steps", "description": "Whether it's glasses, treatment, or reassurance -- you'll know what's going on." }
   ],
   "faqTopicKeywords": ["cataract", "retina", "macular"]
 }

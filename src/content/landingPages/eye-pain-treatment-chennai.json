@@ -1,20 +1,21 @@
 {
   "headline": "Eye Pain? Get Evaluated by a Specialist in Chennai",
-  "subheadline": "Eye pain can stem from minor irritation or more serious underlying conditions. AIIMS-trained Dr. Rajeswari provides prompt, thorough evaluation in KK Nagar.",
+  "subheadline": "Eye pain can stem from minor irritation or more serious conditions. Dr. Rajeswari provides prompt, thorough evaluation.",
   "urgent": false,
-  "metaDescription": "Experiencing eye pain? See AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai for prompt evaluation. Call or book online.",
-  "symptomsTitle": "Does This Sound Like You?",
+  "metaDescription": "Experiencing eye pain? See Dr. Rajeswari in KK Nagar, Chennai for prompt evaluation. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Prompt Evaluation, Common and Serious Causes", "description": "We take eye pain seriously, checking both routine causes and anything that needs urgent attention." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
     "Persistent ache in or around one or both eyes",
     "Pain with eye movement",
-    "Pain along with redness or sensitivity to light",
-    "Pain accompanied by blurred vision",
+    "Pain with redness or light sensitivity",
     "Sudden, severe eye pain"
   ],
-  "processTitle": "How We Find the Cause",
   "processSteps": [
     { "title": "Detailed Examination", "description": "Assessing the eye surface, internal pressure, and overall eye health." },
-    { "title": "Identifying the Source", "description": "Determining whether the cause is on the surface, inside the eye, or related to the optic nerve." },
+    { "title": "Identifying the Source", "description": "Determining whether the cause is surface-level, internal, or nerve-related." },
     { "title": "Prompt Treatment", "description": "Addressing the cause directly -- not just masking the discomfort." }
   ],
   "faqTopicKeywords": ["glaucoma", "neuro"]

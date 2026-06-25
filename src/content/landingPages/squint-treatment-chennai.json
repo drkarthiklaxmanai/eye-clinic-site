@@ -1,21 +1,22 @@
 {
   "headline": "Squint Treatment for Children & Adults in Chennai",
-  "subheadline": "AIIMS-trained Dr. Rajeswari evaluates and treats eye misalignment at every age -- the earlier it's addressed, the better the outcome.",
+  "subheadline": "Dr. Rajeswari evaluates and treats eye misalignment at every age -- the earlier it's addressed, the better the outcome.",
   "urgent": false,
-  "metaDescription": "Squint (strabismus) evaluation and treatment for children and adults in KK Nagar, Chennai with AIIMS-trained Dr. Rajeswari. Call or book online.",
-  "symptomsTitle": "Could This Be Your Child, or You?",
+  "metaDescription": "Squint (strabismus) evaluation and treatment for children and adults in KK Nagar, Chennai. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Care for Both Children and Adults", "description": "Whether it's a childhood squint or one that's persisted into adulthood, we evaluate and treat both." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
     "One or both eyes turning inward, outward, up, or down",
     "Child tilting or turning their head to see better",
-    "Double vision or vision that seems to compete",
-    "A childhood 'lazy eye' that was never fully treated",
-    "Eye strain or fatigue with near work"
+    "Double vision or competing vision",
+    "A childhood 'lazy eye' never fully treated"
   ],
-  "processTitle": "What to Expect",
   "processSteps": [
     { "title": "Detailed Evaluation", "description": "Assessing the type and degree of misalignment, and checking for amblyopia." },
-    { "title": "Matched Treatment", "description": "Glasses, patching, or vision therapy first where appropriate -- not every squint needs surgery." },
-    { "title": "Surgical Correction", "description": "When needed, precise muscle realignment surgery for function and appearance." }
+    { "title": "Matched Treatment", "description": "Glasses, patching, or vision therapy first where appropriate." },
+    { "title": "Surgical Correction", "description": "When needed, precise muscle realignment for function and appearance." }
   ],
   "faqTopicKeywords": ["squint", "strabismus", "amblyopia"]
 }
