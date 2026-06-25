@@ -18,5 +18,26 @@
     { "title": "Eye Health Examination", "description": "Ruling out cataracts, retina conditions, or other underlying issues." },
     { "title": "Clear Next Steps", "description": "Whether it's glasses, treatment, or reassurance -- you'll know what's going on." }
   ],
-  "faqTopicKeywords": ["cataract", "retina", "macular"]
+  "faqTopicKeywords": ["cataract", "retina", "macular"],
+  "causeExploration": {
+    "causesIntro": "Blurred vision is a symptom, not a diagnosis -- it's your eyes' way of signaling that something needs attention, but it doesn't tell you what on its own. The cause can range from something as simple as an outdated glasses prescription to a condition that genuinely needs treatment. The right first step isn't guessing -- it's a proper evaluation to find out what's actually happening.",
+    "commonCauses": [
+      "Refractive error (your glasses prescription has changed)",
+      "Dry eye disease",
+      "Cataracts",
+      "Diabetic eye disease",
+      "Glaucoma",
+      "A retinal condition",
+      "An optic nerve condition"
+    ],
+    "urgentIntro": "Most blurred vision can wait for a scheduled appointment. But a few situations deserve prompt evaluation, ideally the same day:",
+    "urgentScenarios": [
+      "Sudden blurred vision, especially in one eye",
+      "Vision loss or a sudden dark patch in one eye",
+      "Blurred vision along with eye pain",
+      "New flashes of light or floaters",
+      "Blurred vision if you have diabetes",
+      "Blurring severe enough to affect daily activities like reading or driving"
+    ]
+  }
 }
