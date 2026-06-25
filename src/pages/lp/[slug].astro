@@ -7,6 +7,7 @@ import ConvenienceSection from '../../components/LandingPageSections/Convenience
 import QuickCTA from '../../components/LandingPageSections/QuickCTA.astro';
 import SymptomRecognition from '../../components/LandingPageSections/SymptomRecognition.astro';
 import DoctorSection from '../../components/LandingPageSections/DoctorSection.astro';
+import CauseExploration from '../../components/LandingPageSections/CauseExploration.astro';
 import WhatHappensNext from '../../components/LandingPageSections/WhatHappensNext.astro';
 import MidPageCTA from '../../components/LandingPageSections/MidPageCTA.astro';
 import ObjectionFAQ from '../../components/LandingPageSections/ObjectionFAQ.astro';
@@ -39,6 +40,15 @@ const data = entry.data;
   )}
 
   <DoctorSection />
+
+  {data.causeExploration && (
+    <CauseExploration
+      causesIntro={data.causeExploration.causesIntro}
+      commonCauses={data.causeExploration.commonCauses}
+      urgentIntro={data.causeExploration.urgentIntro}
+      urgentScenarios={data.causeExploration.urgentScenarios}
+    />
+  )}
 
   <WhatHappensNext steps={data.processSteps} />
 
