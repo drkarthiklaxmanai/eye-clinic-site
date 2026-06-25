@@ -45,6 +45,17 @@ const landingPageCollection = defineCollection({
 
     showObjectionFAQ: z.boolean().optional().default(true),
     faqTopicKeywords: z.array(z.string()).optional(),
+
+    // Condition-specific "what could be causing this" content.
+    // Only populated on symptom-intent pages where the cause is
+    // genuinely ambiguous (e.g. blurred vision, eye pain) -- not
+    // service-intent pages where the diagnosis is already known.
+    causeExploration: z.object({
+      causesIntro: z.string(),
+      commonCauses: z.array(z.string()),
+      urgentIntro: z.string(),
+      urgentScenarios: z.array(z.string()),
+    }).optional(),
   }),
 });
 
