@@ -26,15 +26,18 @@ const landingPageCollection = defineCollection({
   schema: z.object({
     headline: z.string(),
     subheadline: z.string(),
-    urgent: z.boolean().optional(),
+    urgent: z.boolean().optional().default(false),
     metaDescription: z.string(),
-    symptomsTitle: z.string().optional(),
+
+    showSymptomCheck: z.boolean().optional().default(false),
     symptoms: z.array(z.string()).optional(),
-    processTitle: z.string().optional(),
+
     processSteps: z.array(z.object({
       title: z.string(),
       description: z.string(),
     })).optional(),
+
+    showObjectionFAQ: z.boolean().optional().default(true),
     faqTopicKeywords: z.array(z.string()).optional(),
   }),
 });
