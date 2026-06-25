@@ -43,8 +43,16 @@ const landingPageCollection = defineCollection({
       description: z.string(),
     })).optional(),
 
-    showObjectionFAQ: z.boolean().optional().default(true),
-    faqTopicKeywords: z.array(z.string()).optional(),
+// Page-specific objection-handling FAQs, written directly per page
+    // rather than filtered from the global faqs collection. Each page's
+    // booking objections are genuinely different (Cataract vs. LASIK
+    // vs. Diabetic Eye) -- keyword filtering produced generic,
+    // educational answers, not objection-handling ones. Exactly 3 per
+    // page: condition-specific objection, urgency, trust.
+    landingFaqs: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
 
     // Condition-specific "what could be causing this" content.
     // Only populated on symptom-intent pages where the cause is
