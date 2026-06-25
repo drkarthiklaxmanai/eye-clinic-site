@@ -29,6 +29,12 @@ const landingPageCollection = defineCollection({
     urgent: z.boolean().optional().default(false),
     metaDescription: z.string(),
 
+    // Page-specific differentiators, appended to the 3 universal cards
+    whyPatientsChoose: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+    })).optional().default([]),
+
     showSymptomCheck: z.boolean().optional().default(false),
     symptoms: z.array(z.string()).optional(),
 
