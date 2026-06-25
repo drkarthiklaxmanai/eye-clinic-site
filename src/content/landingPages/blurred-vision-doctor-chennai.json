@@ -20,7 +20,7 @@
   ],
   "faqTopicKeywords": ["cataract", "retina", "macular"],
   "causeExploration": {
-    "title": "What Could Be Causing Your Blurred Vision?",
+    "title": "Possible Causes of Blurred Vision",
     "causesIntro": "Blurred vision is a symptom, not a diagnosis -- it's your eyes' way of signaling that something needs attention, but it doesn't tell you what on its own. In many cases, the cause is straightforward and treatable. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed.",
     "commonCauses": [
       "Refractive error (your glasses prescription has changed)",
@@ -31,6 +31,7 @@
       "A retinal condition",
       "An optic nerve condition"
     ],
+    "causesOutro": "The same symptom can have many different causes. Identifying the cause accurately is the first step toward effective treatment.",
     "urgentTitle": "When Should You Seek Prompt Evaluation?",
     "urgentIntro": "Most blurred vision can wait for a scheduled appointment. But a few situations deserve prompt evaluation, ideally the same day:",
     "urgentScenarios": [
@@ -38,7 +39,7 @@
       "Vision loss or a sudden dark patch in one eye",
       "Blurred vision along with eye pain",
       "New flashes of light or floaters",
-      "Blurred vision if you have diabetes",
+      "New or unexplained blurred vision if you have diabetes",
       "Blurring severe enough to affect daily activities like reading or driving"
     ]
   }
