@@ -2,8 +2,8 @@
 // src/components/LandingPageSections/WhyPatientsChooseCrispr.astro
 //
 // Three universal cards are always shown; 1-2 page-specific
-// differentiators come from props, letting each landing page feel
-// distinct without forking the architecture.
+// differentiators come from props. Capped at 5 total to keep this
+// section disciplined -- do not let future additions dilute it.
 
 interface Differentiator {
   title: string;
@@ -13,12 +13,12 @@ interface Differentiator {
 const { pageSpecific = [] as Differentiator[] } = Astro.props;
 
 const universal: Differentiator[] = [
-  { title: "Same Ophthalmologist, Every Visit", description: "You see Dr. Rajeswari throughout your care -- not a different specialist each time." },
+  { title: "See the Same Doctor Throughout Your Care", description: "You see Dr. Rajeswari at every visit -- not a different specialist each time." },
   { title: "Time to Ask Questions", description: "Consultations aren't rushed. You leave understanding your diagnosis and your options." },
   { title: "Recommendations Based on Need", description: "Treatment is suggested because it's clinically right for you -- never to fill a schedule." },
 ];
 
-const points = [...universal, ...pageSpecific];
+const points = [...universal, ...pageSpecific].slice(0, 5);
 ---
 
 <section class="py-14 px-6 bg-white">
