@@ -59,6 +59,18 @@ const landingPageCollection = defineCollection({
       urgentIntro: z.string(),
       urgentScenarios: z.array(z.string()),
     }).optional(),
+
+    // Personal, first-person framing from Dr. Rajeswari -- the one thing
+    // a corporate hospital chain cannot replicate at scale. 100-150 words.
+    doctorsPerspective: z.string().optional(),
+
+    // Decision-support: "what happens after evaluation" pathways,
+    // mapped by possible finding -> next step. Replaces vague
+    // reassurance with a concrete sense of what to expect.
+    afterEvaluation: z.array(z.object({
+      finding: z.string(),
+      nextStep: z.string(),
+    })).optional(),
   }),
 });
 
