@@ -54,15 +54,6 @@ const data = entry.data;
     />
   )}
 
-  {data.doctorsPerspectiveStructured ? (
-    <DoctorsPerspective
-      patientConcern={data.doctorsPerspectiveStructured.patientConcern}
-      response={data.doctorsPerspectiveStructured.response}
-    />
-  ) : data.doctorsPerspective && (
-    <DoctorsPerspective perspective={data.doctorsPerspective} />
-  )}
-
   {data.causeExploration && (
     <CauseExploration
       title={data.causeExploration.title}
@@ -86,11 +77,21 @@ const data = entry.data;
       evaluationSteps={data.decisionSupport.evaluationSteps}
       notSuitableTitle={data.decisionSupport.notSuitableTitle}
       notSuitableReasons={data.decisionSupport.notSuitableReasons}
-      showLensOptions={false}
     />
   )}
 
-  {data.doctorsPerspective && (
+  <!-- Single, consolidated Doctor's Perspective call site -- previously
+       this rendered twice on pages like LASIK/Cataract because it was
+       called once after EducationalInsightSection/CauseExploration AND
+       again after SurgicalDecisionSupport. Now it fires exactly once
+       per page, landing in the right visual position for whichever
+       psychology-specific block preceded it. -->
+  {data.doctorsPerspectiveStructured ? (
+    <DoctorsPerspective
+      patientConcern={data.doctorsPerspectiveStructured.patientConcern}
+      response={data.doctorsPerspectiveStructured.response}
+    />
+  ) : data.doctorsPerspective && (
     <DoctorsPerspective perspective={data.doctorsPerspective} />
   )}
 
