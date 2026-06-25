@@ -18,7 +18,11 @@
     { "title": "Honest Discussion", "description": "We explain your results and IOL options -- no pressure to rush into surgery." },
     { "title": "The Procedure", "description": "Stitchless, painless phacoemulsification, typically with same-day discharge." }
   ],
-  "faqTopicKeywords": ["cataract", "iol", "phacoemulsification"],
+  "landingFaqs": [
+    { "question": "How do I know if I really need cataract surgery?", "answer": "Surgery is recommended based on how the cataract affects your daily life -- reading, driving, working -- not simply how it appears during examination. We'll discuss what's appropriate for your specific situation." },
+    { "question": "Can cataract surgery wait, or should it be done immediately?", "answer": "In most cases, it can wait until it's genuinely affecting you. There's rarely a need to rush -- some patients prefer to proceed sooner, others are comfortable waiting, and that's a decision we make together." },
+    { "question": "Will I have time to discuss lens options before making a decision?", "answer": "Yes. Lens selection is discussed in detail during your evaluation, with enough time to ask questions before any decision is made." }
+  ],
   "decisionSupport": {
     "suitabilityTitle": "When Is Cataract Surgery Usually Recommended?",
     "suitabilityIntro": "Cataract surgery is usually recommended when vision changes begin affecting daily activities such as reading, driving, working, or recognizing faces comfortably. The decision is based on how the cataract affects your life, not simply how it appears during examination. Some patients benefit from surgery earlier, while others may be comfortable waiting -- during your consultation, we'll discuss what is appropriate for your situation.",
