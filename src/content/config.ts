@@ -76,6 +76,20 @@ const landingPageCollection = defineCollection({
     // Used on LASIK/Cataract -- the patient already knows the
     // condition; the anxiety is whether/when to proceed, not what's
     // wrong. NOT used on symptom-intent pages.
+    // For "patient feels fine, doesn't realize they need screening"     
+    // pages (Diabetic Eye Checkup). Distinct from CauseExploration     
+    // (uncertain cause) and decisionSupport (surgical anxiety) --     
+    // this page's job is converting apathy into action, not resolving    
+    // doubt about a procedure.     
+    screeningRationale: z.object({       
+      title: z.string(),       
+      body: z.string(),     
+    }).optional(),      
+    
+    screeningPathway: z.array(z.string()).optional(), // simple linear steps, e.g. ["Diabetes", "Retinal Examination", "No Changes Found", "Annual Follow-Up"]      
+    
+    prioritizeIf: z.array(z.string()).optional(), // risk-based urgency triggers, not alarmist      
+    
     decisionSupport: z.object({
       suitabilityTitle: z.string(),
       suitabilityIntro: z.string(),
