@@ -1,17 +1,19 @@
 ---
 // src/components/LandingPageSections/DoctorsPerspective.astro
 //
-// First-person framing from Dr. Rajeswari. This is the section that
-// makes the page feel like a specialist speaking to a patient, not a
-// landing page speaking to a visitor -- something a corporate hospital
-// chain cannot replicate at scale.
+// Supports two formats: a free-form perspective string (used by
+// earlier pages like Cataract/LASIK), and a standardized
+// "patient concern -> response" structure (used going forward) for
+// consistency across pages while content stays page-specific.
 import { siteConfig } from '../../config/site.js';
 
 interface Props {
-  perspective: string;
+  perspective?: string;
+  patientConcern?: string;
+  response?: string;
 }
 
-const { perspective } = Astro.props;
+const { perspective, patientConcern, response } = Astro.props;
 ---
 
 <section class="py-12 px-6 bg-gradient-to-br from-blue-50 to-white border-t border-slate-100">
@@ -25,11 +27,21 @@ const { perspective } = Astro.props;
           onerror="this.src='https://placehold.co/100x100/e2e8f0/1e3a8a?text=Dr'"
         />
         <div>
-          <p class="font-bold text-slate-900 text-sm">{siteConfig.doctor.name}'s Perspective</p>
+          <p class="font-bold text-slate-900 text-sm">
+            {patientConcern ? "What I Commonly Hear From Patients" : `${siteConfig.doctor.name}'s Perspective`}
+          </p>
           <p class="text-xs text-blue-600 font-semibold uppercase tracking-wide">{siteConfig.doctor.specialization}</p>
         </div>
       </div>
-      <p class="text-slate-700 leading-relaxed italic">"{perspective}"</p>
+
+      {patientConcern ? (
+        <>
+          <p class="text-slate-900 font-semibold italic mb-3">"{patientConcern}"</p>
+          <p class="text-slate-700 leading-relaxed">{response}</p>
+        </>
+      ) : (
+        <p class="text-slate-700 leading-relaxed italic">"{perspective}"</p>
+      )}
     </div>
   </div>
 </section>
