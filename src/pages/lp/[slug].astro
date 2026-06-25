@@ -49,13 +49,21 @@ const data = entry.data;
     <EducationalInsightSection
       title={data.educationalInsight.title}
       body={data.educationalInsight.body}
-      personalRelevance={data.educationalInsight.personalRelevance}
       pathway={data.educationalInsight.pathway}
       prioritizeIf={data.educationalInsight.prioritizeIf}
     />
   )}
 
-  {data.doctorsPerspective && (
+  {data.actionPrompt && (
+    <ActionPromptCard prompt={data.actionPrompt} />
+  )}
+
+  {data.doctorsPerspectiveStructured ? (
+    <DoctorsPerspective
+      patientConcern={data.doctorsPerspectiveStructured.patientConcern}
+      response={data.doctorsPerspectiveStructured.response}
+    />
+  ) : data.doctorsPerspective && (
     <DoctorsPerspective perspective={data.doctorsPerspective} />
   )}
 
