@@ -18,5 +18,21 @@
     { "title": "Honest Discussion", "description": "We explain your results and IOL options -- no pressure to rush into surgery." },
     { "title": "The Procedure", "description": "Stitchless, painless phacoemulsification, typically with same-day discharge." }
   ],
-  "faqTopicKeywords": ["cataract", "iol", "phacoemulsification"]
+  "faqTopicKeywords": ["cataract", "iol", "phacoemulsification"],
+  "decisionSupport": {
+    "suitabilityTitle": "When Is Cataract Surgery Usually Recommended?",
+    "suitabilityIntro": "Cataract surgery is usually recommended when vision changes begin affecting daily activities such as reading, driving, working, or recognizing faces comfortably. The decision is based on how the cataract affects your life, not simply how it appears during examination. Some patients benefit from surgery earlier, while others may be comfortable waiting -- during your consultation, we'll discuss what is appropriate for your situation.",
+    "evaluationSteps": [
+      "Vision Assessment",
+      "Cataract Grading",
+      "Discussion of Impact on Daily Life",
+      "Recommendation"
+    ],
+    "lensOptions": [
+      { "name": "Monofocal", "benefit": "Clear vision at one distance" },
+      { "name": "Toric", "benefit": "Corrects astigmatism" },
+      { "name": "Multifocal", "benefit": "Reduced dependence on glasses" }
+    ]
+  },
+  "doctorsPerspective": "Many patients worry that cataract surgery is being recommended too early, or that they may be choosing the wrong lens. A good cataract consultation should help you understand whether surgery is necessary now, what options are available, and what results you can realistically expect. The goal is not simply to perform surgery -- it's to help you make an informed decision that fits your visual needs and lifestyle."
 }
