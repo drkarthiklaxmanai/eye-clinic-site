@@ -61,7 +61,9 @@ const landingPageCollection = defineCollection({
     }).optional(),
 
     // Personal, first-person framing from Dr. Rajeswari -- the one thing
-    // a corporate hospital chain cannot replicate at scale. 100-150 words.
+    // a corporate hospital chain cannot replicate at scale. Used by
+    // earlier pages (Cataract, LASIK) as free-form prose. Kept alongside
+    // doctorsPerspectiveStructured below for backward compatibility.
     doctorsPerspective: z.string().optional(),
 
     // Decision-support: "what happens after evaluation" pathways,
@@ -72,10 +74,6 @@ const landingPageCollection = defineCollection({
       nextStep: z.string(),
     })).optional(),
 
-    // Surgical decision-support, distinct from CauseExploration.
-    // Used on LASIK/Cataract -- the patient already knows the
-    // condition; the anxiety is whether/when to proceed, not what's
-    // wrong. NOT used on symptom-intent pages.
     // Reusable across any "patient feels fine, doesn't realize they
     // need screening" page (Diabetic Eye, future Glaucoma, future
     // Retina). One configurable component instead of forking a new
@@ -83,7 +81,6 @@ const landingPageCollection = defineCollection({
     educationalInsight: z.object({
       title: z.string(),
       body: z.string(),
-      personalRelevance: z.string().optional(), // short "who specifically should act" sentence
       pathway: z.object({
         steps: z.array(z.string()),
         branches: z.array(z.object({
@@ -95,20 +92,21 @@ const landingPageCollection = defineCollection({
     }).optional(),
 
     // Standardized structure for doctorsPerspective, replacing the
-    // free-form string. Keeps a consistent "patient concern -> doctor
-    // response -> what we do" shape across every page while content
-    // stays page-specific.
+    // free-form string for NEW pages going forward. Keeps a consistent
+    // "patient concern -> doctor response" shape across pages while
+    // content stays page-specific.
     doctorsPerspectiveStructured: z.object({
-      patientConcern: z.string(), // the quoted question patients commonly ask
+      patientConcern: z.string(),
       response: z.string(),
     }).optional(),
-      prioritizeIf: z.array(z.string()).optional(),
-    }).optional(),   
-    
+
+    // Surgical decision-support, distinct from CauseExploration and
+    // educationalInsight. Used on LASIK/Cataract -- the patient already
+    // knows the condition; the anxiety is whether/when to proceed.
     decisionSupport: z.object({
       suitabilityTitle: z.string(),
       suitabilityIntro: z.string(),
-      evaluationSteps: z.array(z.string()), // simple pathway, e.g. ["Vision Assessment", "Corneal Mapping", ...]
+      evaluationSteps: z.array(z.string()),
       notSuitableTitle: z.string().optional(),
       notSuitableReasons: z.array(z.string()).optional(),
       lensOptions: z.array(z.object({
