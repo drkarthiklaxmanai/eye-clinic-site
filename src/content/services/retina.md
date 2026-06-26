@@ -31,15 +31,11 @@ treatments:
   - name: "Coordinated Diabetes Care"
     description: "Guidance alongside your physician to manage the underlying systemic condition."
 
-pageFaqs:
-  - question: "How often should I get a retina screening if I have diabetes?"
-    answer: "Annually, even if your blood sugar is well-controlled and you have no symptoms. Diabetic retinopathy can develop silently, and early changes are far easier to manage than advanced ones."
-  - question: "Is a dilated retina exam painful?"
-    answer: "No. Dilating drops cause temporary light sensitivity and blurred near vision for a few hours, but the examination itself is painless."
-  - question: "Can vision lost to retinal disease be restored?"
-    answer: "It depends on the condition and stage. Many forms of retinal damage are permanent once they occur, which is why early detection and timely treatment matter so much. Some causes, like diabetic macular edema, can improve significantly with treatment."
-  - question: "Do I need a referral to see a retina specialist?"
-    answer: "No referral is needed. You can book a retina evaluation directly."
+faqIds:
+  - "retina-screening-frequency"
+  - "dilated-exam-pain"
+  - "blood-sugar-control-alone"
+  - "retina-referral-needed"
 
 ctaTitle: "Schedule Your Retina Evaluation"
 ---
