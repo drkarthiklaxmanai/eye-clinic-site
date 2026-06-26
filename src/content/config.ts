@@ -74,6 +74,17 @@ const landingPageCollection = defineCollection({
     // objection-handling content and is never replaced by this.
     baseFaqIds: z.array(z.string()).optional(),
 
+    // Optional single understated link to a deeper content-cluster
+    // page (service or condition), for ad visitors who want to learn
+    // more before booking. Rendered as a single subtle text line at
+    // the very end of the page, after ClinicPhotoStrip and before
+    // BookingSection -- never competing visually with MidPageCTA or
+    // the booking flow itself. Omitted entirely if not set.
+    learnMoreLink: z.object({
+      text: z.string(),
+      url: z.string(),
+    }).optional(),
+
     // Condition-specific "what could be causing this" content.
     // Only populated on symptom-intent pages where the cause is
     // genuinely ambiguous (e.g. blurred vision, eye pain) -- not
