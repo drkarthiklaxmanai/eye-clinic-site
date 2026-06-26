@@ -8,6 +8,17 @@ import CTA from '../components/CTA.astro';
 import { getCollection } from 'astro:content';
 import ClinicGallery from '../components/ClinicGallery.astro';
 
+// Optimized service images, imported once here and passed directly
+// into ServiceCard as ImageMetadata objects (not string paths).
+import cataractImg from '../assets/cataract.png';
+import lasikImg from '../assets/lasik.png';
+import retinaImg from '../assets/retina-service.png';
+import glaucomaImg from '../assets/glaucoma-service.png';
+import squintImg from '../assets/squint-service.png';
+import neuroImg from '../assets/neuro-service.png';
+import comprehensiveCheckupImg from '../assets/comprehensive-eye-checkup-service.png';
+import pediatricImg from '../assets/pediatric-eye-care-service.png';
+
 // SEO Optimized Meta Data (Ranking Booster)
 const pageTitle = "Best Eye Clinic in KK Nagar, Chennai";
 const pageDescription = "AIIMS-trained Dr. Rajeswari offers advanced LASIK, stitchless cataract surgery, and comprehensive eye care in KK Nagar, Chennai. Book your evaluation today.";
@@ -37,56 +48,56 @@ const latestPosts = allPosts
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <ServiceCard 
-        image="/images/cataract.png"
+        image={cataractImg}
         alt="Macro view of intraocular lens"
         title="Cataract Surgery" 
         description="Cataract causes blurred vision and glare. Advanced surgery using modern phacoemulsification restores vision safely."
         link="/services/cataract"
       />
       <ServiceCard 
-        image="/images/lasik.png"
+        image={lasikImg}
         alt="Laser eye surgery technology"
         title="LASIK Surgery" 
         description="Correct refractive errors and reduce dependence on glasses. Detailed evaluation ensures safe, precise outcomes."
         link="/services/lasik"
       />
       <ServiceCard 
-        image="/images/retina-service.png"
+        image={retinaImg}
         alt="Retinal image"
         title="Retina Care" 
         description="Specialized management for Diabetic Retinopathy and macular degeneration to prevent irreversible vision loss."
         link="/services/retina"
       />
       <ServiceCard 
-        image="/images/glaucoma-service.png"
+        image={glaucomaImg}
         alt="Glaucoma eye pressure screening"
         title="Glaucoma Screening" 
         description="Early detection through eye pressure and optic nerve evaluation -- glaucoma is irreversible once vision is lost."
         link="/services/glaucoma"
       />
       <ServiceCard 
-        image="/images/squint-service.png"
+        image={squintImg}
         alt="Eye alignment examination"
         title="Squint Treatment" 
         description="Ocular alignment evaluations and surgical treatments for pediatric and adult strabismus patients."
         link="/services/squint"
       />
       <ServiceCard 
-        image="/images/neuro-service.png"
+        image={neuroImg}
         alt="Optic pathway illustration"
         title="Neuro-ophthalmology" 
         description="Diagnosis and management of complex optic nerve and brain-related vision issues."
         link="/services/neuro"
       />
       <ServiceCard 
-        image="/images/hero-doctor.jpg"
+        image={comprehensiveCheckupImg}
         alt="Comprehensive eye examination"
         title="Comprehensive Eye Checkup" 
         description="A thorough evaluation of your vision and eye health, including screening for dry eye and digital eye strain."
         link="/services/comprehensive-eye-checkup"
       />
       <ServiceCard 
-        image="/images/squint-service.png"
+        image={pediatricImg}
         alt="Pediatric eye examination"
         title="Pediatric Eye Care" 
         description="Routine vision screening and management of children's eye conditions, from refractive errors to conditions present from birth."
