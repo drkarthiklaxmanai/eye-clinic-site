@@ -1,10 +1,25 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQAccordion from '../../components/FAQAccordion.astro';
 import { siteConfig } from '../../config/site.js';
+
+// Optimized local assets, mapped by service slug. A service's
+// heroImage frontmatter field can either be:
+//   - a key in this map (e.g. "cataract") -> rendered with the
+//     optimized astro:assets <Image> component
+//   - a plain path string (e.g. "/images/retina-service.png") ->
+//     rendered as a plain <img> with a placeholder fallback
+// This preserves astro:assets optimization for pages that have a
+// real imported asset, without forcing every service to have one.
+import cataractImg from '../../assets/cataract.png';
+
+const optimizedImages = {
+  cataract: cataractImg,
+};
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -17,6 +32,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const data = entry.data;
+
+const optimizedImage = data.heroImage ? optimizedImages[data.heroImage] : null;
+const isPlainImagePath = data.heroImage && !optimizedImage;
 
 // Resolve linked condition entries (if any) for the "Conditions We
 // Manage" section, so links and titles stay in sync with the
@@ -61,7 +79,16 @@ if (data.faqIds && data.faqIds.length > 0) {
           {data.ctaTitle || `Book a ${data.title} Evaluation`}
         </a>
       </div>
-      {data.heroImage && (
+      {optimizedImage && (
+        <div class="md:w-1/2 w-full">
+          <Image
+            src={optimizedImage}
+            alt={data.heroHeadline}
+            class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video"
+          />
+        </div>
+      )}
+      {isPlainImagePath && (
         <div class="md:w-1/2 w-full">
           <img
             src={data.heroImage}
