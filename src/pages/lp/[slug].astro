@@ -113,11 +113,11 @@ const data = entry.data;
     <ObjectionFAQ faqs={data.landingFaqs} />
   )}
 
-  <ClinicPhotoStrip />
-
-{data.learnMoreLink && (
+  {data.learnMoreLink && (
     <LearnMoreLink text={data.learnMoreLink.text} url={data.learnMoreLink.url} />
   )}
+
+  <ClinicPhotoStrip />
 
   <BookingSection />
 </LandingPageLayout>
