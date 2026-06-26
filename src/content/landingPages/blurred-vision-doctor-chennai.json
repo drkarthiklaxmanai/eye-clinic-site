@@ -1,21 +1,57 @@
 {
   "headline": "Blurred Vision? See an Eye Specialist in Chennai",
-  "subheadline": "Blurred vision can have many causes -- from a simple prescription change to early cataracts or retina conditions. AIIMS-trained Dr. Rajeswari will identify the real cause.",
+  "subheadline": "Blurred vision can have many causes -- Dr. Rajeswari will identify the real cause, not just guess.",
   "urgent": false,
-  "metaDescription": "Experiencing blurred vision? See AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai for a thorough evaluation. Call or book online.",
-  "symptomsTitle": "Does This Sound Like You?",
+  "metaDescription": "Experiencing blurred vision? See Dr. Rajeswari in KK Nagar, Chennai for a thorough evaluation. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "We Find the Real Cause", "description": "A comprehensive evaluation, not a quick glasses prescription, to identify what's actually going on." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
-    "Gradual blurring that's worsened over weeks or months",
+    "Gradual blurring over weeks or months",
     "Sudden blurred vision in one or both eyes",
     "Blurring that comes and goes",
-    "Difficulty seeing clearly at distance or up close",
-    "Blurred vision along with glare or halos at night"
+    "Blurred vision with glare or halos at night"
   ],
-  "processTitle": "How We Find the Cause",
   "processSteps": [
     { "title": "Vision & Refraction Test", "description": "Checking whether a simple glasses prescription is the cause." },
     { "title": "Eye Health Examination", "description": "Ruling out cataracts, retina conditions, or other underlying issues." },
-    { "title": "Clear Next Steps", "description": "Whether it's glasses, treatment, or reassurance -- you'll know exactly what's going on." }
+    { "title": "Clear Next Steps", "description": "Whether it's glasses, treatment, or reassurance -- you'll know what's going on." }
   ],
-  "faqTopicKeywords": ["cataract", "retina", "macular"]
+  "landingFaqs": [
+    { "question": "Should blurred vision always be checked?", "answer": "Not every episode of blurred vision indicates a serious problem, but persistent, worsening, or unexplained blurring deserves evaluation to determine the cause." },
+    { "question": "How urgently should I be seen?", "answer": "Gradual blurring can usually be evaluated with a routine appointment. Sudden blurred vision, especially in one eye, should be assessed promptly." },
+    { "question": "What if it turns out to be something simple?", "answer": "Many cases of blurred vision are caused by issues such as prescription changes or dry eyes. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed." }
+  ],
+  "causeExploration": {
+    "title": "Possible Causes of Blurred Vision",
+    "causesIntro": "Blurred vision is a symptom, not a diagnosis -- it's your eyes' way of signaling that something needs attention, but it doesn't tell you what on its own. In many cases, the cause is straightforward and treatable. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed.",
+    "commonCauses": [
+      "Refractive error (your glasses prescription has changed)",
+      "Dry eye disease",
+      "Cataracts",
+      "Diabetic eye disease",
+      "Glaucoma",
+      "A retinal condition",
+      "An optic nerve condition"
+    ],
+    "causesOutro": "The same symptom can have many different causes. Identifying the cause accurately is the first step toward effective treatment.",
+    "urgentTitle": "When Should You Seek Prompt Evaluation?",
+    "urgentIntro": "Most blurred vision can wait for a scheduled appointment. But a few situations deserve prompt evaluation, ideally the same day:",
+    "urgentScenarios": [
+      "Sudden blurred vision, especially in one eye",
+      "Vision loss or a sudden dark patch in one eye",
+      "Blurred vision along with eye pain",
+      "New flashes of light or floaters",
+      "New or unexplained blurred vision if you have diabetes",
+      "Blurring severe enough to affect daily activities like reading or driving"
+    ]
+  },
+  "afterEvaluation": [
+    { "finding": "Glasses Issue", "nextStep": "Updated prescription" },
+    { "finding": "Cataract", "nextStep": "Cataract evaluation and discussion" },
+    { "finding": "Retina-Related", "nextStep": "Further retinal assessment" },
+    { "finding": "Glaucoma", "nextStep": "Additional testing and monitoring" }
+  ],
+  "doctorsPerspective": "Many patients assume blurred vision means they simply need new glasses. Sometimes that's true. Sometimes the cause is a cataract, diabetes-related changes, or another eye condition altogether. I don't guess based on symptoms alone -- the first step is always a proper examination to identify the actual reason, and only then do we talk about what, if anything, needs to be done."
 }

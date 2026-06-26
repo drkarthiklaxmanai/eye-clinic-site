@@ -1,21 +1,42 @@
 {
   "headline": "Glaucoma Screening in KK Nagar, Chennai",
-  "subheadline": "Glaucoma often has no symptoms until vision is lost. AIIMS-trained Dr. Rajeswari offers thorough screening to protect your sight before it's too late.",
+  "subheadline": "Glaucoma often has no symptoms until vision is lost. Dr. Rajeswari offers thorough screening to protect your sight.",
   "urgent": false,
-  "metaDescription": "Glaucoma screening and management in KK Nagar, Chennai with AIIMS-trained Dr. Rajeswari. Early detection protects vision permanently. Call or book online.",
-  "symptomsTitle": "Are You at Risk?",
-  "symptoms": [
-    "Family history of glaucoma",
-    "Age over 40 with no recent eye pressure check",
-    "Diabetes or high blood pressure",
-    "Gradually narrowing side vision you may not have noticed",
-    "Never had your optic nerve examined"
+  "metaDescription": "Glaucoma screening and management in KK Nagar, Chennai with Dr. Rajeswari. Early detection protects vision permanently. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Focused on Preserving Your Vision", "description": "Our priority is catching changes early, when treatment can still protect what you have." },
+    { "title": "Close to Home for Long-Term Care", "description": "Glaucoma monitoring is often lifelong. Having your eye doctor nearby makes regular follow-up easier and more consistent." }
   ],
-  "processTitle": "What to Expect",
+  "showSymptomCheck": false,
   "processSteps": [
-    { "title": "Eye Pressure Check", "description": "A quick, painless measurement of intraocular pressure (IOP)." },
+    { "title": "Eye Pressure Check", "description": "A quick, painless measurement of intraocular pressure." },
     { "title": "Optic Nerve Evaluation", "description": "Assessment of the optic nerve for early signs of damage." },
-    { "title": "Ongoing Protection", "description": "If needed, treatment focused on preserving the vision you currently have." }
+    { "title": "Ongoing Protection", "description": "If needed, treatment focused on preserving the vision you have." }
   ],
-  "faqTopicKeywords": ["glaucoma"]
+  "landingFaqs": [
+    { "question": "If my vision is normal, why should I be screened?", "answer": "Glaucoma typically causes no symptoms until significant, often permanent vision loss has already occurred. A simple pressure check and optic nerve evaluation can catch it years before you'd ever notice anything yourself." },
+    { "question": "How often should glaucoma screening be done?", "answer": "Generally every 1-2 years after age 40, or annually if you have risk factors like diabetes, high blood pressure, or a family history of glaucoma. We'll recommend a schedule based on your specific risk." },
+    { "question": "Does a high eye pressure reading mean I have glaucoma?", "answer": "Not necessarily. Eye pressure is only one part of glaucoma assessment. Some people have elevated pressure without glaucoma, while others develop glaucoma despite having pressures within the normal range. That's why screening includes both pressure measurement and optic nerve evaluation." }
+  ],
+  "educationalInsight": {
+    "title": "Why Glaucoma Often Goes Unnoticed",
+    "body": "Many people assume that if their vision feels normal, their eyes must be healthy. Glaucoma often develops gradually and without obvious symptoms, which is why many people are unaware they have it until screening identifies early changes. A simple eye pressure check and optic nerve evaluation can catch it years before you'd ever notice symptoms yourself. The goal of screening is not to find disease -- it's to find it early enough that the vision you have can be protected.",
+    "pathway": {
+      "steps": ["Risk Factors Present", "Pressure Check & Optic Nerve Evaluation"],
+      "branches": [
+        { "finding": "Normal Findings", "outcome": "Routine Monitoring" },
+        { "finding": "Early Changes Found", "outcome": "Treatment to Preserve Vision" }
+      ]
+    },
+    "prioritizeIf": [
+      "You are over 40 and have never had a glaucoma screening",
+      "You have a family history of glaucoma",
+      "You have diabetes or high blood pressure",
+      "It has been more than a year since your last optic nerve check"
+    ]
+  },
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "Doctor, my vision seems normal. Why should I worry about glaucoma?",
+    "response": "This is probably the most common question I hear about glaucoma. The challenge is that glaucoma usually develops gradually, and many people notice no change in vision during the early stages. By the time symptoms become obvious, some vision may already have been permanently lost. A screening examination allows us to look for changes before they affect your daily life. Most people we screen do not have glaucoma, but when we do find early changes, we have the opportunity to protect vision before damage progresses."
+  }
 }

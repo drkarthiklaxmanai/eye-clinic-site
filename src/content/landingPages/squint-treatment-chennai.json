@@ -1,21 +1,31 @@
 {
   "headline": "Squint Treatment for Children & Adults in Chennai",
-  "subheadline": "AIIMS-trained Dr. Rajeswari evaluates and treats eye misalignment at every age -- the earlier it's addressed, the better the outcome.",
+  "subheadline": "Dr. Rajeswari evaluates and treats eye misalignment at every age -- the earlier it's addressed, the better the outcome.",
   "urgent": false,
-  "metaDescription": "Squint (strabismus) evaluation and treatment for children and adults in KK Nagar, Chennai with AIIMS-trained Dr. Rajeswari. Call or book online.",
-  "symptomsTitle": "Could This Be Your Child, or You?",
+  "metaDescription": "Squint (strabismus) evaluation and treatment for children and adults in KK Nagar, Chennai. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Care for Both Children and Adults", "description": "Whether it's a childhood squint or one that's persisted into adulthood, we evaluate and treat both." },
+    { "title": "Treatment for Children and Adults", "description": "Squint is not only a childhood condition. Adults can also benefit from evaluation and treatment." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
     "One or both eyes turning inward, outward, up, or down",
     "Child tilting or turning their head to see better",
-    "Double vision or vision that seems to compete",
-    "A childhood 'lazy eye' that was never fully treated",
-    "Eye strain or fatigue with near work"
+    "Double vision or competing vision",
+    "A childhood 'lazy eye' never fully treated"
   ],
-  "processTitle": "What to Expect",
   "processSteps": [
     { "title": "Detailed Evaluation", "description": "Assessing the type and degree of misalignment, and checking for amblyopia." },
-    { "title": "Matched Treatment", "description": "Glasses, patching, or vision therapy first where appropriate -- not every squint needs surgery." },
-    { "title": "Surgical Correction", "description": "When needed, precise muscle realignment surgery for function and appearance." }
+    { "title": "Matched Treatment", "description": "Glasses, patching, or vision therapy first where appropriate." },
+    { "title": "Surgical Correction", "description": "When needed, precise muscle realignment for function and appearance." }
   ],
-  "faqTopicKeywords": ["squint", "strabismus", "amblyopia"]
+  "landingFaqs": [
+    { "question": "Can adults still be treated for squint?", "answer": "Yes. Squint treatment is not limited to children. Adults may benefit from glasses, prisms, surgery, or other treatments depending on the cause." },
+    { "question": "Does every squint require surgery?", "answer": "No. Some patients are managed with glasses, observation, or other non-surgical approaches. Treatment depends on the type and severity of the squint." },
+    { "question": "Is treatment mainly cosmetic or functional?", "answer": "Both may be important. Treatment can improve eye alignment, binocular vision, comfort, confidence, and in some cases reduce double vision." }
+  ],
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "Doctor, I've had this since childhood. Is it too late to do anything about it now?",
+    "response": "It's rarely too late to evaluate, even if surgery isn't always the answer at every stage. Adults with longstanding squint are sometimes told nothing more can be done, but that isn't always true -- a proper evaluation can identify options for alignment, comfort, or double vision that weren't available or weren't offered before. The first step is simply finding out what's possible for your specific situation."
+  }
 }

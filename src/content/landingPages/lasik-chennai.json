@@ -1,20 +1,45 @@
 {
   "headline": "LASIK Eye Surgery in Chennai",
-  "subheadline": "AIIMS-trained ophthalmologist Dr. Rajeswari offers safe, evidence-based LASIK evaluation and treatment in KK Nagar, Chennai. No unnecessary procedures -- only what's clinically right for you.",
+  "subheadline": "AIIMS-trained ophthalmologist Dr. Rajeswari offers safe, evidence-based LASIK evaluation and treatment in KK Nagar, Chennai.",
   "urgent": false,
-  "metaDescription": "LASIK eye surgery consultation in KK Nagar, Chennai with AIIMS-trained Dr. Rajeswari. Evidence-based evaluation, no unnecessary procedures. Call or book online.",
-  "symptomsTitle": "Is LASIK Right for You?",
+  "metaDescription": "LASIK eye surgery consultation in KK Nagar, Chennai with Dr. Rajeswari. Honest evaluation, no unnecessary procedures. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Honest Suitability Assessment", "description": "We tell you clearly if LASIK is right for you -- and what to consider if it isn't." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
     "Dependent on glasses or contact lenses",
-    "Stable vision prescription for 1+ years",
+    "Stable prescription for 1+ years",
     "Tired of daily lens maintenance",
-    "Active lifestyle or sports requiring glasses-free vision"
+    "Active lifestyle wanting glasses-free vision"
   ],
-  "processTitle": "What to Expect",
   "processSteps": [
-    { "title": "Comprehensive Evaluation", "description": "Detailed corneal mapping and eye health assessment to confirm you're a safe candidate." },
-    { "title": "Honest Discussion", "description": "Dr. Rajeswari explains your specific results and whether LASIK is truly the right option -- no pressure, no upselling." },
-    { "title": "The Procedure", "description": "If suitable, the laser procedure itself takes only minutes per eye, with rapid visual recovery." }
+    { "title": "Comprehensive Evaluation", "description": "Detailed corneal mapping to confirm you're a safe candidate." },
+    { "title": "Honest Discussion", "description": "A clear conversation about your results and whether LASIK is truly right for you." },
+    { "title": "The Procedure", "description": "If suitable, the laser procedure takes only minutes per eye." }
   ],
-  "faqTopicKeywords": ["lasik", "refractive", "laser"]
+  "landingFaqs": [
+    { "question": "How do I know if I'm a suitable LASIK candidate?", "answer": "A detailed evaluation -- including corneal mapping and a check of your overall eye health -- determines this. We won't recommend LASIK without being confident it's right for your eyes." },
+    { "question": "What happens if LASIK isn't the best option for me?", "answer": "We'll tell you clearly, and discuss what alternatives may suit you better. The goal is the right outcome for your eyes, not a specific procedure." },
+    { "question": "Will I know all my options before deciding?", "answer": "Yes. Your evaluation results and the reasoning behind any recommendation are explained clearly, so you can make an informed decision without pressure." }
+  ],
+  "decisionSupport": {
+    "suitabilityTitle": "Is LASIK Right for Everyone?",
+    "suitabilityIntro": "Not everyone who wants LASIK is a suitable candidate. If LASIK is not the right option for your eyes, we'll tell you that clearly. Factors such as corneal thickness, prescription stability, dry eye disease, and overall eye health all influence whether LASIK is the right option. Our goal is not to recommend surgery to everyone who walks in -- it's to determine whether LASIK is safe, appropriate, and likely to deliver the outcome you expect.",
+    "evaluationSteps": [
+      "Vision Assessment",
+      "Corneal Mapping",
+      "Suitability Discussion",
+      "Recommendation"
+    ],
+    "notSuitableTitle": "Common Reasons Someone May Not Be Suitable",
+    "notSuitableReasons": [
+      "Unstable prescription",
+      "Thin corneas",
+      "Significant dry eye",
+      "Certain eye diseases",
+      "Unrealistic expectations"
+    ]
+  },
+  "doctorsPerspective": "Many patients come expecting LASIK specifically. Sometimes LASIK is the right answer, and sometimes another option is safer or more suitable for your particular eyes. My priority isn't to perform a specific procedure -- it's to give you an honest assessment and the right recommendation for your vision, even if that means LASIK isn't it."
 }

@@ -1,21 +1,56 @@
 {
   "headline": "Eye Pain? Get Evaluated by a Specialist in Chennai",
-  "subheadline": "Eye pain can stem from minor irritation or more serious underlying conditions. AIIMS-trained Dr. Rajeswari provides prompt, thorough evaluation in KK Nagar.",
+  "subheadline": "Eye pain can stem from minor irritation or more serious conditions. Dr. Rajeswari provides prompt, thorough evaluation.",
   "urgent": false,
-  "metaDescription": "Experiencing eye pain? See AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai for prompt evaluation. Call or book online.",
-  "symptomsTitle": "Does This Sound Like You?",
+  "metaDescription": "Experiencing eye pain? See Dr. Rajeswari in KK Nagar, Chennai for prompt evaluation. Call or book online.",
+  "whyPatientsChoose": [
+    { "title": "Prompt Evaluation, Common and Serious Causes", "description": "We take eye pain seriously, checking both routine causes and anything that needs urgent attention." }
+  ],
+  "showSymptomCheck": true,
   "symptoms": [
     "Persistent ache in or around one or both eyes",
     "Pain with eye movement",
-    "Pain along with redness or sensitivity to light",
-    "Pain accompanied by blurred vision",
+    "Pain with redness or light sensitivity",
     "Sudden, severe eye pain"
   ],
-  "processTitle": "How We Find the Cause",
   "processSteps": [
     { "title": "Detailed Examination", "description": "Assessing the eye surface, internal pressure, and overall eye health." },
-    { "title": "Identifying the Source", "description": "Determining whether the cause is on the surface, inside the eye, or related to the optic nerve." },
+    { "title": "Identifying the Source", "description": "Determining whether the cause is surface-level, internal, or nerve-related." },
     { "title": "Prompt Treatment", "description": "Addressing the cause directly -- not just masking the discomfort." }
   ],
-  "faqTopicKeywords": ["glaucoma", "neuro"]
+  "landingFaqs": [
+    { "question": "Is eye pain ever an emergency?", "answer": "Sometimes. Severe pain, pain with vision changes, significant redness, or pain after an injury should be evaluated promptly." },
+    { "question": "How quickly should I be evaluated?", "answer": "That depends on the severity and associated symptoms. Mild discomfort may wait for a routine appointment, while sudden or severe pain deserves earlier assessment." },
+    { "question": "What if the examination finds nothing serious?", "answer": "That's valuable information. Many causes of eye discomfort are straightforward to treat, and ruling out more serious conditions is often the most important part of the evaluation." }
+  ],
+  "causeExploration": {
+    "title": "Possible Causes of Eye Pain",
+    "causesIntro": "Eye pain can come from something minor that resolves quickly, or from a condition that genuinely needs treatment -- and it's not always possible to tell which from how it feels alone. In many cases, the cause is straightforward and treatable. The purpose of the examination is to identify the cause accurately and ensure nothing important is missed.",
+    "commonCauses": [
+      "Eye strain or digital eye strain",
+      "Dry eye disease",
+      "A corneal problem, such as a scratch or irritation",
+      "An eye infection",
+      "Inflammation inside the eye",
+      "Glaucoma",
+      "An optic nerve condition"
+    ],
+    "urgentTitle": "When Should You Seek Prompt Evaluation?",
+    "urgentIntro": "Most eye pain can wait for a scheduled appointment. But a few situations deserve prompt evaluation, ideally the same day:",
+    "urgentScenarios": [
+      "Sudden, severe eye pain",
+      "Eye pain with redness and light sensitivity",
+      "Eye pain along with blurred vision",
+      "Pain that worsens with eye movement",
+      "Eye pain after an injury or something getting into the eye",
+      "Eye pain that is worsening or associated with reduced vision"
+    ]
+  },
+  "afterEvaluation": [
+    { "finding": "Dry Eye or Strain", "nextStep": "Drops or simple lifestyle adjustments" },
+    { "finding": "Corneal Issue", "nextStep": "Targeted treatment and follow-up" },
+    { "finding": "Infection or Inflammation", "nextStep": "Prescription treatment" },
+    { "finding": "Glaucoma-Related", "nextStep": "Pressure check and ongoing monitoring" }
+  ],
+  "doctorsPerspective": "Eye pain makes people understandably anxious, but most of the time the cause is something straightforward -- dry eye, strain, or minor irritation. My job in the first visit is to rule out the less common but more serious causes quickly, so you're not left wondering, and to treat what's actually there rather than just the discomfort."
 }
