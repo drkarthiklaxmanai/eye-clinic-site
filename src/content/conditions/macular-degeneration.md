@@ -44,15 +44,10 @@ urgentScenarios:
   - "New or rapidly worsening distortion of straight lines"
   - "A new dark or blank spot appearing in your central vision"
 
-pageFaqs:
-  - question: "What's the difference between dry and wet macular degeneration?"
-    answer: "Dry AMD is more common and progresses gradually, with thinning of the macula over time. Wet AMD involves abnormal blood vessel growth and fluid leakage, and can progress much faster -- it's treated with anti-VEGF injections."
-  - question: "Can macular degeneration cause complete blindness?"
-    answer: "AMD affects central vision -- needed for reading, recognizing faces, and driving -- but it does not typically cause complete blindness, since peripheral vision is usually preserved."
-  - question: "Can diet or supplements slow macular degeneration?"
-    answer: "For certain stages of dry AMD, specific vitamin and antioxidant supplementation has been shown to slow progression. This should be guided by your retina specialist based on your exact diagnosis."
-  - question: "How often should I be screened for AMD?"
-    answer: "Annually after age 50, or sooner if you have a family history or are already noticing changes in your central vision."
+faqIds:
+  - "dry-vs-wet-amd"
+  - "amd-blindness"
+  - "retina-screening-frequency"
 
 relatedConditions:
   - "diabetic-retinopathy"
