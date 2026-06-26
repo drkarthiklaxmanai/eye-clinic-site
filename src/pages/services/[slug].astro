@@ -7,18 +7,30 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQAccordion from '../../components/FAQAccordion.astro';
 import { siteConfig } from '../../config/site.js';
 
-// Optimized local assets, mapped by service slug. A service's
-// heroImage frontmatter field can either be:
-//   - a key in this map (e.g. "cataract") -> rendered with the
-//     optimized astro:assets <Image> component
-//   - a plain path string (e.g. "/images/retina-service.png") ->
-//     rendered as a plain <img> with a placeholder fallback
-// This preserves astro:assets optimization for pages that have a
-// real imported asset, without forcing every service to have one.
+// Optimized local assets, mapped by service slug. Every service's
+// heroImage frontmatter field is a key into this map -- all hero
+// images now go through astro:assets for optimization. A missing
+// entry here, or a missing source file, fails the BUILD rather than
+// falling back to a placeholder; this is intentional so a missing
+// image is caught immediately rather than silently shipped.
 import cataractImg from '../../assets/cataract.png';
+import lasikImg from '../../assets/lasik.png';
+import retinaImg from '../../assets/retina-service.png';
+import glaucomaImg from '../../assets/glaucoma-service.png';
+import squintImg from '../../assets/squint-service.png';
+import neuroImg from '../../assets/neuro-service.png';
+import comprehensiveCheckupImg from '../../assets/comprehensive-eye-checkup-service.png';
+import pediatricImg from '../../assets/pediatric-eye-care-service.png';
 
 const optimizedImages = {
   cataract: cataractImg,
+  lasik: lasikImg,
+  retina: retinaImg,
+  glaucoma: glaucomaImg,
+  squint: squintImg,
+  neuro: neuroImg,
+  'comprehensive-eye-checkup': comprehensiveCheckupImg,
+  'pediatric-eye-care': pediatricImg,
 };
 
 export async function getStaticPaths() {
@@ -34,7 +46,6 @@ const { Content } = await entry.render();
 const data = entry.data;
 
 const optimizedImage = data.heroImage ? optimizedImages[data.heroImage] : null;
-const isPlainImagePath = data.heroImage && !optimizedImage;
 
 // Resolve linked condition entries (if any) for the "Conditions We
 // Manage" section, so links and titles stay in sync with the
@@ -85,16 +96,6 @@ if (data.faqIds && data.faqIds.length > 0) {
             src={optimizedImage}
             alt={data.heroHeadline}
             class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video"
-          />
-        </div>
-      )}
-      {isPlainImagePath && (
-        <div class="md:w-1/2 w-full">
-          <img
-            src={data.heroImage}
-            alt={data.heroHeadline}
-            class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video"
-            onerror={`this.src='https://placehold.co/800x450/1e3a8a/ffffff?text=${encodeURIComponent(data.title)}'`}
           />
         </div>
       )}
