@@ -37,6 +37,7 @@
   },
   "doctorsPerspectiveStructured": {
     "patientConcern": "Doctor, my vision seems normal. Why should I worry about glaucoma?",
-    "response": "This is probably the most common question I hear about glaucoma. The challenge is that glaucoma usually develops gradually, and many people notice no change in vision during the early stages. By the time symptoms become obvious, some vision may already have been permanently lost. A screening examination allows us to look for changes before they affect your daily life. Most people we screen do not have glaucoma, but when we do find early changes, we have the opportunity to protect vision before damage progresses."
+    "response": "This is probably the most common question I hear about glaucoma. The challenge is that glaucoma usually develops gradually, and many people notice no change in vision during the early stages. By the time symptoms become obvious, some vision may already have been permanently lost. A screening examination allows us to look for changes before they affect your daily life. Most people we screen do not have glaucoma, but when we do find early changes, we have the opportunity to protect vision before damage progresses.".
+    "learnMoreLink": { "text": "Learn more about glaucoma", "url": "/conditions/open-angle-glaucoma" }
   }
 }
