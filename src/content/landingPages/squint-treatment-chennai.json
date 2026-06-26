@@ -24,7 +24,8 @@
     { "question": "Does every squint require surgery?", "answer": "No. Some patients are managed with glasses, observation, or other non-surgical approaches. Treatment depends on the type and severity of the squint." },
     { "question": "Is treatment mainly cosmetic or functional?", "answer": "Both may be important. Treatment can improve eye alignment, binocular vision, comfort, confidence, and in some cases reduce double vision." }
   ],
-   "doctorsPerspectiveStructured": {
+  "doctorsPerspectiveStructured": {
     "patientConcern": "Doctor, I've had this since childhood. Is it too late to do anything about it now?",
     "response": "It's rarely too late to evaluate, even if surgery isn't always the answer at every stage. Adults with longstanding squint are sometimes told nothing more can be done, but that isn't always true -- a proper evaluation can identify options for alignment, comfort, or double vision that weren't available or weren't offered before. The first step is simply finding out what's possible for your specific situation."
+  }
 }
