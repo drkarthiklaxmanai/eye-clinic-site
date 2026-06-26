@@ -125,8 +125,105 @@ const landingPageCollection = defineCollection({
   }),
 });
 
+// Service pages (e.g. Retina Care). Deliberately minimal -- no
+// governance/taxonomy fields (author, reviewer, reviewDate) yet.
+// Mixed-audience pages (screening-driven AND symptom-driven readers)
+// use the twoPaths field to branch early rather than forcing one
+// generic narrative on both reader types.
+const serviceCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    metaDescription: z.string(),
+    heroEyebrow: z.string().optional(),
+    heroHeadline: z.string(),
+    heroSubheadline: z.string(),
+    heroImage: z.string().optional(),
+
+    // Early branch for mixed-audience service pages: lets a reader
+    // self-identify (screening vs. symptoms) before the page commits
+    // to one narrative. Optional -- single-psychology service pages
+    // (a future Cataract rebuild, say) can skip this.
+    twoPaths: z.object({
+      screeningTitle: z.string(),
+      screeningBody: z.string(),
+      symptomsTitle: z.string(),
+      symptomsBody: z.string(),
+    }).optional(),
+
+    diagnostics: z.array(z.string()).optional(),
+
+    // Conditions this service manages -- slugs referencing the
+    // conditions collection, used to render links automatically.
+    conditionsManaged: z.array(z.string()).optional(),
+
+    treatments: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+    })).optional(),
+
+    // Page-specific FAQs, written directly rather than pulled from the
+    // global faqs collection -- consistent with how landingPages does it.
+    pageFaqs: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
+
+    ctaTitle: z.string().optional(),
+  }),
+});
+
+// Condition pages (e.g. Diabetic Retinopathy). Same minimal-schema
+// philosophy as serviceCollection. twoPaths lets a condition page
+// branch for readers who arrive screening-driven vs. already
+// noticing symptoms, before merging into shared content.
+const conditionCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    metaDescription: z.string(),
+    heroEyebrow: z.string().optional(),
+    heroHeadline: z.string(),
+    heroSubheadline: z.string(),
+
+    parentService: z.string(), // slug into the services collection
+
+    twoPaths: z.object({
+      screeningTitle: z.string(),
+      screeningBody: z.string(),
+      symptomsTitle: z.string(),
+      symptomsBody: z.string(),
+    }).optional(),
+
+    riskFactors: z.array(z.string()).optional(),
+    symptoms: z.array(z.string()).optional(),
+
+    treatmentOverview: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+    })).optional(),
+
+    urgentCareTitle: z.string().optional(),
+    urgentCareBody: z.string().optional(),
+    urgentScenarios: z.array(z.string()).optional(),
+
+    pageFaqs: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
+
+    // Other condition slugs to cross-link (e.g. Diabetic Retinopathy
+    // <-> Macular Degeneration, both under Retina Care).
+    relatedConditions: z.array(z.string()).optional(),
+
+    ctaTitle: z.string().optional(),
+  }),
+});
+
 export const collections = {
   'faqs': faqCollection,
   'blog': blogCollection,
   'landingPages': landingPageCollection,
+  'services': serviceCollection,
+  'conditions': conditionCollection,
 };
