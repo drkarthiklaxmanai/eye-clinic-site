@@ -17,6 +17,10 @@ diagnostics:
   - "Refractive error check"
   - "Amblyopia screening"
 
+# For general pediatric vision screening, refractive errors, and
+# congenital conditions beyond squint/amblyopia specifically, see the
+# Pediatric Eye Care service.
+
 conditionsManaged:
   - "squint"
   - "amblyopia"
