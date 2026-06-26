@@ -39,6 +39,7 @@ faqIds:
 
 relatedConditions:
   - "astigmatism"
+  - "hyperopia"
 
 ctaTitle: "Book a Vision Correction Consultation"
 ---
