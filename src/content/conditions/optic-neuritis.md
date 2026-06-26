@@ -38,6 +38,9 @@ faqIds:
   - "optic-neuritis-vision-recovery"
   - "neuro-ophthalmology-what-is-it"
 
+relatedConditions:
+  - "papilledema"
+
 ctaTitle: "Book a Neuro-Ophthalmology Evaluation"
 ---
 
