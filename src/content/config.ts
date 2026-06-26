@@ -23,6 +23,13 @@ const blogCollection = defineCollection({
     author: z.string().optional(),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
+
+    // Optional links into the conditions/services collections.
+    // Per governance rules, every article should eventually declare
+    // both -- optional for now so the 13 existing posts validate
+    // without changes, but new articles should set these going forward.
+    condition: z.string().optional(),
+    service: z.string().optional(),
   }),
 });
 
