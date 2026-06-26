@@ -1,0 +1,142 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+import CTA from '../../components/CTA.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { siteConfig } from '../../config/site.js';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const data = entry.data;
+
+// Resolve linked condition entries (if any) for the "Conditions We
+// Manage" section, so links and titles stay in sync with the
+// conditions collection automatically.
+const conditionEntries = data.conditionsManaged
+  ? await Promise.all(
+      data.conditionsManaged.map((slug) => getEntry('conditions', slug))
+    )
+  : [];
+---
+
+<MainLayout title={data.title} description={data.metaDescription}>
+  <Breadcrumbs items={[
+    { name: "Services", url: "/#services" },
+    { name: data.title, url: `/services/${entry.slug}` }
+  ]} />
+
+  <section class="bg-blue-900 text-white py-20 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2">
+        {data.heroEyebrow && (
+          <span class="text-blue-300 font-bold tracking-wider uppercase text-sm mb-4 block">{data.heroEyebrow}</span>
+        )}
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">{data.heroHeadline}</h1>
+        <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+          {data.heroSubheadline}
+        </p>
+        <a href="#book" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-md shadow-lg hover:bg-blue-50 transition inline-block">
+          {data.ctaTitle || `Book a ${data.title} Evaluation`}
+        </a>
+      </div>
+      {data.heroImage && (
+        <div class="md:w-1/2 w-full">
+          <img
+            src={data.heroImage}
+            alt={data.heroHeadline}
+            class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover aspect-video"
+            onerror={`this.src='https://placehold.co/800x450/1e3a8a/ffffff?text=${encodeURIComponent(data.title)}'`}
+          />
+        </div>
+      )}
+    </div>
+  </section>
+
+  {data.twoPaths && (
+    <section class="py-16 px-6 max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 border border-blue-100 p-8 rounded-xl">
+          <h2 class="text-xl font-bold text-blue-900 mb-3">{data.twoPaths.screeningTitle}</h2>
+          <p class="text-slate-700 leading-relaxed">{data.twoPaths.screeningBody}</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 p-8 rounded-xl">
+          <h2 class="text-xl font-bold text-red-900 mb-3">{data.twoPaths.symptomsTitle}</h2>
+          <p class="text-red-800 leading-relaxed">{data.twoPaths.symptomsBody}</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="py-8 px-6 max-w-4xl mx-auto">
+    <div class="prose prose-lg prose-blue max-w-none text-slate-700">
+      <Content />
+    </div>
+  </section>
+
+  {data.diagnostics && data.diagnostics.length > 0 && (
+    <section class="py-8 px-6 max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-blue-900 mb-6">How We Evaluate</h2>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        {data.diagnostics.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {data.treatments && data.treatments.length > 0 && (
+    <section class="py-8 px-6 max-w-4xl mx-auto">
+      <div class="bg-blue-50 p-8 rounded-xl border border-blue-100">
+        <h2 class="text-2xl font-bold text-blue-900 mb-4">Treatment Options</h2>
+        <ul class="space-y-3">
+          {data.treatments.map((t) => (
+            <li>
+              <strong class="text-blue-900">{t.name}:</strong>{' '}
+              <span class="text-slate-700">{t.description}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {conditionEntries.length > 0 && (
+    <section class="py-12 px-6 max-w-4xl mx-auto border-t border-slate-200">
+      <h2 class="text-2xl font-bold text-blue-900 mb-6">Conditions We Manage</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {conditionEntries.map((c) => (
+          <a href={`/conditions/${c.slug}`} class="block p-5 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors">
+            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Condition</p>
+            <p class="font-semibold text-slate-900">{c.data.title}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {data.pageFaqs && data.pageFaqs.length > 0 && (
+    <section class="py-12 px-6 max-w-4xl mx-auto border-t border-slate-200">
+      <h2 class="text-2xl font-bold text-blue-900 mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {data.pageFaqs.map((faq) => (
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-1">{faq.question}</h3>
+            <p class="text-slate-700 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <CTA
+    title={data.ctaTitle || `Schedule Your ${data.title} Evaluation`}
+    address={`${siteConfig.contact.address.street}, ${siteConfig.contact.address.locality} - ${siteConfig.contact.address.postalCode}`}
+    phone={siteConfig.contact.phone}
+  />
+</MainLayout>
