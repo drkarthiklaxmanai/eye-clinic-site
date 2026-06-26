@@ -14,6 +14,7 @@ diagnostics:
 
 conditionsManaged:
   - "optic-neuritis"
+  - "papilledema"
 
 treatments:
   - name: "Optic Neuritis & Optic Nerve Disorders"
