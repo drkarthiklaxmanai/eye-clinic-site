@@ -1,16 +1,28 @@
 ---
-// Single, understated link to a content-cluster page (service or
-// condition), placed at the very end of a landing page for visitors
-// who want to learn more before booking. Deliberately minimal --
-// no heading, no card, no background block -- so it never competes
-// visually with MidPageCTA or BookingSection above/below it.
+// A single, deliberate card linking to a deeper content-cluster page
+// (service or condition), for ad visitors who want to learn more
+// before booking. Sits after the conversion-focused sections
+// (Hero through MidPageCTA/ObjectionFAQ) but before ClinicPhotoStrip
+// -- visually present, matching WhyPatientsChoose's card weight, but
+// never competing with the booking flow that follows.
 const { text, url } = Astro.props;
 ---
 
 {text && url && (
-  <div class="py-8 px-6 text-center">
-    <a href={url} class="text-sm text-slate-500 hover:text-blue-600 underline transition-colors">
-      {text}
+  <section class="py-10 px-6 max-w-4xl mx-auto">
+    <a
+      href={url}
+      class="block bg-blue-50 border border-blue-100 rounded-xl p-6 sm:p-8 hover:bg-blue-100 hover:border-blue-200 transition-colors group"
+    >
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <p class="text-xs text-blue-600 font-bold uppercase tracking-wider mb-2">Want to Learn More?</p>
+          <p class="text-lg sm:text-xl font-bold text-blue-900">{text}</p>
+        </div>
+        <span class="text-blue-600 text-2xl group-hover:translate-x-1 transition-transform flex-shrink-0" aria-hidden="true">
+          &rarr;
+        </span>
+      </div>
     </a>
-  </div>
+  </section>
 )}
