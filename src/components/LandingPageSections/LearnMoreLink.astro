@@ -1,0 +1,16 @@
+---
+// Single, understated link to a content-cluster page (service or
+// condition), placed at the very end of a landing page for visitors
+// who want to learn more before booking. Deliberately minimal --
+// no heading, no card, no background block -- so it never competes
+// visually with MidPageCTA or BookingSection above/below it.
+const { text, url } = Astro.props;
+---
+
+{text && url && (
+  <div class="py-8 px-6 text-center">
+    <a href={url} class="text-sm text-slate-500 hover:text-blue-600 underline transition-colors">
+      {text}
+    </a>
+  </div>
+)}
