@@ -5,6 +5,12 @@ const faqCollection = defineCollection({
   schema: z.object({
     question: z.string(),
     order: z.number().optional(),
+    // Optional tags for browsing/discovery when picking faqIds for a
+    // page (e.g. "retina", "cataract", "diabetic-eye"). Pages reference
+    // FAQs by explicit ID, not by auto-filtering on tags -- this keeps
+    // selection predictable and avoids the generic-answer problem we
+    // hit before with tag-based filtering on landing pages.
+    tags: z.array(z.string()).optional().default([]),
   }),
 });
 
@@ -53,6 +59,13 @@ const landingPageCollection = defineCollection({
       question: z.string(),
       answer: z.string(),
     })).optional(),
+
+    // Optional supplement to landingFaqs: explicit IDs into the central
+    // faqs collection, for pages that want to ALSO surface a few shared
+    // general-education FAQs below their inline objection-handling set.
+    // Additive only -- landingFaqs remains the primary, frozen
+    // objection-handling content and is never replaced by this.
+    baseFaqIds: z.array(z.string()).optional(),
 
     // Condition-specific "what could be causing this" content.
     // Only populated on symptom-intent pages where the cause is
@@ -162,12 +175,11 @@ const serviceCollection = defineCollection({
       description: z.string(),
     })).optional(),
 
-    // Page-specific FAQs, written directly rather than pulled from the
-    // global faqs collection -- consistent with how landingPages does it.
-    pageFaqs: z.array(z.object({
-      question: z.string(),
-      answer: z.string(),
-    })).optional(),
+    // FAQs for this page, referenced by explicit ID from the central
+    // faqs collection (src/content/faqs/). Replaces the earlier inline
+    // pageFaqs array -- consolidating into a shared, reusable repo
+    // rather than duplicating near-identical questions across pages.
+    faqIds: z.array(z.string()).optional(),
 
     ctaTitle: z.string().optional(),
   }),
@@ -207,10 +219,10 @@ const conditionCollection = defineCollection({
     urgentCareBody: z.string().optional(),
     urgentScenarios: z.array(z.string()).optional(),
 
-    pageFaqs: z.array(z.object({
-      question: z.string(),
-      answer: z.string(),
-    })).optional(),
+    // FAQs for this page, referenced by explicit ID from the central
+    // faqs collection (src/content/faqs/). Replaces the earlier inline
+    // pageFaqs array.
+    faqIds: z.array(z.string()).optional(),
 
     // Other condition slugs to cross-link (e.g. Diabetic Retinopathy
     // <-> Macular Degeneration, both under Retina Care).
