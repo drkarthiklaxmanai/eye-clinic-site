@@ -48,6 +48,9 @@ faqIds:
   - "glaucoma-reversible"
   - "glaucoma-silent-thief"
 
+ relatedConditions:
+  - "angle-closure-glaucoma"
+
 ctaTitle: "Book a Glaucoma Evaluation"
 ---
 
