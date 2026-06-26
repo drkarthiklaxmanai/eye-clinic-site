@@ -45,15 +45,10 @@ urgentScenarios:
   - "Rapid decline in vision in one or both eyes"
   - "Sudden flashes of light"
 
-pageFaqs:
-  - question: "Can diabetic retinopathy be reversed?"
-    answer: "Early-stage changes can often be stabilized, and diabetic macular edema can improve meaningfully with anti-VEGF treatment. However, damage from more advanced disease is frequently permanent, which is why annual screening matters even without symptoms."
-  - question: "Will controlling my blood sugar alone protect my eyes?"
-    answer: "Good blood sugar control significantly slows progression, but it doesn't eliminate risk. Annual dilated retina screening is still recommended for everyone with diabetes, regardless of control."
-  - question: "How is diabetic retinopathy diagnosed?"
-    answer: "Through a dilated retinal examination, often supported by Optical Coherence Tomography (OCT) and fundus photography to assess the retina and macula in detail."
-  - question: "Does diabetic retinopathy affect both eyes equally?"
-    answer: "Not always. One eye can be affected more than the other, which is part of why both eyes are examined independently at every screening."
+faqIds:
+  - "retina-screening-frequency"
+  - "diabetic-retinopathy-reversible"
+  - "blood-sugar-control-alone"
 
 relatedConditions:
   - "macular-degeneration"
