@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import CTA from '../../components/CTA.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
 import { siteConfig } from '../../config/site.js';
 
 export async function getStaticPaths() {
@@ -25,6 +26,19 @@ const conditionEntries = data.conditionsManaged
       data.conditionsManaged.map((slug) => getEntry('conditions', slug))
     )
   : [];
+
+// Resolve faqIds against the central faqs collection. Each FAQ's
+// answer lives in its markdown body (matching the existing FAQ.astro
+// pattern), so we render it to a string here.
+let faqEntries = [];
+if (data.faqIds && data.faqIds.length > 0) {
+  const resolved = await Promise.all(
+    data.faqIds.map((id) => getEntry('faqs', id))
+  );
+  faqEntries = resolved
+    .filter(Boolean)
+    .map((f) => ({ question: f.data.question, answer: f.body }));
+}
 ---
 
 <MainLayout title={data.title} description={data.metaDescription}>
@@ -120,19 +134,7 @@ const conditionEntries = data.conditionsManaged
     </section>
   )}
 
-  {data.pageFaqs && data.pageFaqs.length > 0 && (
-    <section class="py-12 px-6 max-w-4xl mx-auto border-t border-slate-200">
-      <h2 class="text-2xl font-bold text-blue-900 mb-6">Frequently Asked Questions</h2>
-      <div class="space-y-6">
-        {data.pageFaqs.map((faq) => (
-          <div>
-            <h3 class="font-semibold text-slate-900 mb-1">{faq.question}</h3>
-            <p class="text-slate-700 leading-relaxed">{faq.answer}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )}
+  <FAQAccordion entries={faqEntries} />
 
   <CTA
     title={data.ctaTitle || `Schedule Your ${data.title} Evaluation`}
