@@ -41,6 +41,7 @@ faqIds:
 
 relatedConditions:
   - "myopia"
+  - "hyperopia"
 
 ctaTitle: "Book a Vision Correction Consultation"
 ---
