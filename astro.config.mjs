@@ -7,11 +7,6 @@ export default defineConfig({
   prefetch: true,
   integrations: [
     tailwind(),
-    sitemap({
-      // Landing pages are ad-traffic-only and intentionally excluded
-      // from organic discovery -- they're not meant to rank or be
-      // found via search, only reached via paid campaigns.
-      filter: (page) => typeof page === 'string' && !page.includes('/lp/'),
-    })
+    sitemap()
   ]
 });
