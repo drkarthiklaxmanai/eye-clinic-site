@@ -11,7 +11,7 @@ export default defineConfig({
       // Landing pages are ad-traffic-only and intentionally excluded
       // from organic discovery -- they're not meant to rank or be
       // found via search, only reached via paid campaigns.
-      filter: (page) => !page.includes('/lp/'),
+      filter: (page) => typeof page === 'string' && !page.includes('/lp/'),
     })
   ]
 });
