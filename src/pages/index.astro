@@ -7,6 +7,7 @@ import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
 import { getCollection } from 'astro:content';
 import ClinicGallery from '../components/ClinicGallery.astro';
+import BookingSection from '../components/LandingPageSections/BookingSection.astro';
 
 // Optimized service images, imported once here and passed directly
 // into ServiceCard as ImageMetadata objects (not string paths).
@@ -198,9 +199,5 @@ const latestPosts = allPosts
     </div>
   </section>
 
-  <CTA 
-    title="Book Consultation"
-    address="39/2, R K Shanmugam Salai, K K Nagar, Chennai – 600078"
-    phone="+91 63813 02828"
-  />
+  <BookingSection defaultService="General Checkup" />
 </MainLayout>
