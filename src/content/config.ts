@@ -208,6 +208,15 @@ const serviceCollection = defineCollection({
     faqIds: z.array(z.string()).optional(),
 
     ctaTitle: z.string().optional(),
+
+    // Value matching one of BookingCalendar.astro's <option value="...">
+    // strings exactly, used to pre-select this service in the embedded
+    // booking form at the bottom of the page.
+    defaultService: z.string().optional(),
+  }),
+});
+
+// Condition pages
   }),
 });
 
