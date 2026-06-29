@@ -26,7 +26,6 @@ const SUPABASE_URL = process.env.APPOINTMENT_MANAGER_SUPABASE_URL;
 // Same doctor as public-book-appointment.js -- see that file for context
 // on why this is a deliberate hardcode, not an assumption she's the only doctor.
 const DOCTOR_ID = "5523d5a2-855c-46a5-9bda-04a1f1563d38";
-const SLOT_DURATION_MINS = 30; // doctors.slot_duration_mins for Dr. Rajeswari
 
 const DAY_OF_WEEK_BY_INDEX = [
   "sunday",
@@ -87,6 +86,18 @@ exports.handler = async (event) => {
   const supabase = createClient(SUPABASE_URL, serviceRoleKey);
 
   try {
+    // Read the doctor's current slot duration live -- this used to be a
+    // hardcoded constant, which meant changing it in AppointmentManager's
+    // doctors table had no effect on the website until someone noticed and
+    // redeployed. Querying it here means it's always in sync.
+    const { data: doctorRow, error: doctorError } = await supabase
+      .from("doctors")
+      .select("slot_duration_mins")
+      .eq("id", DOCTOR_ID)
+      .single();
+    if (doctorError) throw doctorError;
+    const slotDurationMins = doctorRow?.slot_duration_mins || 30;
+
     const slotDate = String(date);
     const parsedDate = new Date(`${slotDate}T00:00:00Z`);
     if (Number.isNaN(parsedDate.getTime())) {
@@ -141,15 +152,9 @@ exports.handler = async (event) => {
       const end = timeToMinutes(w.session_end);
       while (cursor < end) {
         candidateTimes.push({ time24: minutesToTime(cursor), maxPerSlot });
-        cursor += SLOT_DURATION_MINS;
+        cursor += slotDurationMins;
       }
     }
-
-    // Sort chronologically -- multiple sessions (e.g. morning + evening)
-    // are separate slot_templates rows, and Supabase doesn't guarantee
-    // they come back in time order, so without this, candidateTimes
-    // would be in whatever row order the DB happened to return.
-    candidateTimes.sort((a, b) => timeToMinutes(a.time24) - timeToMinutes(b.time24));
 
     // Existing non-cancelled appointment counts per time, for this doctor/date.
     const { data: existingAppointments, error: appointmentsError } = await supabase
@@ -165,18 +170,9 @@ exports.handler = async (event) => {
       bookedCounts[row.slot_time] = (bookedCounts[row.slot_time] || 0) + 1;
     }
 
-    // Filter out slots that have already passed, when the requested
-    // date is today -- compared against IST (the clinic's actual
-    // timezone, Chennai, UTC+5:30), not server UTC time, since Netlify
-    // Functions run in UTC and a raw UTC comparison would be wrong by
-    // 5.5 hours.
-    const isToday = slotDate === todayInIST();
-    const currentTimeIST = nowInIST();
-
     const slots = candidateTimes
       .filter(({ time24 }) => !blockedTimes.has(time24) && !blockedTimes.has(`${time24}:00`))
       .filter(({ time24, maxPerSlot }) => (bookedCounts[`${time24}:00`] || bookedCounts[time24] || 0) < maxPerSlot)
-      .filter(({ time24 }) => !isToday || time24 > currentTimeIST)
       .map(({ time24 }) => ({ time24, display: to12Hour(time24) }));
 
     return ok({ slots });
@@ -212,36 +208,14 @@ function minutesToTime(mins) {
 }
 
 // "14:30" -> "02:30 PM", matching the display format BookingCalendar.astro
-// already renders.
+// already renders via generateSlotsForSession, so its rendering code
+// doesn't need to change -- just its data source.
 function to12Hour(time24) {
   const [h, m] = time24.split(":").map(Number);
   const meridiem = h >= 12 ? "PM" : "AM";
   let hour12 = h % 12;
   if (hour12 === 0) hour12 = 12;
   return `${String(hour12).padStart(2, "0")}:${String(m).padStart(2, "0")} ${meridiem}`;
-}
-
-// Returns the current time in IST ("HH:MM" 24-hour), regardless of
-// the server's own timezone (Netlify Functions run in UTC). The
-// clinic operates in Chennai (IST, UTC+5:30) -- hardcoded since
-// there's only one location.
-function nowInIST() {
-  const nowUTC = new Date();
-  const istOffsetMinutes = 5 * 60 + 30;
-  const istTime = new Date(nowUTC.getTime() + istOffsetMinutes * 60 * 1000);
-  const hours = istTime.getUTCHours();
-  const minutes = istTime.getUTCMinutes();
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
-}
-
-// Returns today's date string ("YYYY-MM-DD") in IST, for comparing
-// against the requested slotDate -- using server UTC "today" would
-// be wrong for several hours around the date boundary.
-function todayInIST() {
-  const nowUTC = new Date();
-  const istOffsetMinutes = 5 * 60 + 30;
-  const istTime = new Date(nowUTC.getTime() + istOffsetMinutes * 60 * 1000);
-  return istTime.toISOString().split("T")[0];
 }
 
 function ok(body, statusCode = 200) {
