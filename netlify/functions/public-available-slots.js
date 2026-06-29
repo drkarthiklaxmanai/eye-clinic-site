@@ -133,7 +133,8 @@ exports.handler = async (event) => {
         .select("*")
         .eq("doctor_id", DOCTOR_ID)
         .eq("day_of_week", dayOfWeek)
-        .eq("is_active", true);
+        .eq("is_active", true)
+        .order("session_start", { ascending: true });
       if (templatesError) throw templatesError;
 
       windows = templates || [];
@@ -173,6 +174,7 @@ exports.handler = async (event) => {
     const slots = candidateTimes
       .filter(({ time24 }) => !blockedTimes.has(time24) && !blockedTimes.has(`${time24}:00`))
       .filter(({ time24, maxPerSlot }) => (bookedCounts[`${time24}:00`] || bookedCounts[time24] || 0) < maxPerSlot)
+      .sort((a, b) => timeToMinutes(a.time24) - timeToMinutes(b.time24))
       .map(({ time24 }) => ({ time24, display: to12Hour(time24) }));
 
     return ok({ slots });
