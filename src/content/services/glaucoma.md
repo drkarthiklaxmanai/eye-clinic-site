@@ -5,6 +5,7 @@ heroEyebrow: "Sight-Saving Screening"
 heroHeadline: "Glaucoma Screening & Management"
 heroSubheadline: "Glaucoma often has no symptoms until vision is already lost. Early detection is the only way to protect your sight permanently."
 heroImage: "/images/glaucoma-service.png"
+defaultService: "Glaucoma Screening"
 
 twoPaths:
   screeningTitle: "Never had your eye pressure checked?"
