@@ -5,6 +5,7 @@ heroEyebrow: "FAICO-Certified Specialist"
 heroHeadline: "Neuro-Ophthalmology Care"
 heroSubheadline: "Specialized diagnosis and management of complex vision problems rooted in the optic nerve and brain."
 heroImage: "/images/neuro-service.png"
+defaultService: "Neuro-Ophthalmology"
 
 diagnostics:
   - "Detailed visual field testing"
