@@ -145,6 +145,12 @@ exports.handler = async (event) => {
       }
     }
 
+    // Sort chronologically -- multiple sessions (e.g. morning + evening)
+    // are separate slot_templates rows, and Supabase doesn't guarantee
+    // they come back in time order, so without this, candidateTimes
+    // would be in whatever row order the DB happened to return.
+    candidateTimes.sort((a, b) => timeToMinutes(a.time24) - timeToMinutes(b.time24));
+
     // Existing non-cancelled appointment counts per time, for this doctor/date.
     const { data: existingAppointments, error: appointmentsError } = await supabase
       .from("appointments")
