@@ -4,6 +4,7 @@ metaDescription: "A thorough, routine eye examination covering vision, eye healt
 heroEyebrow: "General Eye Care"
 heroHeadline: "Comprehensive Eye Checkup"
 heroSubheadline: "A thorough evaluation of your vision and eye health -- whether it's time for a routine checkup or you've been noticing everyday discomfort you've learned to live with."
+defaultService: "General Checkup"
 
 twoPaths:
   screeningTitle: "Just due for a routine checkup?"
