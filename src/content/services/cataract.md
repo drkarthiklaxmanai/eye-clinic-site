@@ -5,6 +5,7 @@ heroEyebrow: "Surgical Excellence"
 heroHeadline: "Advanced Cataract Surgery & Premium IOLs"
 heroSubheadline: "Restore crystal-clear vision with stitchless, painless phacoemulsification performed by an AIIMS-trained specialist."
 heroImage: "cataract"
+defaultService: "Cataract Evaluation"
 
 twoPaths:
   screeningTitle: "Noticing early signs of cataract?"
