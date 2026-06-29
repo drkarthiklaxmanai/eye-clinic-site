@@ -5,6 +5,7 @@ heroEyebrow: "Strabismus Specialist"
 heroHeadline: "Squint Evaluation & Correction"
 heroSubheadline: "Specialized care for eye misalignment in children and adults -- the earlier it's addressed, the better the outcome."
 heroImage: "/images/squint-service.png"
+defaultService: "Squint Treatment"
 
 twoPaths:
   screeningTitle: "Noticing your child's eyes turning?"
