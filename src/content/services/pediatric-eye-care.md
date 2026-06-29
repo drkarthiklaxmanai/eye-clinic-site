@@ -4,6 +4,7 @@ metaDescription: "Comprehensive children's eye care -- routine vision screening,
 heroEyebrow: "Children's Vision Specialist"
 heroHeadline: "Pediatric Eye Care"
 heroSubheadline: "Routine vision screening and management of children's eye conditions, because early detection shapes how well a child's vision develops."
+defaultService: "Pediatric Eye Care"
 
 twoPaths:
   screeningTitle: "Due for a routine children's vision check?"
