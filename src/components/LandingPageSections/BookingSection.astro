@@ -1,14 +1,6 @@
 ---
-// src/components/LandingPageSections/BookingSection.astro
-//
-// Uses the same real-time Supabase-backed BookingCalendar as /book,
-// so there's exactly ONE booking pipeline across the whole site.
-// BookingCalendar's own card is semi-transparent (bg-white/40,
-// designed for a light page background), so against this section's
-// dark navy wrapper we add a solid white panel behind it here to
-// restore proper contrast, rather than touching BookingCalendar
-// itself (which still needs to look correct standalone on /book).
 import BookingCalendar from '../BookingCalendar.astro';
+const { defaultService } = Astro.props;
 ---
 
 <section id="book" class="py-16 px-6 bg-blue-900">
@@ -17,6 +9,6 @@ import BookingCalendar from '../BookingCalendar.astro';
     <p class="text-blue-200">Select an available time slot below to secure your consultation.</p>
   </div>
   <div class="bg-white rounded-3xl p-1 shadow-2xl max-w-5xl mx-auto">
-    <BookingCalendar />
+    <BookingCalendar defaultService={defaultService} />
   </div>
 </section>
