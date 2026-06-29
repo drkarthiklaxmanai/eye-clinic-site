@@ -5,6 +5,7 @@ heroEyebrow: "Medical Retina Specialist"
 heroHeadline: "Retina Care for Diabetic & Age-Related Conditions"
 heroSubheadline: "Protecting your vision from diabetic retinopathy and macular degeneration through early detection and expert management."
 heroImage: "/images/retina-service.png"
+defaultService: "Retina Care"
 
 twoPaths:
   screeningTitle: "Told you need a retina screening?"
