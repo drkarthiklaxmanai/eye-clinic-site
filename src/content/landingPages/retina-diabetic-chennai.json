@@ -37,5 +37,6 @@
     ]
   },
   "doctorsPerspective": "One of the challenges with retinal disease is that patients often expect symptoms to warn them when something is wrong. Unfortunately, that isn't always the case. Many retinal conditions develop quietly and may not affect vision until later stages. Regular retinal examinations allow us to detect changes early, monitor them over time, and decide whether treatment is needed. Often, the most important thing we provide is clarity about whether your retina is healthy today and what should happen next.",
-  "learnMoreLink": { "text": "Learn more about diabetic retinopathy", "url": "/conditions/diabetic-retinopathy" }
+  "learnMoreLink": { "text": "Learn more about diabetic retinopathy", "url": "/conditions/diabetic-retinopathy" },
+  "defaultService": "Retina Care"
 }
