@@ -85,6 +85,14 @@ const landingPageCollection = defineCollection({
       url: z.string(),
     }).optional(),
 
+        // Pre-selects a service in the booking form's dropdown, matching
+    // this page's topic, so a visitor doesn't have to re-select
+    // something the landing page already told them about. Must match
+    // one of the literal <option value="..."> strings in
+    // BookingCalendar.astro's service dropdown exactly, or it's
+    // silently ignored (falls back to the unselected placeholder).
+    defaultService: z.string().optional(),
+    
     // Condition-specific "what could be causing this" content.
     // Only populated on symptom-intent pages where the cause is
     // genuinely ambiguous (e.g. blurred vision, eye pain) -- not
