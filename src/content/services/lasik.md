@@ -5,6 +5,7 @@ heroEyebrow: "Refractive Surgery"
 heroHeadline: "LASIK & Refractive Vision Correction"
 heroSubheadline: "Reduce or eliminate your dependence on glasses and contact lenses with a safe, precisely evaluated LASIK procedure."
 heroImage: "/images/lasik.png"
+defaultService: "LASIK Screening"
 
 twoPaths:
   screeningTitle: "Wondering if you're a candidate?"
