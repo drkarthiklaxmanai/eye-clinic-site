@@ -34,6 +34,7 @@ const { defaultService } = Astro.props;
       <option value="Glaucoma Screening">Glaucoma Screening</option>
       <option value="Squint Treatment">Squint Treatment</option>
       <option value="Neuro-Ophthalmology">Neuro-Ophthalmology</option>
+      <option value="Pediatric Eye Care">Pediatric Eye Care</option>
       <option value="Blurred Vision">Blurred Vision</option>
       <option value="Eye Pain">Eye Pain</option>
       <option value="Sudden Vision Loss">Sudden Vision Loss</option>
@@ -62,37 +63,6 @@ const { defaultService } = Astro.props;
 </div>
 
 <script>
-  import { supabase } from '../lib/supabase.js';
-
-  function generateSlotsForSession(startTime, endTime, durationMinutes) {
-    const slots = [];
-    const [startH, startM] = startTime.split(':').map(Number);
-    const [endH, endM] = endTime.split(':').map(Number);
-
-    let current = startH * 60 + startM;
-    const end = endH * 60 + endM;
-
-    while (current + durationMinutes <= end) {
-      const h24 = Math.floor(current / 60);
-      const m = current % 60;
-      const period = h24 >= 12 ? 'PM' : 'AM';
-      const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
-      slots.push(`${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${period}`);
-      current += durationMinutes;
-    }
-    return slots;
-  }
-
-  function parseTimeToMinutes(displayTime) {
-    const [time, period] = displayTime.split(' ');
-    const [hStr, mStr] = time.split(':');
-    let h = parseInt(hStr, 10);
-    const m = parseInt(mStr, 10);
-    if (period === 'PM' && h !== 12) h += 12;
-    if (period === 'AM' && h === 12) h = 0;
-    return h * 60 + m;
-  }
-
   document.addEventListener('astro:page-load', () => {
     let selectedTime = "";
 
@@ -110,10 +80,10 @@ const { defaultService } = Astro.props;
       dateInput.value = todayStr;
     }
 
-    // Pre-select the service based on which landing page this
-    // booking form is embedded in, read from the data-default-service
-    // attribute set in the frontmatter above. Falls back to the
-    // placeholder if the value doesn't match any option.
+    // Pre-select the service based on which landing page (or service
+    // page) this booking form is embedded in, read from the
+    // data-default-service attribute set in the frontmatter above.
+    // Falls back to the placeholder if the value doesn't match any option.
     const defaultService = root?.dataset.defaultService;
     if (serviceSelect && defaultService) {
       const matchingOption = Array.from(serviceSelect.options).find(
@@ -129,14 +99,14 @@ const { defaultService } = Astro.props;
       errorMessage?.classList.remove('hidden');
     }
 
-    function renderSlots(times) {
+    function renderSlots(displayTimes) {
       selectedTime = "";
-      if (times.length === 0) {
+      if (displayTimes.length === 0) {
         slotsContainer.innerHTML = '<p class="col-span-2 text-slate-500 text-sm">No slots available on this date. Please try another day, or call us directly.</p>';
         return;
       }
       slotsContainer.innerHTML = '';
-      times.forEach((time, index) => {
+      displayTimes.forEach((time, index) => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium';
@@ -149,6 +119,8 @@ const { defaultService } = Astro.props;
         });
         slotsContainer.appendChild(btn);
 
+        // Auto-select the first available slot, while still letting
+        // the user click a different one afterward.
         if (index === 0) {
           btn.classList.add('bg-blue-600', 'text-white');
           selectedTime = time;
@@ -156,66 +128,30 @@ const { defaultService } = Astro.props;
       });
     }
 
+    // Fetches available slots from the public-available-slots Netlify
+    // Function, which computes availability against AppointmentManager's
+    // real slot_templates/schedule_overrides/appointments tables --
+    // replacing the old direct queries against eye-clinic-site's own,
+    // now-stale schedule_sessions/blocked_dates/blocked_slots tables.
     async function loadAvailableSlots(dateStr) {
       slotsContainer.innerHTML = '<p class="col-span-2 text-slate-400 text-sm">Checking availability...</p>';
       errorMessage?.classList.add('hidden');
 
       try {
-        const dayOfWeek = new Date(dateStr + 'T00:00:00').getDay();
+        const response = await fetch(`/.netlify/functions/public-available-slots?date=${encodeURIComponent(dateStr)}`);
+        const data = await response.json();
 
-        const { data: blockedDateRows, error: bdError } = await supabase
-          .from('blocked_dates')
-          .select('reason')
-          .eq('blocked_date', dateStr);
-        if (bdError) throw bdError;
+        if (!response.ok || data.error) {
+          throw new Error(data.error || 'Could not load availability.');
+        }
 
-        if (blockedDateRows && blockedDateRows.length > 0) {
-          slotsContainer.innerHTML = `<p class="col-span-2 text-slate-500 text-sm">Clinic closed on this date${blockedDateRows[0].reason ? `: ${blockedDateRows[0].reason}` : ''}. Please choose another day.</p>`;
+        if (data.reason) {
+          slotsContainer.innerHTML = `<p class="col-span-2 text-slate-500 text-sm">${data.reason}</p>`;
           return;
         }
 
-        const { data: sessionRows, error: schError } = await supabase
-          .from('schedule_sessions')
-          .select('start_time, end_time, slot_duration_minutes')
-          .eq('day_of_week', dayOfWeek)
-          .eq('is_active', true);
-        if (schError) throw schError;
-
-        let possibleTimes = [];
-        (sessionRows || []).forEach((session) => {
-          possibleTimes.push(...generateSlotsForSession(session.start_time, session.end_time, session.slot_duration_minutes));
-        });
-
-        if (possibleTimes.length === 0) {
-          slotsContainer.innerHTML = '<p class="col-span-2 text-slate-500 text-sm">Clinic closed on this day of the week. Please choose another day.</p>';
-          return;
-        }
-
-        const { data: blockedSlotRows, error: bsError } = await supabase
-          .from('blocked_slots')
-          .select('time_slot')
-          .eq('blocked_date', dateStr);
-        if (bsError) throw bsError;
-
-        const blockedTimes = new Set((blockedSlotRows || []).map((r) => r.time_slot));
-        possibleTimes = possibleTimes.filter((t) => !blockedTimes.has(t));
-
-        const { data: takenRows, error: takenError } = await supabase
-          .from('slot_availability')
-          .select('appointment_time')
-          .eq('appointment_date', dateStr);
-        if (takenError) throw takenError;
-
-        const takenTimes = new Set((takenRows || []).map((r) => r.appointment_time));
-        possibleTimes = possibleTimes.filter((t) => !takenTimes.has(t));
-
-        if (dateStr === todayStr) {
-          const now = new Date();
-          const currentMinutes = now.getHours() * 60 + now.getMinutes();
-          possibleTimes = possibleTimes.filter((t) => parseTimeToMinutes(t) > currentMinutes);
-        }
-
-        renderSlots(possibleTimes);
+        const displayTimes = (data.slots || []).map((s) => s.display);
+        renderSlots(displayTimes);
       } catch (err) {
         console.error("Error loading availability:", err);
         slotsContainer.innerHTML = '<p class="col-span-2 text-red-500 text-sm">Could not load availability. Please try again.</p>';
@@ -227,6 +163,8 @@ const { defaultService } = Astro.props;
       if (selectedDate) loadAvailableSlots(selectedDate);
     });
 
+    // Load today's slots immediately on page load, since the date is
+    // pre-populated rather than waiting for the user to pick one.
     if (dateInput?.value) {
       loadAvailableSlots(dateInput.value);
     }
@@ -247,25 +185,31 @@ const { defaultService } = Astro.props;
           return;
         }
 
+        // patients.name in AppointmentManager is a single text column,
+        // so prefix/first/last are concatenated here -- the split-name
+        // concept ends at this form layer.
+        const name = `${prefix} ${fName} ${lName}`.trim();
+
         try {
           confirmBtn.innerText = "Securing Slot...";
           confirmBtn.disabled = true;
 
-          const { error } = await supabase.from('appointments').insert({
-            prefix,
-            first_name: fName,
-            last_name: lName,
-            phone,
-            service_type: service,
-            appointment_date: date,
-            appointment_time: selectedTime,
+          const response = await fetch('/.netlify/functions/public-book-appointment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              phone,
+              service,
+              date,
+              time: selectedTime,
+            }),
           });
 
-          if (error) {
-            if (error.code === '23505') {
-              throw new Error("Sorry, that slot was just booked by someone else. Please pick another time.");
-            }
-            throw error;
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(result.error || "Could not complete your booking. Please try again or call us directly.");
           }
 
           successMessage?.classList.remove('hidden');
