@@ -216,10 +216,6 @@ const serviceCollection = defineCollection({
   }),
 });
 
-// Condition pages
-  }),
-});
-
 // Condition pages (e.g. Diabetic Retinopathy). Same minimal-schema
 // philosophy as serviceCollection. twoPaths lets a condition page
 // branch for readers who arrive screening-driven vs. already
