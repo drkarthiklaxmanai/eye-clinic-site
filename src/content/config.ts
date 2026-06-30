@@ -99,6 +99,10 @@ const landingPageCollection = defineCollection({
     // no single condition to anchor causeExploration/decisionSupport/
     // educationalInsight around.
     showServicesGrid: z.boolean().optional().default(false),
+
+    // Renders LocalAreaSection (named landmarks + neighbourhood list)
+    // right after ConvenienceSection, for hyper-local pages only.
+    showLocalArea: z.boolean().optional().default(false),
     
     // Condition-specific "what could be causing this" content.
     // Only populated on symptom-intent pages where the cause is
