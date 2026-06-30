@@ -1,10 +1,9 @@
 ---
 // src/components/LandingPageSections/GoogleRatingBadge.astro
 // Static badge linking to the real Google Business Profile (reviews
-// tab). Rating/count are hardcoded -- update manually as real reviews
+// tab). Rating is hardcoded -- update manually as real reviews
 // accumulate. Not a live API widget (see handoff notes for tradeoffs).
 const GOOGLE_RATING = "5.0";
-const GOOGLE_REVIEW_COUNT = 9;
 const GOOGLE_PROFILE_URL = "https://maps.app.goo.gl/Zq7rLHWN75uMtm5J8";
 ---
 
@@ -17,5 +16,5 @@ const GOOGLE_PROFILE_URL = "https://maps.app.goo.gl/Zq7rLHWN75uMtm5J8";
   <span class="flex text-amber-500" aria-hidden="true">
     {"★★★★★"}
   </span>
-  <span>{GOOGLE_RATING} on Google ({GOOGLE_REVIEW_COUNT} reviews)</span>
+  <span>{GOOGLE_RATING}-Star Rated on Google</span>
 </a>
