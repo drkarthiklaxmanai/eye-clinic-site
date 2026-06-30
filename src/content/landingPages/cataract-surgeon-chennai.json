@@ -1,0 +1,41 @@
+{
+  "headline": "Cataract Surgeon in Chennai",
+  "subheadline": "Choosing the right surgeon matters as much as choosing the right time. Dr. Rajeswari (AIIMS, DNB, FAICO) performs every cataract evaluation and surgery personally.",
+  "urgent": false,
+  "metaDescription": "Looking for an experienced cataract surgeon in Chennai? Dr. Rajeswari (AIIMS-trained) offers personal, stitchless cataract surgery in KK Nagar.",
+  "whyPatientsChoose": [
+    { "title": "Surgeon-Led, Start to Finish", "description": "Your evaluation, surgery, and every follow-up are handled personally by Dr. Rajeswari -- not delegated to a rotating surgical team." }
+  ],
+  "showSymptomCheck": false,
+  "processSteps": [
+    { "title": "Surgical Evaluation", "description": "A detailed assessment of your cataract, eye health, and suitability for surgery -- performed by Dr. Rajeswari directly." },
+    { "title": "A Direct Conversation", "description": "Your surgeon explains the procedure, lens options, and realistic outcomes -- not a counselor or coordinator standing in." },
+    { "title": "Stitchless Surgery", "description": "Modern phacoemulsification technique, typically with same-day discharge." }
+  ],
+  "landingFaqs": [
+    { "question": "Will Dr. Rajeswari actually perform my surgery, or will it be handled by a surgical team?", "answer": "Dr. Rajeswari performs the evaluation and the surgery personally -- there's no handoff to a different surgeon on the day of your procedure." },
+    { "question": "What makes one cataract surgeon a better choice than another?", "answer": "Experience with your specific case, a clear explanation of lens options suited to your lifestyle, and continuity of care through every follow-up. Dr. Rajeswari is AIIMS-trained with a Medical Retina Fellowship, bringing both surgical and broader ophthalmic expertise to each case." },
+    { "question": "Can I speak with the surgeon directly before deciding, rather than just a coordinator?", "answer": "Yes -- your consultation is with Dr. Rajeswari directly, so any questions about the procedure, risks, or lens choice are answered by the person actually performing your surgery." }
+  ],
+  "decisionSupport": {
+    "suitabilityTitle": "What to Look For in a Cataract Surgeon",
+    "suitabilityIntro": "Surgical outcomes depend heavily on experience and judgment -- not just the technology used. Beyond technical skill, continuity matters: the surgeon who evaluates you should be the same one operating, and the same one seeing you afterward.",
+    "evaluationSteps": [
+      "Detailed surgical assessment by the operating surgeon",
+      "Direct discussion of lens options and expected outcomes",
+      "Clear explanation of risks specific to your case",
+      "A recommendation based on your daily life, not a standard protocol"
+    ],
+    "lensOptions": [
+      { "name": "Monofocal", "benefit": "Clear vision at one distance" },
+      { "name": "Toric", "benefit": "Corrects astigmatism" },
+      { "name": "Multifocal", "benefit": "Reduced dependence on glasses" }
+    ]
+  },
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "Patients researching cataract surgery often tell me they're less worried about the procedure itself and more concerned about who is actually doing it -- will it really be the surgeon they consulted with?",
+    "response": "It will. I evaluate every patient myself, perform the surgery myself, and see you for follow-up myself. That continuity matters -- you shouldn't have to re-explain your case to a different person at every stage of surgical care."
+  },
+  "learnMoreLink": { "text": "Read our full guide to cataract surgery", "url": "/services/cataract" },
+  "defaultService": "Cataract Evaluation"
+}

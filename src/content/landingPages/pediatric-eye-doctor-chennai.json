@@ -1,0 +1,51 @@
+{
+  "headline": "Pediatric Eye Doctor in Chennai",
+  "subheadline": "Gentle, thorough eye care for children -- from routine vision screening to managing conditions present from birth -- with Dr. Rajeswari in KK Nagar.",
+  "urgent": false,
+  "metaDescription": "Pediatric eye doctor in Chennai. Vision screening, squint evaluation, and child-friendly eye exams with Dr. Rajeswari in KK Nagar. Book an appointment.",
+  "whyPatientsChoose": [
+    { "title": "Child-Friendly Approach", "description": "Exams paced for children, with clear explanations for parents at every step." }
+  ],
+  "showSymptomCheck": true,
+  "symptoms": [
+    "Squinting, tilting the head, or covering one eye to see",
+    "Sitting very close to the TV or holding books close to the face",
+    "Eyes that don't appear to align (one drifts in or out)",
+    "Complaints of headaches or eye strain during reading or schoolwork"
+  ],
+  "processSteps": [
+    { "title": "Comfortable Evaluation", "description": "Age-appropriate vision testing and eye examination, paced to keep your child comfortable." },
+    { "title": "Clear Explanation for Parents", "description": "We explain what we found in plain terms -- whether it's glasses, monitoring, or further treatment." },
+    { "title": "Ongoing Care", "description": "Children's eyes change as they grow -- we recommend a follow-up schedule appropriate to your child's needs." }
+  ],
+  "landingFaqs": [
+    { "question": "At what age should my child have their first eye checkup?", "answer": "Even children with no apparent problems benefit from an early baseline checkup, and any visible signs -- squinting, head tilting, sitting close to screens -- warrant an evaluation regardless of age." },
+    { "question": "Will the exam be stressful for my child?", "answer": "Pediatric exams are paced specifically for children -- we take the time needed to keep your child comfortable rather than rushing through a standard adult protocol." },
+    { "question": "My child's school did a vision screening already -- is a full eye exam still necessary?", "answer": "School screenings are a useful first flag but aren't a substitute for a comprehensive exam, which checks eye alignment, eye health, and focusing ability in addition to basic vision -- things a screening often misses." }
+  ],
+  "causeExploration": {
+    "title": "What Could Be Causing Your Child's Eye Symptoms?",
+    "causesIntro": "Several common conditions can affect children's vision and eye comfort, many of which are very manageable when identified early:",
+    "commonCauses": [
+      "Refractive errors (needing glasses) -- the most common cause of squinting or sitting close to screens",
+      "Strabismus (squint) -- eyes that don't align properly",
+      "Amblyopia ('lazy eye') -- reduced vision in one eye that develops in childhood",
+      "Eye strain from extended near-work or screen time"
+    ],
+    "causesOutro": "Most pediatric vision issues are highly treatable, especially when caught while a child's visual system is still developing.",
+    "urgentTitle": "When to Seek a Prompt Evaluation",
+    "urgentIntro": "Most concerns can wait for a scheduled appointment, but some signs warrant a sooner visit:",
+    "urgentScenarios": [
+      "A noticeable misalignment of the eyes that has recently appeared",
+      "Sudden vision changes reported by your child",
+      "Eye injury or persistent redness with pain",
+      "A white reflection visible in your child's pupil in photographs"
+    ]
+  },
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "Parents often worry that a young child won't be able to cooperate with an eye exam, or that bringing them in over a minor concern is unnecessary.",
+    "response": "Children's exams are built around them -- we adapt the approach to their age and comfort level. And it's always reasonable to bring in a concern that seems minor; many treatable conditions, like a lazy eye, have the best outcomes specifically when caught early in childhood."
+  },
+  "learnMoreLink": { "text": "Read our full guide to pediatric eye care", "url": "/services/pediatric-eye-care" },
+  "defaultService": "Pediatric Eye Care"
+}
