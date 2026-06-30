@@ -18,13 +18,15 @@ import { siteConfig } from '../config/site.js';
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="absolute top-full left-0 pt-2 hidden group-hover:block">
-          <div class="bg-white rounded-xl shadow-lg border border-slate-100 py-2 w-56">
+          <div class="bg-white rounded-xl shadow-lg border border-slate-100 py-2 w-60">
             <a href="/services/cataract" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Cataract Surgery</a>
             <a href="/services/lasik" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">LASIK Surgery</a>
             <a href="/services/retina" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Retina Care</a>
             <a href="/services/glaucoma" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Glaucoma Screening</a>
             <a href="/services/squint" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Squint Treatment</a>
             <a href="/services/neuro" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Neuro-Ophthalmology</a>
+            <a href="/services/pediatric-eye-care" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Pediatric Eye Care</a>
+            <a href="/services/comprehensive-eye-checkup" class="block px-4 py-2 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Comprehensive Eye Checkup</a>
           </div>
         </div>
       </div>
@@ -50,15 +52,25 @@ import { siteConfig } from '../config/site.js';
   </div>
 
   <!-- Mobile menu panel -->
-  <div id="mobileMenuPanel" class="hidden lg:hidden border-t border-slate-200 bg-white">
+  <div id="mobileMenuPanel" class="hidden lg:hidden border-t border-slate-200 bg-white max-h-[calc(100vh-5rem)] overflow-y-auto">
     <nav class="px-6 py-4 flex flex-col gap-1">
       <a href="/" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Home</a>
-      <a href="/services/cataract" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Cataract Surgery</a>
-      <a href="/services/lasik" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">LASIK Surgery</a>
-      <a href="/services/retina" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Retina Care</a>
-      <a href="/services/glaucoma" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Glaucoma Screening</a>
-      <a href="/services/squint" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Squint Treatment</a>
-      <a href="/services/neuro" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Neuro-Ophthalmology</a>
+
+      <button id="mobileServicesToggle" class="w-full flex items-center justify-between py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors" aria-expanded="false">
+        <span>Services</span>
+        <svg id="mobileServicesChevron" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div id="mobileServicesSubmenu" class="hidden flex-col gap-1 pl-4 border-l border-slate-100 ml-1">
+        <a href="/services/cataract" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Cataract Surgery</a>
+        <a href="/services/lasik" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">LASIK Surgery</a>
+        <a href="/services/retina" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Retina Care</a>
+        <a href="/services/glaucoma" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Glaucoma Screening</a>
+        <a href="/services/squint" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Squint Treatment</a>
+        <a href="/services/neuro" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Neuro-Ophthalmology</a>
+        <a href="/services/pediatric-eye-care" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Pediatric Eye Care</a>
+        <a href="/services/comprehensive-eye-checkup" class="py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Comprehensive Eye Checkup</a>
+      </div>
+
       <a href="/dr-rajeswari" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Dr. Rajeswari</a>
       <a href="/faq" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">FAQ</a>
       <a href="/blog" class="py-2.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Blog</a>
@@ -85,8 +97,12 @@ import { siteConfig } from '../config/site.js';
       btn.setAttribute('aria-expanded', String(isHidden));
     });
 
-    // Close menu when a link inside it is tapped
-    panel.querySelectorAll('a').forEach((link) => {
+    // Close menu when a top-level link inside it is tapped
+    // (excludes the Services toggle button itself, and excludes links
+    // inside the services submenu, which are handled separately below
+    // so tapping a service link closes the WHOLE mobile menu, not just
+    // the submenu).
+    panel.querySelectorAll('nav > a, #mobileServicesSubmenu a').forEach((link) => {
       link.addEventListener('click', () => {
         panel.classList.add('hidden');
         iconOpen.classList.remove('hidden');
@@ -94,5 +110,20 @@ import { siteConfig } from '../config/site.js';
         btn.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // Services submenu tap-to-expand
+    const servicesToggle = document.getElementById('mobileServicesToggle');
+    const servicesSubmenu = document.getElementById('mobileServicesSubmenu');
+    const servicesChevron = document.getElementById('mobileServicesChevron');
+
+    if (servicesToggle && servicesSubmenu && servicesChevron) {
+      servicesToggle.addEventListener('click', () => {
+        const isHidden = servicesSubmenu.classList.contains('hidden');
+        servicesSubmenu.classList.toggle('hidden');
+        servicesSubmenu.classList.toggle('flex');
+        servicesChevron.classList.toggle('rotate-180');
+        servicesToggle.setAttribute('aria-expanded', String(isHidden));
+      });
+    }
   });
 </script>

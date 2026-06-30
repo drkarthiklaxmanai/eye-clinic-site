@@ -53,5 +53,6 @@
     { "finding": "Retina-Related", "nextStep": "Further retinal assessment" },
     { "finding": "Glaucoma", "nextStep": "Additional testing and monitoring" }
   ],
-  "doctorsPerspective": "Many patients assume blurred vision means they simply need new glasses. Sometimes that's true. Sometimes the cause is a cataract, diabetes-related changes, or another eye condition altogether. I don't guess based on symptoms alone -- the first step is always a proper examination to identify the actual reason, and only then do we talk about what, if anything, needs to be done."
+  "doctorsPerspective": "Many patients assume blurred vision means they simply need new glasses. Sometimes that's true. Sometimes the cause is a cataract, diabetes-related changes, or another eye condition altogether. I don't guess based on symptoms alone -- the first step is always a proper examination to identify the actual reason, and only then do we talk about what, if anything, needs to be done.",
+  "defaultService": "Blurred Vision"
 }

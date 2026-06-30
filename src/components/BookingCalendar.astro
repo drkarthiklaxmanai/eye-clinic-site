@@ -1,8 +1,13 @@
 ---
 // src/components/BookingCalendar.astro
+const { defaultService } = Astro.props;
 ---
 
-<div class="max-w-5xl mx-auto p-8 bg-white/40 backdrop-blur-xl border border-white/50 rounded-3xl shadow-2xl flex flex-col md:flex-row gap-8">
+<div
+  id="bookingCalendarRoot"
+  data-default-service={defaultService || ''}
+  class="max-w-5xl mx-auto p-8 bg-white/40 backdrop-blur-xl border border-white/50 rounded-3xl shadow-2xl flex flex-col md:flex-row gap-8"
+>
 
   <div class="md:w-1/2 space-y-5 pr-0 md:pr-8 border-b md:border-b-0 md:border-r border-slate-200/60 pb-8 md:pb-0">
     <h3 class="text-2xl font-bold text-blue-900 mb-6">Patient Details</h3>
@@ -21,7 +26,7 @@
     <input type="tel" id="phone" placeholder="Mobile Number (+91...)" required class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none" />
 
     <select id="service" class="w-full p-3 rounded-xl bg-white/80 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
-      <option value="" disabled selected>Select Service...</option>
+      <option value="" disabled>Select Service...</option>
       <option value="General Checkup">General Eye Checkup</option>
       <option value="Cataract Evaluation">Cataract Evaluation</option>
       <option value="LASIK Screening">LASIK Screening</option>
@@ -29,6 +34,10 @@
       <option value="Glaucoma Screening">Glaucoma Screening</option>
       <option value="Squint Treatment">Squint Treatment</option>
       <option value="Neuro-Ophthalmology">Neuro-Ophthalmology</option>
+      <option value="Pediatric Eye Care">Pediatric Eye Care</option>
+      <option value="Blurred Vision">Blurred Vision</option>
+      <option value="Eye Pain">Eye Pain</option>
+      <option value="Sudden Vision Loss">Sudden Vision Loss</option>
     </select>
   </div>
 
@@ -54,67 +63,50 @@
 </div>
 
 <script>
-  import { supabase } from '../lib/supabase.js';
-
-  // Generates display-formatted time slots (e.g. "09:30 AM") between a
-  // start and end time (24h "HH:MM:SS" from Postgres), at the given
-  // duration in minutes. The last slot must still fit before end_time.
-  function generateSlotsForSession(startTime: string, endTime: string, durationMinutes: number): string[] {
-    const slots: string[] = [];
-    const [startH, startM] = startTime.split(':').map(Number);
-    const [endH, endM] = endTime.split(':').map(Number);
-
-    let current = startH * 60 + startM;
-    const end = endH * 60 + endM;
-
-    while (current + durationMinutes <= end) {
-      const h24 = Math.floor(current / 60);
-      const m = current % 60;
-      const period = h24 >= 12 ? 'PM' : 'AM';
-      const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
-      slots.push(`${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${period}`);
-      current += durationMinutes;
-    }
-    return slots;
-  }
-
-// Converts a display time like "09:30 AM" back into minutes-since-midnight,
-  // so it can be compared against the current time.
-  function parseTimeToMinutes(displayTime: string): number {
-    const [time, period] = displayTime.split(' ');
-    const [hStr, mStr] = time.split(':');
-    let h = parseInt(hStr, 10);
-    const m = parseInt(mStr, 10);
-    if (period === 'PM' && h !== 12) h += 12;
-    if (period === 'AM' && h === 12) h = 0;
-    return h * 60 + m;
-  }
-
   document.addEventListener('astro:page-load', () => {
     let selectedTime = "";
 
-    const dateInput = document.getElementById('date') as HTMLInputElement;
+    const root = document.getElementById('bookingCalendarRoot');
+    const dateInput = document.getElementById('date');
     const slotsContainer = document.getElementById('slotsContainer');
-    const confirmBtn = document.getElementById('confirmBtn') as HTMLButtonElement;
+    const confirmBtn = document.getElementById('confirmBtn');
     const successMessage = document.getElementById('successMessage');
     const errorMessage = document.getElementById('errorMessage');
+    const serviceSelect = document.getElementById('service');
 
-    const today = new Date().toISOString().split('T')[0];
-    if (dateInput) dateInput.min = today;
+    const todayStr = new Date().toISOString().split('T')[0];
+    if (dateInput) {
+      dateInput.min = todayStr;
+      dateInput.value = todayStr;
+    }
 
-    function showError(message: string) {
+    // Pre-select the service based on which landing page (or service
+    // page) this booking form is embedded in, read from the
+    // data-default-service attribute set in the frontmatter above.
+    // Falls back to the placeholder if the value doesn't match any option.
+    const defaultService = root?.dataset.defaultService;
+    if (serviceSelect && defaultService) {
+      const matchingOption = Array.from(serviceSelect.options).find(
+        (opt) => opt.value === defaultService
+      );
+      if (matchingOption) {
+        serviceSelect.value = defaultService;
+      }
+    }
+
+    function showError(message) {
       errorMessage.textContent = message;
       errorMessage?.classList.remove('hidden');
     }
 
-    function renderSlots(times: string[]) {
+    function renderSlots(displayTimes) {
       selectedTime = "";
-      if (times.length === 0) {
+      if (displayTimes.length === 0) {
         slotsContainer.innerHTML = '<p class="col-span-2 text-slate-500 text-sm">No slots available on this date. Please try another day, or call us directly.</p>';
         return;
       }
       slotsContainer.innerHTML = '';
-      times.forEach((time) => {
+      displayTimes.forEach((time, index) => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'time-slot py-3 border border-blue-200 rounded-lg text-blue-800 hover:bg-blue-50 transition font-medium';
@@ -126,81 +118,40 @@
           selectedTime = time;
         });
         slotsContainer.appendChild(btn);
+
+        // Auto-select the first available slot, while still letting
+        // the user click a different one afterward.
+        if (index === 0) {
+          btn.classList.add('bg-blue-600', 'text-white');
+          selectedTime = time;
+        }
       });
     }
 
-    // Fetch and combine: schedule sessions (computed into individual times)
-    // + blocked dates + blocked slots + already-confirmed appointments,
-    // to compute real availability.
-    async function loadAvailableSlots(dateStr: string) {
+    // Fetches available slots from the public-available-slots Netlify
+    // Function, which computes availability against AppointmentManager's
+    // real slot_templates/schedule_overrides/appointments tables --
+    // replacing the old direct queries against eye-clinic-site's own,
+    // now-stale schedule_sessions/blocked_dates/blocked_slots tables.
+    async function loadAvailableSlots(dateStr) {
       slotsContainer.innerHTML = '<p class="col-span-2 text-slate-400 text-sm">Checking availability...</p>';
       errorMessage?.classList.add('hidden');
 
       try {
-        const dayOfWeek = new Date(dateStr + 'T00:00:00').getDay();
+        const response = await fetch(`/.netlify/functions/public-available-slots?date=${encodeURIComponent(dateStr)}`);
+        const data = await response.json();
 
-        // 1. Is the whole day blocked (holiday/leave)?
-        const { data: blockedDateRows, error: bdError } = await supabase
-          .from('blocked_dates')
-          .select('reason')
-          .eq('blocked_date', dateStr);
-        if (bdError) throw bdError;
+        if (!response.ok || data.error) {
+          throw new Error(data.error || 'Could not load availability.');
+        }
 
-        if (blockedDateRows && blockedDateRows.length > 0) {
-          slotsContainer.innerHTML = `<p class="col-span-2 text-slate-500 text-sm">Clinic closed on this date${blockedDateRows[0].reason ? `: ${blockedDateRows[0].reason}` : ''}. Please choose another day.</p>`;
+        if (data.reason) {
+          slotsContainer.innerHTML = `<p class="col-span-2 text-slate-500 text-sm">${data.reason}</p>`;
           return;
         }
 
-        // 2. What sessions are normally open on this day of week?
-        //    Each session is a time range + slot duration -- we compute
-        //    the actual bookable times from it here.
-        const { data: sessionRows, error: schError } = await supabase
-          .from('schedule_sessions')
-          .select('start_time, end_time, slot_duration_minutes')
-          .eq('day_of_week', dayOfWeek)
-          .eq('is_active', true);
-        if (schError) throw schError;
-
-        let possibleTimes: string[] = [];
-        (sessionRows || []).forEach((session) => {
-          possibleTimes.push(...generateSlotsForSession(session.start_time, session.end_time, session.slot_duration_minutes));
-        });
-
-        if (possibleTimes.length === 0) {
-          slotsContainer.innerHTML = '<p class="col-span-2 text-slate-500 text-sm">Clinic closed on this day of the week. Please choose another day.</p>';
-          return;
-        }
-
-        // 3. Remove ad-hoc blocked slots for this specific date
-        const { data: blockedSlotRows, error: bsError } = await supabase
-          .from('blocked_slots')
-          .select('time_slot')
-          .eq('blocked_date', dateStr);
-        if (bsError) throw bsError;
-
-        const blockedTimes = new Set((blockedSlotRows || []).map((r) => r.time_slot));
-        possibleTimes = possibleTimes.filter((t) => !blockedTimes.has(t));
-
-        // 4. Remove already-confirmed appointment times
-        const { data: takenRows, error: takenError } = await supabase
-          .from('slot_availability')
-          .select('appointment_time')
-          .eq('appointment_date', dateStr);
-        if (takenError) throw takenError;
-
-        const takenTimes = new Set((takenRows || []).map((r) => r.appointment_time));
-        possibleTimes = possibleTimes.filter((t) => !takenTimes.has(t));
-
-        // 5. If the selected date is TODAY, remove any time slot that has
-        //    already passed -- prevents booking a 10 AM slot at 2 PM.
-        const todayStr = new Date().toISOString().split('T')[0];
-        if (dateStr === todayStr) {
-          const now = new Date();
-          const currentMinutes = now.getHours() * 60 + now.getMinutes();
-          possibleTimes = possibleTimes.filter((t) => parseTimeToMinutes(t) > currentMinutes);
-        }
-
-        renderSlots(possibleTimes);
+        const displayTimes = (data.slots || []).map((s) => s.display);
+        renderSlots(displayTimes);
       } catch (err) {
         console.error("Error loading availability:", err);
         slotsContainer.innerHTML = '<p class="col-span-2 text-red-500 text-sm">Could not load availability. Please try again.</p>';
@@ -208,17 +159,23 @@
     }
 
     dateInput?.addEventListener('change', (e) => {
-      const selectedDate = (e.target as HTMLInputElement).value;
+      const selectedDate = e.target.value;
       if (selectedDate) loadAvailableSlots(selectedDate);
     });
 
+    // Load today's slots immediately on page load, since the date is
+    // pre-populated rather than waiting for the user to pick one.
+    if (dateInput?.value) {
+      loadAvailableSlots(dateInput.value);
+    }
+
     if (confirmBtn) {
       confirmBtn.addEventListener('click', async () => {
-        const prefix = (document.getElementById('prefix') as HTMLSelectElement).value;
-        const fName = (document.getElementById('firstName') as HTMLInputElement).value;
-        const lName = (document.getElementById('lastName') as HTMLInputElement).value;
-        const phone = (document.getElementById('phone') as HTMLInputElement).value;
-        const service = (document.getElementById('service') as HTMLSelectElement).value;
+        const prefix = document.getElementById('prefix').value;
+        const fName = document.getElementById('firstName').value;
+        const lName = document.getElementById('lastName').value;
+        const phone = document.getElementById('phone').value;
+        const service = document.getElementById('service').value;
         const date = dateInput.value;
 
         errorMessage?.classList.add('hidden');
@@ -228,31 +185,37 @@
           return;
         }
 
+        // patients.name in AppointmentManager is a single text column,
+        // so prefix/first/last are concatenated here -- the split-name
+        // concept ends at this form layer.
+        const name = `${prefix} ${fName} ${lName}`.trim();
+
         try {
           confirmBtn.innerText = "Securing Slot...";
           confirmBtn.disabled = true;
 
-          const { error } = await supabase.from('appointments').insert({
-            prefix,
-            first_name: fName,
-            last_name: lName,
-            phone,
-            service_type: service,
-            appointment_date: date,
-            appointment_time: selectedTime,
+          const response = await fetch('/.netlify/functions/public-book-appointment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              phone,
+              service,
+              date,
+              time: selectedTime,
+            }),
           });
 
-          if (error) {
-            if (error.code === '23505') {
-              throw new Error("Sorry, that slot was just booked by someone else. Please pick another time.");
-            }
-            throw error;
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(result.error || "Could not complete your booking. Please try again or call us directly.");
           }
 
           successMessage?.classList.remove('hidden');
           confirmBtn.style.display = 'none';
 
-        } catch (err: any) {
+        } catch (err) {
           console.error("Error booking:", err);
           showError(err.message || "Could not complete your booking. Please try again or call us directly.");
           confirmBtn.innerText = "Confirm Appointment";

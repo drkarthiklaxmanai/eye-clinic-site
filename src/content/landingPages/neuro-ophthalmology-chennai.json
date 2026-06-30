@@ -29,5 +29,7 @@
   "doctorsPerspectiveStructured": {
     "patientConcern": "Doctor, I've seen multiple doctors and still don't know why my vision is changing.",
     "response": "Neuro-ophthalmology consultations are often sought when the answer isn't immediately obvious. The goal is to determine whether the problem originates in the eye, the optic nerve, brain pathways, or somewhere else entirely. Sometimes the most important outcome of the consultation is not a treatment, but a clear diagnosis and a clear plan."
-  }
+  },
+  "learnMoreLink": { "text": "Learn more about neuro-ophthalmology", "url": "/services/neuro" },
+  "defaultService": "Neuro-Ophthalmology"
 }

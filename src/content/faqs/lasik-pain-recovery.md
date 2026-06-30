@@ -1,6 +1,5 @@
 ---
-question: "Is LASIK painful, and how long is the recovery?"
-order: 2
+question: "Is LASIK painful, and how long is recovery?"
+tags: ["lasik"]
 ---
-
-LASIK is performed under topical (eye drop) anesthesia and is not painful during the procedure. Some patients experience mild grittiness or light sensitivity for the first day. The laser treatment itself takes only minutes per eye, and many patients notice significantly improved vision within 24 hours, with full stabilization over the following days to weeks.
+The procedure itself is not painful -- numbing eye drops are used throughout. Many patients notice significantly improved vision within 24 hours, and it's a same-day outpatient procedure with no stitches.

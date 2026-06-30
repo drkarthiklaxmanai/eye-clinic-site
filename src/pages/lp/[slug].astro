@@ -16,6 +16,7 @@ import WhatHappensNext from '../../components/LandingPageSections/WhatHappensNex
 import MidPageCTA from '../../components/LandingPageSections/MidPageCTA.astro';
 import ObjectionFAQ from '../../components/LandingPageSections/ObjectionFAQ.astro';
 import ClinicPhotoStrip from '../../components/LandingPageSections/ClinicPhotoStrip.astro';
+import LearnMoreLink from '../../components/LandingPageSections/LearnMoreLink.astro';
 import BookingSection from '../../components/LandingPageSections/BookingSection.astro';
 
 export async function getStaticPaths() {
@@ -112,7 +113,11 @@ const data = entry.data;
     <ObjectionFAQ faqs={data.landingFaqs} />
   )}
 
+  {data.learnMoreLink && (
+    <LearnMoreLink text={data.learnMoreLink.text} url={data.learnMoreLink.url} />
+  )}
+
   <ClinicPhotoStrip />
 
-  <BookingSection />
+  <BookingSection defaultService={data.defaultService} />
 </LandingPageLayout>

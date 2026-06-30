@@ -52,5 +52,6 @@
     { "finding": "Infection or Inflammation", "nextStep": "Prescription treatment" },
     { "finding": "Glaucoma-Related", "nextStep": "Pressure check and ongoing monitoring" }
   ],
-  "doctorsPerspective": "Eye pain makes people understandably anxious, but most of the time the cause is something straightforward -- dry eye, strain, or minor irritation. My job in the first visit is to rule out the less common but more serious causes quickly, so you're not left wondering, and to treat what's actually there rather than just the discomfort."
+  "doctorsPerspective": "Eye pain makes people understandably anxious, but most of the time the cause is something straightforward -- dry eye, strain, or minor irritation. My job in the first visit is to rule out the less common but more serious causes quickly, so you're not left wondering, and to treat what's actually there rather than just the discomfort.",
+  "defaultService": "Eye Pain"
 }

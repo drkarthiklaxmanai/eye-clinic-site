@@ -47,5 +47,7 @@
   "doctorsPerspectiveStructured": {
     "patientConcern": "Doctor, do I need to worry that this is something neurological?",
     "response": "Not every case of double vision is neurological, but it is one of the possibilities we consider carefully. The examination helps determine whether the problem is coming from the eye muscles, the nerves controlling them, or another part of the visual system. Often the most important outcome of the consultation is understanding exactly which category you fall into and whether any further testing is needed."
-  }
+  },
+  "learnMoreLink": { "text": "Learn more about double vision and its causes", "url": "/blog/double-vision-neurological-cause" },
+  "defaultService": "Neuro-Ophthalmology"
 }

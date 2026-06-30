@@ -5,6 +5,12 @@ const faqCollection = defineCollection({
   schema: z.object({
     question: z.string(),
     order: z.number().optional(),
+    // Optional tags for browsing/discovery when picking faqIds for a
+    // page (e.g. "retina", "cataract", "diabetic-eye"). Pages reference
+    // FAQs by explicit ID, not by auto-filtering on tags -- this keeps
+    // selection predictable and avoids the generic-answer problem we
+    // hit before with tag-based filtering on landing pages.
+    tags: z.array(z.string()).optional().default([]),
   }),
 });
 
@@ -17,6 +23,13 @@ const blogCollection = defineCollection({
     author: z.string().optional(),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
+
+    // Optional links into the conditions/services collections.
+    // Per governance rules, every article should eventually declare
+    // both -- optional for now so the 13 existing posts validate
+    // without changes, but new articles should set these going forward.
+    condition: z.string().optional(),
+    service: z.string().optional(),
   }),
 });
 
@@ -54,6 +67,32 @@ const landingPageCollection = defineCollection({
       answer: z.string(),
     })).optional(),
 
+    // Optional supplement to landingFaqs: explicit IDs into the central
+    // faqs collection, for pages that want to ALSO surface a few shared
+    // general-education FAQs below their inline objection-handling set.
+    // Additive only -- landingFaqs remains the primary, frozen
+    // objection-handling content and is never replaced by this.
+    baseFaqIds: z.array(z.string()).optional(),
+
+    // Optional single understated link to a deeper content-cluster
+    // page (service or condition), for ad visitors who want to learn
+    // more before booking. Rendered as a single subtle text line at
+    // the very end of the page, after ClinicPhotoStrip and before
+    // BookingSection -- never competing visually with MidPageCTA or
+    // the booking flow itself. Omitted entirely if not set.
+    learnMoreLink: z.object({
+      text: z.string(),
+      url: z.string(),
+    }).optional(),
+
+        // Pre-selects a service in the booking form's dropdown, matching
+    // this page's topic, so a visitor doesn't have to re-select
+    // something the landing page already told them about. Must match
+    // one of the literal <option value="..."> strings in
+    // BookingCalendar.astro's service dropdown exactly, or it's
+    // silently ignored (falls back to the unselected placeholder).
+    defaultService: z.string().optional(),
+    
     // Condition-specific "what could be causing this" content.
     // Only populated on symptom-intent pages where the cause is
     // genuinely ambiguous (e.g. blurred vision, eye pain) -- not
@@ -125,8 +164,109 @@ const landingPageCollection = defineCollection({
   }),
 });
 
+// Service pages (e.g. Retina Care). Deliberately minimal -- no
+// governance/taxonomy fields (author, reviewer, reviewDate) yet.
+// Mixed-audience pages (screening-driven AND symptom-driven readers)
+// use the twoPaths field to branch early rather than forcing one
+// generic narrative on both reader types.
+const serviceCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    metaDescription: z.string(),
+    heroEyebrow: z.string().optional(),
+    heroHeadline: z.string(),
+    heroSubheadline: z.string(),
+    heroImage: z.string().optional(),
+
+    // Early branch for mixed-audience service pages: lets a reader
+    // self-identify (screening vs. symptoms) before the page commits
+    // to one narrative. Optional -- single-psychology service pages
+    // (a future Cataract rebuild, say) can skip this.
+    twoPaths: z.object({
+      screeningTitle: z.string(),
+      screeningBody: z.string(),
+      symptomsTitle: z.string(),
+      symptomsBody: z.string(),
+    }).optional(),
+
+    diagnostics: z.array(z.string()).optional(),
+
+    // Conditions this service manages -- slugs referencing the
+    // conditions collection, used to render links automatically.
+    conditionsManaged: z.array(z.string()).optional(),
+
+    treatments: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+    })).optional(),
+
+    // FAQs for this page, referenced by explicit ID from the central
+    // faqs collection (src/content/faqs/). Replaces the earlier inline
+    // pageFaqs array -- consolidating into a shared, reusable repo
+    // rather than duplicating near-identical questions across pages.
+    faqIds: z.array(z.string()).optional(),
+
+    ctaTitle: z.string().optional(),
+
+    // Value matching one of BookingCalendar.astro's <option value="...">
+    // strings exactly, used to pre-select this service in the embedded
+    // booking form at the bottom of the page.
+    defaultService: z.string().optional(),
+  }),
+});
+
+// Condition pages (e.g. Diabetic Retinopathy). Same minimal-schema
+// philosophy as serviceCollection. twoPaths lets a condition page
+// branch for readers who arrive screening-driven vs. already
+// noticing symptoms, before merging into shared content.
+const conditionCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    metaDescription: z.string(),
+    heroEyebrow: z.string().optional(),
+    heroHeadline: z.string(),
+    heroSubheadline: z.string(),
+
+    parentService: z.string(), // slug into the services collection
+
+    twoPaths: z.object({
+      screeningTitle: z.string(),
+      screeningBody: z.string(),
+      symptomsTitle: z.string(),
+      symptomsBody: z.string(),
+    }).optional(),
+
+    riskFactors: z.array(z.string()).optional(),
+    symptoms: z.array(z.string()).optional(),
+
+    treatmentOverview: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+    })).optional(),
+
+    urgentCareTitle: z.string().optional(),
+    urgentCareBody: z.string().optional(),
+    urgentScenarios: z.array(z.string()).optional(),
+
+    // FAQs for this page, referenced by explicit ID from the central
+    // faqs collection (src/content/faqs/). Replaces the earlier inline
+    // pageFaqs array.
+    faqIds: z.array(z.string()).optional(),
+
+    // Other condition slugs to cross-link (e.g. Diabetic Retinopathy
+    // <-> Macular Degeneration, both under Retina Care).
+    relatedConditions: z.array(z.string()).optional(),
+
+    ctaTitle: z.string().optional(),
+  }),
+});
+
 export const collections = {
   'faqs': faqCollection,
   'blog': blogCollection,
   'landingPages': landingPageCollection,
+  'services': serviceCollection,
+  'conditions': conditionCollection,
 };
