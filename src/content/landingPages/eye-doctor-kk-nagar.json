@@ -1,0 +1,27 @@
+{
+  "headline": "Eye Doctor in KK Nagar, Chennai",
+  "subheadline": "AIIMS-trained ophthalmologist Dr. Rajeswari, seeing patients right here in KK Nagar -- the same doctor for every visit, from a routine checkup to surgery.",
+  "urgent": false,
+  "metaDescription": "Looking for an eye doctor in KK Nagar, Chennai? Dr. Rajeswari (AIIMS, DNB, FAICO) offers comprehensive eye exams, cataract surgery, and LASIK nearby.",
+  "whyPatientsChoose": [
+    { "title": "One Doctor, Every Visit", "description": "You see Dr. Rajeswari personally -- not a different doctor or a junior resident each time you come in." }
+  ],
+  "showSymptomCheck": false,
+  "showServicesGrid": true,
+  "processSteps": [
+    { "title": "Book Your Visit", "description": "Choose a slot online or call us directly -- we're on Double Tank Road, near Bashyam Apartments and A.P. Super Market." },
+    { "title": "Meet Dr. Rajeswari", "description": "A thorough, unhurried consultation -- enough time to actually ask your questions." },
+    { "title": "A Clear Plan", "description": "Whether it's glasses, monitoring, or treatment, you leave knowing exactly what's next and why." }
+  ],
+  "landingFaqs": [
+    { "question": "Will I actually see the same doctor every time, or does it rotate?", "answer": "You see Dr. Rajeswari directly, for every visit -- from your first consultation through any follow-up or treatment. There's no rotation between different doctors." },
+    { "question": "What are Dr. Rajeswari's qualifications?", "answer": "Dr. Rajeswari is AIIMS-trained (MD), holds a DNB and FAICO in Neuro-ophthalmology, and has completed a Medical Retina Fellowship -- with experience across general ophthalmology, surgical care, and complex retinal and neuro-ophthalmic conditions." },
+    { "question": "Is the clinic easy to find from nearby areas like Ashok Nagar or Vadapalani?", "answer": "Yes -- we're centrally located in KK Nagar, an easy, short drive from Ashok Nagar, Vadapalani, Jafferkhanpet, West Mambalam, and Virugambakkam, with the exact map link available when you book." }
+  ],
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "A common worry I hear is not knowing who you'll actually see -- some clinics rotate doctors, or you only get a few rushed minutes.",
+    "response": "When you come to me, you're my patient for that visit and every one after it. I take the time to explain what I'm seeing and why, because an eye exam shouldn't feel transactional -- especially when it's something as personal as your vision."
+  },
+  "learnMoreLink": { "text": "Read more about Dr. Rajeswari", "url": "/dr-rajeswari" },
+  "defaultService": "General Checkup"
+}

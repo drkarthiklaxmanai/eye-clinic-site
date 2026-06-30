@@ -1,0 +1,54 @@
+{
+  "headline": "Comprehensive Eye Checkup in Chennai",
+  "subheadline": "A complete eye health evaluation -- not just a vision test -- from AIIMS-trained Dr. Rajeswari in KK Nagar, Chennai.",
+  "urgent": false,
+  "metaDescription": "Comprehensive eye checkup in Chennai with Dr. Rajeswari -- vision testing, eye pressure check, retina screening, and dry eye evaluation. Book online.",
+  "whyPatientsChoose": [
+    { "title": "More Than a Vision Test", "description": "A full evaluation of eye health -- pressure, retina, and surface checks -- not just a glasses prescription." }
+  ],
+  "showSymptomCheck": true,
+  "symptoms": [
+    "It's been over a year since your last eye exam",
+    "Mild blurring you've gotten used to ignoring",
+    "Eye strain after screen time or reading",
+    "Family history of glaucoma, diabetes, or retinal disease"
+  ],
+  "processSteps": [
+    { "title": "Vision & Refraction", "description": "Precise testing to identify any refractive error and current glasses needs." },
+    { "title": "Eye Health Screening", "description": "Eye pressure check, retina evaluation, and dry eye assessment as part of the same visit." },
+    { "title": "Results, Explained Clearly", "description": "We walk you through every finding and what -- if anything -- needs follow-up." }
+  ],
+  "landingFaqs": [
+    { "question": "I don't have any symptoms -- do I really need a checkup?", "answer": "Many eye conditions, including glaucoma and early diabetic retinopathy, have no noticeable symptoms until vision is already affected. A comprehensive checkup catches these early, when they're most treatable." },
+    { "question": "How long does a comprehensive eye checkup take?", "answer": "Typically 30-45 minutes, depending on whether pupil dilation is needed for a detailed retina examination." },
+    { "question": "Will I need to get my eyes dilated?", "answer": "Not always -- it depends on what we find during the initial examination and your individual risk factors. We'll explain if and why it's recommended for you." }
+  ],
+  "educationalInsight": {
+    "title": "Why a Checkup Matters Even If You Feel Fine",
+    "body": "Vision changes gradually enough that most people adapt without realizing it -- and some of the most serious eye conditions, like glaucoma, cause no symptoms at all until permanent vision loss has already occurred. A comprehensive checkup looks beyond just whether you can read the chart clearly.",
+    "pathway": {
+      "steps": [
+        "Vision and refraction testing",
+        "Eye pressure measurement",
+        "Retina and optic nerve evaluation",
+        "Discussion of findings and any recommended follow-up"
+      ],
+      "branches": [
+        { "finding": "Everything normal", "outcome": "We confirm your eye health is on track and recommend a routine follow-up interval." },
+        { "finding": "Early changes noted", "outcome": "We explain what we found, why it matters, and the most appropriate next step -- without overstating urgency." }
+      ]
+    },
+    "prioritizeIf": [
+      "It has been more than a year since your last eye exam",
+      "You have diabetes or a family history of glaucoma",
+      "You spend long hours on screens",
+      "You're over 40 and have never had a baseline eye pressure check"
+    ]
+  },
+  "doctorsPerspectiveStructured": {
+    "patientConcern": "Patients often assume that if they can see clearly, their eyes must be healthy -- so a checkup feels unnecessary.",
+    "response": "Clear vision and healthy eyes aren't always the same thing. Conditions like glaucoma can progress silently for years. A comprehensive checkup isn't about finding a problem -- it's about confirming there isn't one, or catching it early enough that it's easy to manage."
+  },
+  "learnMoreLink": { "text": "Read our full guide to comprehensive eye checkups", "url": "/services/comprehensive-eye-checkup" },
+  "defaultService": "General Checkup"
+}
