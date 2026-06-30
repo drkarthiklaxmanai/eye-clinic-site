@@ -128,6 +128,41 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crisprey
           }
         });
       });
+
+      // Scroll depth tracking: fires once each at 50% and 90% of
+      // total page height. Reset per navigation (ViewTransitions
+      // swaps content without a full reload) so depth re-fires on
+      // every new page rather than only the first.
+      document.addEventListener('astro:page-load', () => {
+        let firedDepths = { 50: false, 90: false };
+
+        function checkScrollDepth() {
+          if (typeof gtag !== 'function') return;
+
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          if (docHeight <= 0) return;
+
+          const percentScrolled = (scrollTop / docHeight) * 100;
+
+          if (!firedDepths[50] && percentScrolled >= 50) {
+            firedDepths[50] = true;
+            gtag('event', 'scroll_depth_50', {
+              event_category: 'engagement',
+              event_label: window.location.pathname,
+            });
+          }
+          if (!firedDepths[90] && percentScrolled >= 90) {
+            firedDepths[90] = true;
+            gtag('event', 'scroll_depth_90', {
+              event_category: 'engagement',
+              event_label: window.location.pathname,
+            });
+          }
+        }
+
+        window.addEventListener('scroll', checkScrollDepth, { passive: true });
+      });
     </script>
 
     <style is:global>
