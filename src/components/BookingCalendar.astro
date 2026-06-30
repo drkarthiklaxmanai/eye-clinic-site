@@ -212,12 +212,15 @@ const { defaultService } = Astro.props;
             throw new Error(result.error || "Could not complete your booking. Please try again or call us directly.");
           }
 
-          if (typeof gtag === 'function') {
-            gtag('event', 'booking_completed', {
-              event_category: 'conversion',
-              event_label: service,
-            });
-          }
+          // Temporary diagnostic -- remove once booking_completed is
+          // confirmed showing up correctly in GA4 Realtime.
+          console.log('Booking success block reached, about to fire gtag');
+          window.gtag?.('event', 'booking_test');
+
+          window.gtag?.('event', 'booking_completed', {
+            event_category: 'conversion',
+            event_label: service,
+          });
 
           successMessage?.classList.remove('hidden');
           confirmBtn.style.display = 'none';
