@@ -1,0 +1,21 @@
+---
+// src/components/LandingPageSections/GoogleRatingBadge.astro
+// Static badge linking to the real Google Business Profile (reviews
+// tab). Rating/count are hardcoded -- update manually as real reviews
+// accumulate. Not a live API widget (see handoff notes for tradeoffs).
+const GOOGLE_RATING = "5.0";
+const GOOGLE_REVIEW_COUNT = 9;
+const GOOGLE_PROFILE_URL = "https://www.google.com/maps/search/?api=1&query=Crispr+Eye+Care+KK+Nagar+Chennai";
+---
+
+<a
+  href={GOOGLE_PROFILE_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 text-amber-800 font-semibold text-sm mb-5 shadow-sm hover:bg-amber-100 transition-colors"
+>
+  <span class="flex text-amber-500" aria-hidden="true">
+    {"★★★★★"}
+  </span>
+  <span>{GOOGLE_RATING} on Google ({GOOGLE_REVIEW_COUNT} reviews)</span>
+</a>
