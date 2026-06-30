@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import LandingPageLayout from '../../layouts/LandingPageLayout.astro';
 import LandingHero from '../../components/LandingPageSections/LandingHero.astro';
+import ServicesOverviewGrid from '../../components/ServicesOverviewGrid.astro';
 import WhyPatientsChooseCrispr from '../../components/LandingPageSections/WhyPatientsChooseCrispr.astro';
 import ConvenienceSection from '../../components/LandingPageSections/ConvenienceSection.astro';
 import QuickCTA from '../../components/LandingPageSections/QuickCTA.astro';
@@ -45,6 +46,8 @@ const data = entry.data;
   )}
 
   <DoctorSection />
+
+  {data.showServicesGrid && <ServicesOverviewGrid />}
 
   {data.educationalInsight && (
     <EducationalInsightSection
