@@ -212,6 +212,13 @@ const { defaultService } = Astro.props;
             throw new Error(result.error || "Could not complete your booking. Please try again or call us directly.");
           }
 
+          if (typeof gtag === 'function') {
+            gtag('event', 'booking_completed', {
+              event_category: 'conversion',
+              event_label: service,
+            });
+          }
+
           successMessage?.classList.remove('hidden');
           confirmBtn.style.display = 'none';
 
