@@ -8,6 +8,7 @@
   ],
   "showSymptomCheck": false,
   "showServicesGrid": true,
+  "showLocalArea": true,
   "processSteps": [
     { "title": "Book Your Visit", "description": "Choose a slot online or call us directly -- we're on Double Tank Road, near Bashyam Apartments and A.P. Super Market." },
     { "title": "Meet Dr. Rajeswari", "description": "A thorough, unhurried consultation -- enough time to actually ask your questions." },
