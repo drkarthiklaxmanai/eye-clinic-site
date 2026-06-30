@@ -126,6 +126,56 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crisprey
     <FloatingContact />
 
     <script>
+      // GA4 conversion tracking via event delegation -- a single
+      // document-level click listener catches phone, WhatsApp, and
+      // directions links anywhere on the site (including ones added
+      // later) without needing to wire each link individually.
+      // Booking click/completion are tracked separately: click via
+      // data-track="booking-click" on Book Now buttons/links, and
+      // completion fires directly from BookingCalendar.astro's
+      // confirm handler once public-book-appointment.js succeeds.
+      document.addEventListener('astro:page-load', () => {
+        document.addEventListener('click', (e) => {
+          if (typeof gtag !== 'function') return;
+
+          const link = e.target.closest('a');
+          if (!link) return;
+
+          const href = link.getAttribute('href') || '';
+
+          if (href.startsWith('tel:')) {
+            gtag('event', 'phone_call_click', {
+              event_category: 'engagement',
+              event_label: href.replace('tel:', ''),
+            });
+            return;
+          }
+
+          if (href.includes('wa.me') || href.includes('whatsapp.com')) {
+            gtag('event', 'whatsapp_click', {
+              event_category: 'engagement',
+              event_label: 'whatsapp_button',
+            });
+            return;
+          }
+
+          if (href.includes('google.com/maps') || href.includes('goo.gl/maps')) {
+            gtag('event', 'directions_click', {
+              event_category: 'engagement',
+              event_label: 'get_directions',
+            });
+            return;
+          }
+
+          if (link.dataset.track === 'booking-click') {
+            gtag('event', 'booking_click', {
+              event_category: 'engagement',
+              event_label: link.dataset.trackLabel || 'book_now_button',
+            });
+          }
+        });
+      });
+
       const observerOptions = {
         root: null,
         rootMargin: '0px',
