@@ -92,6 +92,13 @@ const landingPageCollection = defineCollection({
     // BookingCalendar.astro's service dropdown exactly, or it's
     // silently ignored (falls back to the unselected placeholder).
     defaultService: z.string().optional(),
+
+    // Renders ServicesOverviewGrid (full 8-service grid, reusing
+    // ServiceCard) in place of a single psychology-specific block, for
+    // broad/local-intent pages (e.g. "Eye Clinic KK Nagar") that have
+    // no single condition to anchor causeExploration/decisionSupport/
+    // educationalInsight around.
+    showServicesGrid: z.boolean().optional().default(false),
     
     // Condition-specific "what could be causing this" content.
     // Only populated on symptom-intent pages where the cause is
