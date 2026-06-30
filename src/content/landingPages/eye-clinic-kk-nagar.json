@@ -8,6 +8,7 @@
   ],
   "showSymptomCheck": false,
   "showServicesGrid": true,
+  "showLocalArea": true,
   "processSteps": [
     { "title": "Walk In or Book Ahead", "description": "Visit us on Double Tank Road in KK Nagar, or book a slot online to avoid waiting." },
     { "title": "Complete Evaluation", "description": "Vision testing, eye pressure check, and a detailed examination tailored to your concern." },
