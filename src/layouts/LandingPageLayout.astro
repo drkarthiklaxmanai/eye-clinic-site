@@ -5,7 +5,7 @@ import LandingFooter from '../components/LandingPageSections/LandingFooter.astro
 import { siteConfig } from '../config/site.js';
 import '../styles/global.css';
 
-// Landing pages are built for paid traffic (Google Ads). They deliberately
+// Landing pages are built for paid traffic (Goog<FloatingContact />le Ads). They deliberately
 // have NO navbar, NO footer links, and NO exit paths -- every link off this
 // page is a wasted ad click. They are also noindexed so they never compete
 // with or dilute the real /services/* SEO pages in organic search.
@@ -79,6 +79,56 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://crisprey
     <LandingFooter />
 
     <FloatingContact />
+
+    <script>
+      // GA4 conversion tracking via event delegation -- mirrors the
+      // same logic in MainLayout.astro so landing pages report
+      // phone_call_click, whatsapp_click, directions_click, and
+      // booking_click identically to the main site. Booking
+      // completion is tracked separately, directly from
+      // BookingCalendar.astro's confirm handler.
+      document.addEventListener('astro:page-load', () => {
+        document.addEventListener('click', (e) => {
+          if (typeof gtag !== 'function') return;
+
+          const link = e.target.closest('a');
+          if (!link) return;
+
+          const href = link.getAttribute('href') || '';
+
+          if (href.startsWith('tel:')) {
+            gtag('event', 'phone_call_click', {
+              event_category: 'engagement',
+              event_label: href.replace('tel:', ''),
+            });
+            return;
+          }
+
+          if (href.includes('wa.me') || href.includes('whatsapp.com')) {
+            gtag('event', 'whatsapp_click', {
+              event_category: 'engagement',
+              event_label: 'whatsapp_button',
+            });
+            return;
+          }
+
+          if (href.includes('google.com/maps') || href.includes('goo.gl/maps')) {
+            gtag('event', 'directions_click', {
+              event_category: 'engagement',
+              event_label: 'get_directions',
+            });
+            return;
+          }
+
+          if (link.dataset.track === 'booking-click') {
+            gtag('event', 'booking_click', {
+              event_category: 'engagement',
+              event_label: link.dataset.trackLabel || 'book_now_button',
+            });
+          }
+        });
+      });
+    </script>
 
     <style is:global>
       h1, h2, h3, h4, h5, h6 {
