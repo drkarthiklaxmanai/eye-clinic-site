@@ -4,24 +4,49 @@
   "urgent": false,
   "metaDescription": "Eye clinic in KK Nagar, Chennai -- comprehensive eye checkups, cataract surgery, LASIK, and more. Near KM Hospital, Double Tank Road. Book your visit.",
   "whyPatientsChoose": [
-    { "title": "Genuinely Local", "description": "Right here in KK Nagar -- no need to travel across the city or fight traffic for routine eye care." }
+    {
+      "title": "Genuinely Local",
+      "description": "Right here in KK Nagar -- no need to travel across the city or fight traffic for routine eye care."
+    }
   ],
   "showSymptomCheck": false,
   "showServicesGrid": true,
+  "showLocalArea": true,
   "processSteps": [
-    { "title": "Walk In or Book Ahead", "description": "Visit us on Double Tank Road in KK Nagar, or book a slot online to avoid waiting." },
-    { "title": "Complete Evaluation", "description": "Vision testing, eye pressure check, and a detailed examination tailored to your concern." },
-    { "title": "Clear Next Steps", "description": "We explain exactly what we found and what -- if anything -- needs to be done next." }
+    {
+      "title": "Walk In or Book Ahead",
+      "description": "Visit us on Double Tank Road in KK Nagar, or book a slot online to avoid waiting."
+    },
+    {
+      "title": "Complete Evaluation",
+      "description": "Vision testing, eye pressure check, and a detailed examination tailored to your concern."
+    },
+    {
+      "title": "Clear Next Steps",
+      "description": "We explain exactly what we found and what -- if anything -- needs to be done next."
+    }
   ],
   "landingFaqs": [
-    { "question": "Is this clinic actually in KK Nagar, or is that just a service area you cover?", "answer": "We're physically located in KK Nagar itself, on Double Tank Road, close to KM Hospital and PSBB School KK Nagar -- not a satellite location or a service-area listing." },
-    { "question": "Do I need an appointment, or can I just walk in?", "answer": "Walk-ins are welcome, but booking ahead online means you're seen at your slot time instead of waiting. For anything urgent, call us directly and we'll fit you in." },
-    { "question": "Is this a general eye clinic or do you only handle specific conditions?", "answer": "We're a comprehensive eye clinic -- routine checkups, glasses prescriptions, and screening, through to cataract, LASIK, glaucoma, retina, squint, and pediatric eye care, all under the same doctor." }
+    {
+      "question": "Is this clinic actually in KK Nagar, or is that just a service area you cover?",
+      "answer": "We're physically located in KK Nagar itself, on Double Tank Road, close to KM Hospital and PSBB School KK Nagar -- not a satellite location or a service-area listing."
+    },
+    {
+      "question": "Do I need an appointment, or can I just walk in?",
+      "answer": "Walk-ins are welcome, but booking ahead online means you're seen at your slot time instead of waiting. For anything urgent, call us directly and we'll fit you in."
+    },
+    {
+      "question": "Is this a general eye clinic or do you only handle specific conditions?",
+      "answer": "We're a comprehensive eye clinic -- routine checkups, glasses prescriptions, and screening, through to cataract, LASIK, glaucoma, retina, squint, and pediatric eye care, all under the same doctor."
+    }
   ],
   "doctorsPerspectiveStructured": {
     "patientConcern": "Many patients tell me they've been putting off an eye checkup simply because the nearest clinic felt like a city-wide trip -- traffic, parking, half a day gone.",
     "response": "That's exactly why we're here in KK Nagar. Whether it's a routine checkup for the family or something more specific, you shouldn't have to treat a basic eye exam like a major outing. I'd rather see you for a five-minute concern early than have you wait months because the clinic felt inconvenient."
   },
-  "learnMoreLink": { "text": "Learn more about our services", "url": "/#services" },
+  "learnMoreLink": {
+    "text": "Learn more about our services",
+    "url": "/#services"
+  },
   "defaultService": "General Checkup"
 }
