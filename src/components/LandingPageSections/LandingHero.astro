@@ -1,6 +1,7 @@
 ---
 // src/components/LandingPageSections/LandingHero.astro
 import { siteConfig } from '../../config/site.js';
+import GoogleRatingBadge from './GoogleRatingBadge.astro';
 
 const {
   headline,
@@ -29,9 +30,12 @@ const whatsappHref = siteConfig.contact.whatsapp;
           </div>
         )}
 
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm mb-5 shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          AIIMS-Trained Ophthalmologist
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-5">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            AIIMS-Trained Ophthalmologist
+          </div>
+          <GoogleRatingBadge />
         </div>
 
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-5 tracking-tight">
