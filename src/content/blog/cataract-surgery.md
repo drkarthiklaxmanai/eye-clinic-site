@@ -19,5 +19,4 @@ Most patients recover very quickly after modern phacoemulsification cataract sur
 ## When should I see an eye doctor?
 You should consult an ophthalmologist immediately if you notice sudden vision changes, persistent discomfort, or experience flashes and floaters. Routine annual checkups are also critical, especially if you have underlying conditions like diabetes that can quietly damage the retina and lead to rapid visual decline.
 
-*To learn more or to schedule an evaluation with our AIIMS-trained ophthalmologist, reach out via WhatsApp or call us at +91 63813 02828.*
-
+*To learn more or to schedule an evaluation with our AIIMS-trained ophthalmologist, reach out to us at +91 63813 02828.*
