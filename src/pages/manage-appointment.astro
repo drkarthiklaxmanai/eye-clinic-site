@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import ManageAppointments from '../components/ManageAppointments.astro';
+import BookingCalendar from '../components/BookingCalendar.astro';
 import { siteConfig } from '../config/site.js';
 
 const pageTitle = `Manage My Appointment | ${siteConfig.name}`;
@@ -16,6 +16,6 @@ const pageDescription = `Reschedule or cancel your appointment at ${siteConfig.n
   </section>
 
   <section class="py-16 px-5 md:px-6 bg-slate-50 relative -mt-8">
-    <ManageAppointments />
+    <BookingCalendar heading="Manage my appointment" />
   </section>
 </MainLayout>

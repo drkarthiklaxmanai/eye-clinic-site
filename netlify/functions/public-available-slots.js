@@ -23,11 +23,8 @@ try {
 
 const SUPABASE_URL = process.env.APPOINTMENT_MANAGER_SUPABASE_URL;
 
-// Crispr Eye Care's doctor open to online booking (same list as
-// lib/booking-core.cjs).
-const CLINIC_DOCTOR_IDS = [
-  "5523d5a2-855c-46a5-9bda-04a1f1563d38", // Rajeswari T
-];
+// This clinic's doctors (lib/clinic.cjs, the one file that differs between the websites).
+const { CLINIC_DOCTOR_IDS } = require("./lib/clinic.cjs");
 
 const DAY_OF_WEEK_BY_INDEX = [
   "sunday",
