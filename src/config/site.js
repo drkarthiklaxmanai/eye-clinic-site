@@ -32,10 +32,10 @@ export const siteConfig = {
     whatsapp: "https://wa.me/916381302828",
 
     // Machine-readable, schema.org format -- used ONLY in JSON-LD structured data.
-    // Closed midday (11:30am-5pm gap), closed Sundays.
-    workingHours: "Mo-Sa 09:30-11:30, 17:00-20:00",
+    // Evening consultations only, closed Sundays.
+    workingHours: "Mo-Sa 17:00-20:00",
 
     // Human-readable, used for on-page display (top bar, contact page, etc.)
-    workingHoursDisplay: "Mon-Sat: 9:30-11:30 AM & 5:00-8:00 PM"
+    workingHoursDisplay: "Mon-Sat: 5:00-8:00 PM"
   }
 };
